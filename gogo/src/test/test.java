@@ -7,6 +7,7 @@ import java.util.List;
 import GasStation.GasStation;
 import GasStation.GasStationDAO;
 import GasStation.GasStationDAOImpl;
+import parking.Crollotcrol;
 import parking.ParkingDAOImpl;
 import parking.Parkinglot;
 import parking.ParkinglotDAO;
@@ -22,10 +23,15 @@ public class test {
 		dao = new GasStationDAOImpl();
 		pdao = new ParkingDAOImpl();
 		
-		String location = "buk_gu";
-		List<GasStation> list = dao.gasStationSelect(conn, location);
-		System.out.println(list);
 		
+		
+		
+		
+		
+//		String location = "buk_gu";
+//		List<GasStation> list = dao.gasStationSelect(conn, location);
+//		System.out.println(list);
+//		
 //		List<Parkinglot> list = pdao.parkinglotSelect(conn);
 //		System.out.println(list);
 		
