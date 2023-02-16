@@ -14,8 +14,8 @@ public class CrolDAOImpl implements CrolDAO {
 		
 		
 		try (PreparedStatement stmt = conn.prepareStatement(sql);
-				ResultSet rs = stmt.executeQuery()) {
-			for (int i = 0; i < list.size(); i++) {
+			) {
+			for (int i = 0; i < list.size(); i+=4) {
 				String a = String.valueOf(list.get(i));
 				String B = String.valueOf(list.get(i+1));
 				int b= Integer.valueOf(B);
@@ -28,7 +28,7 @@ public class CrolDAOImpl implements CrolDAO {
 				stmt.setInt(2,d);
 				stmt.setString(3,a);
 				
-				
+				stmt.executeUpdate();
 			}
 			
 			

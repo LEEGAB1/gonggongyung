@@ -1,6 +1,7 @@
 package parking;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,13 +9,15 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
+import zerozerotwo.dbutil.ConnectionProvider;
+
 public class Crollotcrol {
 	
 	
 	
 	
 	
-	private static Connection conn;
+	private static Connection conn ;
 	public static void main(String[] args) {
 		String url = "https://bsparking.bisco.or.kr/03_pkd/pkd03.asp";
 		List<String> list = new ArrayList<>();
@@ -32,8 +35,11 @@ public class Crollotcrol {
 			
 			for (int i = 7; i < crol.length; i++) {
 				System.out.println(crol[i]);
+				
 				list.add(crol[i]);
+				
 			}
+			System.out.println(list.size());
 //			System.out.println(crol[9]);
 //			System.out.println(crol[10]);
 //			System.out.println(crol[13]);
@@ -44,6 +50,12 @@ public class Crollotcrol {
 			System.out.println("Error: " + e.getMessage());
 		}
 		
+		 try {
+			conn = ConnectionProvider.getConnection();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		CrolDAOImpl dao = new CrolDAOImpl();
 		
 		dao.crol( conn, list);
