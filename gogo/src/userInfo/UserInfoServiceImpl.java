@@ -2,6 +2,7 @@ package userInfo;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 import zerozerotwo.dbutil.ConnectionProvider;
 
@@ -42,6 +43,66 @@ public class UserInfoServiceImpl implements UserInfoService{
 		return 0;
 	}
 
+	@Override
+	public int idCheck(String id) {
+		Connection conn = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			return dao.UserInfoSelectId(conn, id);
+		} catch (RuntimeException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return 0;
+	}
+	
+	@Override
+	public int nameCheck(String name) {
+		Connection conn = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			return dao.UserInfoSelectName(conn, name);
+		} catch (RuntimeException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return 0;
+	}
+	
+	@Override
+	public List<userInfo> read(String id) {
+		Connection conn = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			return dao.selectUserInfo(conn, id);
+		} catch (RuntimeException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return null;
+	}
 
 	@Override
 	public int delete(String id) {
@@ -75,5 +136,6 @@ public class UserInfoServiceImpl implements UserInfoService{
 		}
 		return 0;
 	}
+
 
 }

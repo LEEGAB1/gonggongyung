@@ -9,38 +9,44 @@ import java.util.List;
 
 public class UserInfoDAOImpl implements UserInfoDAO{
 
-	// idÀÖ´ÂÁö Á¶È¸
+	// idï¿½Ö´ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 	@Override
 	public int UserInfoSelectId(Connection conn, String id) {
-		String sql = "select * from user_info where id = ?";
+		String sql = "select count(*) from user_info where id = ?";
 		try (PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setString(1, id);
-			
-			return stmt.executeUpdate();
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+				int count = rs.getInt(1);
+				return count;
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new RuntimeException("DB id Á¶È¸Áß¿¡ ¿À·ù°¡ ¹ß»ýÇß½À´Ï´Ù.", e);
+			
 		}
-		
+		return 0;
 	}
 
-	// ´Ð³×ÀÓ ÀÖ´ÂÁö Á¶È¸
+	// ï¿½Ð³ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 	@Override
 	public int UserInfoSelectName(Connection conn, String name) {
-		String sql = "select * from user_info where nickname = ?";
+		String sql = "select count(*) from user_info where nickname = ?";
 		try (PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setString(1, name);
-			
-			return stmt.executeUpdate();
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+				int count = rs.getInt(1);
+				return count;
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new RuntimeException("DB nickname Á¶È¸Áß¿¡ ¿À·ù°¡ ¹ß»ýÇß½À´Ï´Ù.", e);
 		}
+		return 0;
 	}
 
-	// °í°´Á¤º¸ µî·Ï
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	@Override
 	public int InsertUserInfo(Connection conn, String id, String pw, String name) {
 		String sql = "insert into user_info (id, password, nickname) " + "values(?, ?, ?)";
@@ -52,11 +58,11 @@ public class UserInfoDAOImpl implements UserInfoDAO{
 			return stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new RuntimeException("userinfo µî·ÏÁß¿¡ ¿À·ù°¡ ¹ß»ýÇß½À´Ï´Ù.", e);
 		}
+		return 0;
 	}
 
-	// °í°´Á¤º¸ Á¶È¸
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 	@Override
 	public List<userInfo> selectUserInfo(Connection conn, String userId) {
 		String sql = "SELECT * FROM user_info WHERE id = '" + userId +"'" ;
@@ -77,7 +83,7 @@ public class UserInfoDAOImpl implements UserInfoDAO{
 		return list;
 	}
 
-	// °í°´Á¤º¸ »èÁ¦ 
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 	@Override
 	public int deleteUserInfo(Connection conn, String id) {
 		String sql = "DELETE FROM user_info WHERE id = '" + id + "'";

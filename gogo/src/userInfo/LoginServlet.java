@@ -9,44 +9,35 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/api/userinfo/joinbtn")
-public class UserInfoServlet extends HttpServlet {
+@WebServlet("/api/login/loginbtn")
+public class LoginServlet extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		Connection conn = null;
-		System.out.println("요청");
 		resp.setHeader("Access-Control-Allow-Origin", "*");
 		resp.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
 		resp.setHeader("Access-Control-Allow-Headers", "*");
 		
 		req.setCharacterEncoding("UTF-8");
 		
-		UserInfoServiceImpl service = new UserInfoServiceImpl(new UserInfoDAOImpl());
-		
+		LogInDAOImpl dao = new LogInDAOImpl();
 		resp.setHeader("Content-Type", "application/json; charset=utf-8");
-//		String body = readBody(req);
+		
 		String inputId = req.getParameter("inputId");
 		System.out.println("id: " + inputId);
 		String inputPw = req.getParameter("inputPw");
 		System.out.println("pw: " + inputPw);
-		String inputName = req.getParameter("inputName");
-		System.out.println("name: " + inputName);
 		
+		int userInput = dao.inputSelect(inputId, inputPw);
 		
-		int resultId = service.idCheck(inputId);
-		int resultName = service.nameCheck(inputName);
-		
-		String json = "{\"inputId\":" + resultId + ",\"inputName\":" + resultName + "}";
+		String json = "{\"userInput\":" + userInput + "}";
 		System.out.println("응답: " + json);
 		PrintWriter pw = resp.getWriter();
 		pw.println(json);
 		pw.flush();
-		
-		
-		if (resultId == 0 && resultName == 0) {
-			System.out.println(service.create(inputId, inputPw, inputName));
-		}
+	
 	}
 	
+	
+
 }
