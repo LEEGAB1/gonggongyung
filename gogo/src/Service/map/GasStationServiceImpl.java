@@ -37,6 +37,25 @@ public class GasStationServiceImpl implements GasStationService{
 	}
 
 	@Override
+	public List<GasStation> readGasByStorename(String location, String storename) {
+		Connection conn = null;
+		try {
+			conn= ConnectionProvider.getConnection();
+			return dao.gasStationSelectByStoreName(conn, storename, location);
+		} catch (RuntimeException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return null;
+	}
+	@Override
 	public GasStation updateGas(GasStation gasstation, String location) {
 		Connection conn = null;
 		try {
@@ -64,5 +83,6 @@ public class GasStationServiceImpl implements GasStationService{
 		}
 		return null;
 	}
+
 
 }

@@ -35,6 +35,26 @@ public class ParkinglotServiceImpl implements ParkinglotService{
 		}
 		return null;
 	}
+	
+	@Override
+	public List<Parkinglot> readParkByStoreName(String storename) {
+		Connection conn = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			return dao.parkinglotselectByStoreName(conn, storename);
+		} catch (RuntimeException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return null;
+	}
 
 	@Override
 	public Parkinglot updatePark(Parkinglot parkinglot) {
@@ -64,5 +84,6 @@ public class ParkinglotServiceImpl implements ParkinglotService{
 		}
 		return null;
 	}
+
 
 }
