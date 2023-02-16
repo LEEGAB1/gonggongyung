@@ -117,4 +117,23 @@ public class ReviewDAOImpl implements ReviewDAO{
 		return review;
 	}
 
+	@Override
+	public Review reviewSelectByPk(Connection conn, int pk) {
+		String sql = "SELECT * FROM review WHERE pk=?";
+		
+		try(PreparedStatement stmt = conn.prepareStatement(sql)){
+			stmt.setInt(1, pk);
+			
+			try (ResultSet rs = stmt.executeQuery()){
+				if(rs.next()) {
+					return resultMapping(rs);
+				}
+			} 
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException("리뷰 pk조회 작업중 예외 발생", e);
+		}
+		return null;
+	}
+
 }

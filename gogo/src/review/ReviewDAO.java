@@ -8,6 +8,7 @@ public interface ReviewDAO {
 	List<Review> reviewSelect(Connection conn);
 	List<Review> reviewSelectByStoreName(Connection conn, String storeName);
 	List<Review> reviewSelectBynickname(Connection conn, String nickname);
+	Review reviewSelectByPk(Connection conn, int pk);
 	int reviewdelete(Connection conn, int pk);
 	int reviewInsert(Connection conn, Review review);
 	
