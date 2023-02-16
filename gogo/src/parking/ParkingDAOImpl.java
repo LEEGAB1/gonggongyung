@@ -48,11 +48,12 @@ public class ParkingDAOImpl  implements ParkinglotDAO {
 
 	@Override
 	public int parkinglotUpdate(Connection conn, Parkinglot parkinglot) {
-		String sql = "UPDATE parkinglot SET usenum=?, availablenum=?";
+		String sql = "UPDATE parkinglot SET usenum=?, availablenum=? WHERE storename = ?";
 		
 		try(PreparedStatement stmt = conn.prepareStatement(sql)){
 			stmt.setInt(1, parkinglot.getUsenum());
 			stmt.setInt(2, parkinglot.getAvailablenum());
+			stmt.setString(3, parkinglot.getStorename());
 			
 			return stmt.executeUpdate();
 		} catch (SQLException e) {

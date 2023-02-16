@@ -7,6 +7,7 @@ import java.util.List;
 import GasStation.GasStation;
 import GasStation.GasStationDAO;
 import GasStation.GasStationDAOImpl;
+import Service.map.GasStationServiceImpl;
 import parking.Crollotcrol;
 import parking.ParkingDAOImpl;
 import parking.Parkinglot;
@@ -19,21 +20,28 @@ public class test {
 	private static Connection conn;
 	
 	public static void main(String[] args) throws SQLException {
+		
 		conn = ConnectionProvider.getConnection();
 		dao = new GasStationDAOImpl();
 		pdao = new ParkingDAOImpl();
 		
+		GasStationServiceImpl service = new GasStationServiceImpl(new GasStationDAOImpl());
 		
+//		System.out.println(service.readGas("buk_gu"));
+//		System.out.println(service.readGasByStorename("buk_gu","경덕주유소"));
 		
 		
 		
 		
 //		String location = "buk_gu";
-//		List<GasStation> list = dao.gasStationSelect(conn, location);
+//		String storeName = "경덕주유소";
+//		List<GasStation> list = dao.gasStationSelectByStoreName(conn, storeName, location);
 //		System.out.println(list);
 //		
+		String storeName = "구서역";
 //		List<Parkinglot> list = pdao.parkinglotSelect(conn);
-//		System.out.println(list);
+		List<Parkinglot> list = pdao.parkinglotselectByStoreName(conn, storeName);
+		System.out.println(list);
 		
 		
 	}

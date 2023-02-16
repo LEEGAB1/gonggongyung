@@ -50,12 +50,13 @@ public class GasStationDAOImpl implements GasStationDAO{
 
 	@Override
 	public int gasStationUpdate(Connection conn, GasStation gasstation, String location) {
-		String sql = "UPDATE " + location + "_gas_station SET p_gasoline=?, gasoline=?, diesel =?";
+		String sql = "UPDATE " + location + "_gas_station SET p_gasoline=?, gasoline=?, diesel =? WHERE storename=?";
 		
 		try(PreparedStatement stmt = conn.prepareStatement(sql)){
 			stmt.setString(1, gasstation.getP_gasoline());
 			stmt.setString(2, gasstation.getGasoline());
 			stmt.setString(3, gasstation.getDiesel());
+			stmt.setString(4, gasstation.getStorename());
 			
 			return stmt.executeUpdate();
 		} catch (SQLException e) {
