@@ -8,10 +8,13 @@ import GasStation.GasStation;
 import GasStation.GasStationDAO;
 import GasStation.GasStationDAOImpl;
 import Service.map.GasStationServiceImpl;
+import Service.map.ParkinglotServiceImpl;
+import Service.review.reviewServiceImpl;
 import parking.Crollotcrol;
 import parking.ParkingDAOImpl;
 import parking.Parkinglot;
 import parking.ParkinglotDAO;
+import review.ReviewDAOImpl;
 import zerozerotwo.dbutil.ConnectionProvider;
 
 public class test {
@@ -25,11 +28,14 @@ public class test {
 		dao = new GasStationDAOImpl();
 		pdao = new ParkingDAOImpl();
 		
-		GasStationServiceImpl service = new GasStationServiceImpl(new GasStationDAOImpl());
+		GasStationServiceImpl gservice = new GasStationServiceImpl(new GasStationDAOImpl());
+		ParkinglotServiceImpl pservice = new ParkinglotServiceImpl(new ParkingDAOImpl());
+		reviewServiceImpl rservice = new reviewServiceImpl(new ReviewDAOImpl());
 		
 //		System.out.println(service.readGas("buk_gu"));
-//		System.out.println(service.readGasByStorename("buk_gu","경덕주유소"));
-		
+//		System.out.println(gservice.readGasByStorename("buk_gu","경덕주유소"));
+//		System.out.println(pservice.readPark());
+//		System.out.println(pservice.readParkByStoreName("구서역"));
 		
 		
 		
@@ -38,10 +44,10 @@ public class test {
 //		List<GasStation> list = dao.gasStationSelectByStoreName(conn, storeName, location);
 //		System.out.println(list);
 //		
-		String storeName = "구서역";
+//		String storeName = "구서역";
 //		List<Parkinglot> list = pdao.parkinglotSelect(conn);
-		List<Parkinglot> list = pdao.parkinglotselectByStoreName(conn, storeName);
-		System.out.println(list);
+//		List<Parkinglot> list = pdao.parkinglotselectByStoreName(conn, storeName);
+//		System.out.println(list);
 		
 		
 	}
