@@ -52,22 +52,22 @@ public class Downloding {
 	            "BTN_DIV=os_btn&BTN_DIV_STR=&POLL_ALL=all&SIDO_NM=%EB%B6%80%EC%82%B0%EA%B4%91%EC%97%AD%EC%8B%9C&SIGUNGU_NM=%ED%95%B4%EC%9A%B4%EB%8C%80%EA%B5%AC&SIDO_CD=01&SIGUN_CD=0120&MAP_CENTER_X=&MAP_CENTER_Y=&MAP_ZOOM=&MAP_FIRST_X=&MAP_FIRST_Y=&LPG_YN=&SESSION_USER_ID=&SIDO_NM0=%EB%B6%80%EC%82%B0%EA%B4%91%EC%97%AD%EC%8B%9C&SIGUNGU_NM0=%ED%95%B4%EC%9A%B4%EB%8C%80%EA%B5%AC&DONG_NM=&GIS_X_COOR=&GIS_Y_COOR=&GIS_X_COOR_S=&GIS_X_COOR_E=&GIS_Y_COOR_S=&GIS_Y_COOR_E=&SEARCH_MOD=addr&OS_NM=&OS_ADDR=&NORM_YN=on&SELF_DIV_CD=on&VLT_YN=on&KPETRO_YN=on&KPETRO_DP_YN=on&POLL_DIV_CD=SKE&POLL_DIV_CD=GSC&POLL_DIV_CD=HDO&POLL_DIV_CD=SOL&POLL_DIV_CD=RTO&POLL_DIV_CD=ETC");
 
 	      List<String>fileName = new ArrayList<>();
-	      fileName.add("강서구");
-	      fileName.add("금정구");
-	      fileName.add("기장구");
-	      fileName.add("남구");
-	      fileName.add("동구");
-	      fileName.add("동래구");
-	      fileName.add("부산진구");
-	      fileName.add("북구");
-	      fileName.add("사상구");
-	      fileName.add("사하구");
-	      fileName.add("서구");
-	      fileName.add("수영구");
-	      fileName.add("연제구");
-	      fileName.add("영도구");
-	      fileName.add("중구");
-	      fileName.add("해운대구");
+	      fileName.add("gangseo_gu_gas_station");
+	      fileName.add("geumjeong_gu_gas_station");
+	      fileName.add("gijang_gu_gas_station");
+	      fileName.add("nam_gu_gas_station");
+	      fileName.add("dong_gu_gas_station");
+	      fileName.add("dongrae_gu_gas_station");
+	      fileName.add("jin_gu_gas_station");
+	      fileName.add("buk_gu_gas_station");
+	      fileName.add("sasang_gu_gas_station");
+	      fileName.add("saha_gu_gas_station");
+	      fileName.add("seo_gu_gas_station");
+	      fileName.add("suyung_gu_gas_station");
+	      fileName.add("yeonje_gu_gas_station");
+	      fileName.add("yungdo_gu_gas_station");
+	      fileName.add("jung_gu_gas_station");
+	      fileName.add("haeundae_gu_gas_station");
 	      
 	      
 	      for (int i = 0; i < body.size(); i++) {
@@ -78,8 +78,8 @@ public class Downloding {
 	         try (Response resp = client.newCall(request).execute()) {
 
 	            byte[] information = resp.body().bytes();
-	            Files.write(Paths.get("D:\\\\gsa_station").resolve( fileName.get(i)+".xls"), information);
-//	      file.folderMaker("gangseo_gu_gas_station",information );
+	            Files.write(Paths.get("D:\\\\gasstation").resolve( fileName.get(i)+".xls"), information); //폴더 만드는건 안했음
+
 
 	         } catch (IOException e) {
 	            e.printStackTrace();
