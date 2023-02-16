@@ -1,7 +1,9 @@
 package userInfo;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.sql.Connection;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,26 +16,37 @@ public class UserInfoServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Connection conn = null;
+//		Connection conn = null;
+		System.out.println("요청");
 		resp.setHeader("Access-Control-Allow-Origin", "*");
 		resp.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
 		resp.setHeader("Access-Control-Allow-Headers", "*");
 		
-		String id = req.getParameter("inputId");
-		String name = req.getParameter("inputName");
-		
-		UserInfoDAO dao = new UserInfoDAOImpl();
+//		String id = req.getParameter("inputId");
+//		String name = req.getParameter("inputName");
+//		
+//		UserInfoDAO dao = new UserInfoDAOImpl();
 		//int resultId = dao.UserInfoSelectId(conn, id);
 		//int resultName = dao.UserInfoSelectName(conn, name);
 		
 		// String json = "{\"inputId\":" + resultId + ",\"inputName\":" + resultName + "}";
+		req.setCharacterEncoding("UTF-8");
+		resp.setHeader("Content-Type", "application/json; charset=utf-8");
+//		String body = readBody(req);
+		String inputId = req.getParameter("inputId");
+		System.out.println("파라미터: " + inputId);
+		String inputPw = req.getParameter("inputPw");
+		System.out.println("파라미터: " + inputPw);
+		String inputName = req.getParameter("inputName");
+		System.out.println("파라미터: " + inputName);
 		
 		String json = "{\"result\":\"ok\"}";
-		
-		resp.getWriter().println(json);
+		System.out.println("응답: " + json);
+		PrintWriter pw = resp.getWriter();
+		pw.println(json);
+		pw.flush();
 	}
 
-	
 
 	
 }
