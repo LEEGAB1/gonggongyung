@@ -36,7 +36,7 @@ public class LoginServlet extends HttpServlet{
 		System.out.println("pw: " + inputPw);
 		
 		int userInput = dao.inputSelect(inputId, inputPw);
-		if(userInput ==1  ) {
+		if(userInput == 1  ) {
 			
 			UserInfoDAO user= new UserInfoDAOImpl();	
 			Connection conn = null;
