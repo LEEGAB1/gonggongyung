@@ -36,7 +36,7 @@ public class LogInDAOImpl extends HttpServlet implements LogInDAO {
          while (rs.next()) {
             String userid = rs.getString("id"); // 컬럼값에 있는 "id"를 db에 있는 idd에 넣는다.
             String userpw = rs.getString("password");
-            String userNickname = rs.getNString("nickname");
+            
             // String id = rs.getString(mysql의 컬럼값);
 
             if (userid.equals(id) && userpw.equals(pw)) {
