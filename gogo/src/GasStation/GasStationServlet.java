@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import Service.map.GasStationService;
 import Service.map.GasStationServiceImpl;
 
-@WebServlet({"/gogo/book","/gogo/book/*"})
+@WebServlet({"/gogo/gasstation","/gogo/gasstation/*"})
 public class GasStationServlet extends HttpServlet {
 	private GasStationService gasService;
 
@@ -44,7 +44,8 @@ public class GasStationServlet extends HttpServlet {
 		System.out.println("location" + location);
 		System.out.println("storename" + storename);
 		
-		if(storename.isEmpty()) {
+		
+		if(location != null && storename.isEmpty()) {
 			List<GasStation> list = gasService.readGas(location);
 			ObjectMapper mapper = new ObjectMapper();
 			String json = mapper.writeValueAsString(list);
@@ -53,7 +54,7 @@ public class GasStationServlet extends HttpServlet {
 			pw.println(json);
 			pw.flush();
 			
-		} else {
+		} else if (location != null && storename != null) {
 			List<GasStation> list = gasService.readGasByStorename(location, storename);
 			ObjectMapper mapper = new ObjectMapper();
 			String json = mapper.writeValueAsString(list);
