@@ -38,20 +38,12 @@ public class LoginServlet extends HttpServlet{
 		int userInput = dao.inputSelect(inputId, inputPw);
 		if(userInput ==1  ) {
 			
-			UserInfoDAO user= new UserInfoDAOImpl();	
-			Connection conn = null;
-			try {
-				conn = new ConnectionProvider().getConnection();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			//UserInfoService User =new  UserInfoServiceImpl(new UserInfoDAOImpl());
+			
+			UserInfoService user =new  UserInfoServiceImpl(new UserInfoDAOImpl());
 			
 			
 			
-			sesstion.setAttribute("nickName",user.selectUserNickName(conn, inputId));
-			
+			sesstion.setAttribute("nickName",user.selectNickname( inputId));
 			
 		}
 		

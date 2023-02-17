@@ -137,5 +137,26 @@ public class UserInfoServiceImpl implements UserInfoService{
 		return 0;
 	}
 
+	@Override
+	public String selectNickname(String id) {
+		Connection conn = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			return dao.selectUserNickName(conn, id);
+		} catch (RuntimeException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return null;
+	}
+
 
 }
