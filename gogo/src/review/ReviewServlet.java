@@ -68,7 +68,27 @@ public class ReviewServlet extends HttpServlet{
 	
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String pk = req.getParameter("pk");
+		// 버튼 누르면 pk값 전송받아야함
+		String Spk = req.getParameter("pk");
+		int pk = Integer.valueOf(Spk);
+		System.out.println("pk" + pk);
+		
+		Review review = reviewservice.deleteReview(pk);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		String json;
+		if(review == null) {
+			resp.setStatus(404);
+			json = "{\"result\":\"not found\"}";
+		} else {
+			json = mapper.writeValueAsString(review);
+		}
+		
+		PrintWriter pw = resp.getWriter();
+		pw.println();
+		pw.flush();
+		
+		
 	}
 	
 	private Review jsonToReview(String json) throws JsonMappingException, JsonProcessingException {
