@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/api/login/loginbtn")
+@WebServlet("/gogo/login/loginbtn")
 public class LoginServlet extends HttpServlet{
 
 	@Override

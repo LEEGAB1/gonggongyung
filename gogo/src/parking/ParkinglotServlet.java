@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import Service.map.ParkinglotService;
 import Service.map.ParkinglotServiceImpl;
 
-@WebServlet({"/api/parkinglot","/api/parkinglot/*"})
+@WebServlet({"/gogo/parkinglot","/gogo/parkinglot/*"})
 public class ParkinglotServlet extends HttpServlet{
 	private ParkinglotService parkingservice;
 
