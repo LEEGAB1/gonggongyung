@@ -21,14 +21,8 @@ public class LoginServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	 HttpSession sesstion = req.getSession();
-		resp.setHeader("Access-Control-Allow-Origin", "*");
-		resp.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-		resp.setHeader("Access-Control-Allow-Headers", "*"); // cors 방지 문구!
-		
-		req.setCharacterEncoding("UTF-8"); // 타입 설정
 		
 		LogInDAOImpl dao = new LogInDAOImpl();
-		resp.setHeader("Content-Type", "application/json; charset=utf-8");
 		
 		String inputId = req.getParameter("inputId");
 		System.out.println("id: " + inputId);

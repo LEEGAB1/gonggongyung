@@ -91,9 +91,15 @@ public class ReviewServlet extends HttpServlet{
 		
 	}
 	
+	@Override
+	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		//reviewservice.create();
+	}
+	
 	private Review jsonToReview(String json) throws JsonMappingException, JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
 		return mapper.readValue(json, Review.class);
 	}
 
 }
+
