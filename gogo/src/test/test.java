@@ -28,11 +28,13 @@ public class test {
 		dao = new GasStationDAOImpl();
 		pdao = new ParkingDAOImpl();
 		
-		GasStationServiceImpl gservice = new GasStationServiceImpl(new GasStationDAOImpl());
-		ParkinglotServiceImpl pservice = new ParkinglotServiceImpl(new ParkingDAOImpl());
-		reviewServiceImpl rservice = new reviewServiceImpl(new ReviewDAOImpl());
+//		GasStationServiceImpl gservice = new GasStationServiceImpl(new GasStationDAOImpl());
+//		ParkinglotServiceImpl pservice = new ParkinglotServiceImpl(new ParkingDAOImpl());
+//		reviewServiceImpl rservice = new reviewServiceImpl(new ReviewDAOImpl());
+		GasStationDAOImpl gas = new GasStationDAOImpl ();
+		gas.gasHistoryInsert(conn);
 		
-		System.out.println(gservice.readGas("buk_gu"));
+//		System.out.println(service.readGas("buk_gu"));
 //		System.out.println(gservice.readGasByStorename("buk_gu","경덕주유소"));
 //		System.out.println(pservice.readPark());
 //		System.out.println(pservice.readParkByStoreName("구서역"));
