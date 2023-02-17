@@ -16,15 +16,9 @@ public class UserInfoServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //		Connection conn = null;
 		System.out.println("요청");
-		resp.setHeader("Access-Control-Allow-Origin", "*");
-		resp.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-		resp.setHeader("Access-Control-Allow-Headers", "*");
-		
-		req.setCharacterEncoding("UTF-8");
 		
 		UserInfoServiceImpl service = new UserInfoServiceImpl(new UserInfoDAOImpl());
 		
-		resp.setHeader("Content-Type", "application/json; charset=utf-8");
 //		String body = readBody(req);
 		String inputId = req.getParameter("inputId");
 		System.out.println("id: " + inputId);
