@@ -29,10 +29,10 @@ public class ReviewDAOImpl implements ReviewDAO{
 
 	@Override
 	public List<Review> reviewSelectByStoreName(Connection conn, String storeName) {
-		String sql = "SELECT * FROM review WHERE storeName LIKE '%?%'";
+		String sql = "SELECT * FROM review WHERE storeName LIKE ?";
 		
 		try(PreparedStatement stmt = conn.prepareStatement(sql)) {
-			stmt.setString(1, storeName);
+			stmt.setString(1, "%" + storeName + "%");
 			
 			try(ResultSet rs = stmt.executeQuery()) {
 				List<Review> list = new ArrayList<>();
@@ -49,10 +49,10 @@ public class ReviewDAOImpl implements ReviewDAO{
 
 	@Override
 	public List<Review> reviewSelectBynickname(Connection conn, String nickname) {
-		String sql ="SELECT * FROM review WHERE nickname LIKE '%?%'";
+		String sql ="SELECT * FROM review WHERE nickname LIKE ?";
 		
 		try(PreparedStatement stmt = conn.prepareStatement(sql)) {
-			stmt.setString(1, nickname);
+			stmt.setString(1, "%" + nickname + "%");
 			
 			try(ResultSet rs = stmt.executeQuery()) {
 				List<Review> list = new ArrayList<>();

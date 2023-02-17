@@ -9,5 +9,6 @@ public interface GasStationDAO {
 	List<GasStation> gasStationSelectByStoreName(Connection conn, String storeName, String location);
 	int gasStationUpdate(Connection conn, GasStation gasstation, String location);
 	int gasStationInsert(Connection conn, GasStation gasstation, String location);
+	int gasHistoryInsert(Connection conn);
 
 }
