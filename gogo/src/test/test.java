@@ -31,8 +31,9 @@ public class test {
 //		GasStationServiceImpl gservice = new GasStationServiceImpl(new GasStationDAOImpl());
 //		ParkinglotServiceImpl pservice = new ParkinglotServiceImpl(new ParkingDAOImpl());
 //		reviewServiceImpl rservice = new reviewServiceImpl(new ReviewDAOImpl());
-		GasStationDAOImpl gas = new GasStationDAOImpl ();
-		gas.gasHistoryInsert(conn);
+		GasStationDAOImpl gas = new GasStationDAOImpl();
+		int a = gas.gasHistoryInsert(conn);
+		System.out.println(a);
 		
 //		System.out.println(service.readGas("buk_gu"));
 //		System.out.println(gservice.readGasByStorename("buk_gu","경덕주유소"));
