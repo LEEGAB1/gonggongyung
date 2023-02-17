@@ -1,11 +1,16 @@
-package userInfo;
+package UserInfo;
 
-public class userInfo {
+public class UserInfo {
 	private String id;
 	private String password;
 	private String name;
 	
-	public userInfo(String id, String password, String name) {
+	
+	public UserInfo() {
+		super();
+	}
+
+	public UserInfo(String id, String password, String name) {
 		super();
 		this.id = id;
 		this.password = password;

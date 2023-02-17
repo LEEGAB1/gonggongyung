@@ -1,4 +1,4 @@
-package userInfo;
+package UserInfo;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -84,7 +84,7 @@ public class UserInfoServiceImpl implements UserInfoService{
 	}
 	
 	@Override
-	public List<userInfo> read(String id) {
+	public UserInfo read(String id) {
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
