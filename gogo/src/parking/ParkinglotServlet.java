@@ -29,11 +29,7 @@ public class ParkinglotServlet extends HttpServlet{
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.setHeader("Access-Control-Allow-Origin", "*");
-		resp.setHeader("Access-Control-Allow-Methods", "GET,POST, OPTION");
-		resp.setHeader("Access-Control-Allow-Headers", "*");
-		
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {		
 		List<Parkinglot> list = parkingservice.readPark();
 		ObjectMapper mapper = new ObjectMapper();
 		String json = mapper.writeValueAsString(list);
@@ -44,15 +40,7 @@ public class ParkinglotServlet extends HttpServlet{
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.setHeader("Access-Control-Allow-Origin", "*");
-		resp.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-		resp.setHeader("Access-Control-Allow-Headers", "*");
-		
-		req.setCharacterEncoding("UTF-8");
-		
-		resp.setHeader("Content-Type", "application/json; charset=utf-8");
-		
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {		
 		String storename = req.getParameter("storename");
 		System.out.println("storename" + storename);
 		

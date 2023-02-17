@@ -2,6 +2,8 @@ package GasStation;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -37,11 +39,29 @@ public class GasStationServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		String json;
-//		String doby = readBody(req);
-//		try {
-//			GasStation gasStation = jsonToGasStation(gasStation);
-//		}
+		String location = req.getParameter("location");
+		String storename = req.getParameter("storename");
+		System.out.println("location" + location);
+		System.out.println("storename" + storename);
+		
+		if(storename.isEmpty()) {
+			List<GasStation> list = gasService.readGas(location);
+			ObjectMapper mapper = new ObjectMapper();
+			String json = mapper.writeValueAsString(list);
+			
+			PrintWriter pw = resp.getWriter();
+			pw.println(json);
+			pw.flush();
+			
+		} else {
+			List<GasStation> list = gasService.readGasByStorename(location, storename);
+			ObjectMapper mapper = new ObjectMapper();
+			String json = mapper.writeValueAsString(list);
+			
+			PrintWriter pw = resp.getWriter();
+			pw.println(json);
+			pw.flush();
+		}
 	}
 
 
