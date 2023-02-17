@@ -16,7 +16,8 @@ public class UserInfoServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //		Connection conn = null;
 		System.out.println("요청");
-		
+		req.setCharacterEncoding("UTF-8");
+
 		UserInfoServiceImpl service = new UserInfoServiceImpl(new UserInfoDAOImpl());
 		
 //		String body = readBody(req);
