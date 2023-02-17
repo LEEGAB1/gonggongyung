@@ -1,4 +1,4 @@
-package userInfo;
+package UserInfo;
 
 public class LoginUer {
 	String id;

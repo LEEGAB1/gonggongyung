@@ -1,4 +1,4 @@
-package userInfo;
+package UserInfo;
 
 import java.io.IOException;
 import java.io.PrintWriter;

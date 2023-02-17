@@ -1,4 +1,4 @@
-package userInfo;
+package UserInfo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -64,24 +64,25 @@ public class UserInfoDAOImpl implements UserInfoDAO{
 
 	// ������ ��ȸ
 	@Override
-	public List<userInfo> selectUserInfo(Connection conn, String userId) {
+	public UserInfo selectUserInfo(Connection conn, String userId) {
 		String sql = "SELECT * FROM user_info WHERE id = '" + userId +"'" ;
-		List<userInfo> list = new ArrayList<>();
+		UserInfo Userinfo = new UserInfo();
 		try (PreparedStatement stmt = conn.prepareStatement(sql)) {
 				ResultSet rs = stmt.executeQuery();
-			while(rs.next()) {
-				String id = rs.getString("id");
-				String password = rs.getString("password");
-				String name = rs.getString("nickname");
-				
-				list.add(new userInfo(id, password, name));
-				
+			if(rs.next()) {
+				Userinfo.setId(rs.getString("id"));
+				Userinfo.setPassword(rs.getString("password"));
+				Userinfo.setName(rs.getString("nickname"));				
+
+				return Userinfo;
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return list;
+		return null;
 	}
+
 
 	// ������ ���� 
 	@Override

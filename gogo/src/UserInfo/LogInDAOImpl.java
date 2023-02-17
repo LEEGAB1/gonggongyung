@@ -1,4 +1,4 @@
-package userInfo;
+package UserInfo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
