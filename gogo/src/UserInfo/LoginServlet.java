@@ -2,6 +2,9 @@ package UserInfo;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.text.spi.CollatorProvider;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import zerozerotwo.dbutil.ConnectionProvider;
 
 @WebServlet("/gogo/login/loginbtn")
 public class LoginServlet extends HttpServlet{
@@ -30,11 +35,22 @@ public class LoginServlet extends HttpServlet{
 		String inputPw = req.getParameter("inputPw");
 		System.out.println("pw: " + inputPw);
 		
-		String userInput = dao.inputSelect(inputId, inputPw);
-		if(userInput !=  null  ) {
+		int userInput = dao.inputSelect(inputId, inputPw);
+		if(userInput ==1  ) {
+			
+			UserInfoDAO user= new UserInfoDAOImpl();	
+			Connection conn = null;
+			try {
+				conn = new ConnectionProvider().getConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//UserInfoService User =new  UserInfoServiceImpl(new UserInfoDAOImpl());
 			
 			
-			sesstion.setAttribute("nickName",userInput );
+			
+			sesstion.setAttribute("nickName",user.selectUserNickName(conn, inputId));
 			
 			
 		}

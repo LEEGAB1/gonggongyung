@@ -97,6 +97,26 @@ public class UserInfoDAOImpl implements UserInfoDAO{
 		}
 		return 0;
 	}
+
+	@Override
+	public String selectUserNickName(Connection conn, String id) {
+		
+		String sql = "SELECT nickname FROM user_info WHERE id = '" + id +"'" ;
+		
+		try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+				ResultSet rs = stmt.executeQuery();
+			if(rs.next()) {
+				
+				 String userNickname = rs.getNString("nickname");				
+
+				return userNickname;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 	
 

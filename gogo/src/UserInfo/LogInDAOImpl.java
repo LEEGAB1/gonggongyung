@@ -20,9 +20,9 @@ import zerozerotwo.dbutil.ConnectionProvider;
 public class LogInDAOImpl extends HttpServlet implements LogInDAO {
 
    @Override
-   public String inputSelect(String id, String pw) { // 사용자가 입력한 id, pas
+   public int inputSelect(String id, String pw ) { // 사용자가 입력한 id, pas
 	   
-      String sql = "SELECT * from user_info where id = ? && password = ? ;";
+      String sql = "SELECT id, password from user_info where id = ? && password = ? ;";
       ResultSet rs = null;
       try (Connection conn = ConnectionProvider.getConnection(); 
             PreparedStatement stmt = conn.prepareStatement(sql); // sql 구문을 실행하는것 PreparedStatement
@@ -41,22 +41,20 @@ public class LogInDAOImpl extends HttpServlet implements LogInDAO {
 
             if (userid.equals(id) && userpw.equals(pw)) {
                System.out.println("성공");
+             
                
-               return userNickname;
-               
-               
-            
+               return 1;
 
             } else {
                System.out.println("실패");
-               return null;
+               return 0;
             }
 
          }
       } catch (SQLException e) {
          e.printStackTrace();
          System.out.println("오류 발생");
-         return null;
+         return 0;
       } finally {
          if (rs != null) {
             try {
@@ -67,7 +65,7 @@ public class LogInDAOImpl extends HttpServlet implements LogInDAO {
             }
          }
       }
-      return null;
+      return 0;
    }
 
 }
