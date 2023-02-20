@@ -20,7 +20,7 @@ public class LoginServlet extends HttpServlet{
  
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	 HttpSession sesstion = req.getSession();
+	 HttpSession sesstion = req.getSession(true);
 		
 		LogInDAOImpl dao = new LogInDAOImpl();
 		
@@ -28,21 +28,24 @@ public class LoginServlet extends HttpServlet{
 		System.out.println("id: " + inputId);
 		String inputPw = req.getParameter("inputPw");
 		System.out.println("pw: " + inputPw);
-		
+		String userName = "";
 		int userInput = dao.inputSelect(inputId, inputPw);
 		if(userInput == 1  ) {
 			
 			
 			UserInfoService user =new  UserInfoServiceImpl(new UserInfoDAOImpl());
+			userName = user.selectNickname(inputId);
+			System.out.println("조회결과:" + userName);
 			
 			
-			
-			sesstion.setAttribute("nickName",user.selectNickname( inputId));
+			sesstion.setAttribute("nickName", userName);
+			String nickname = String.valueOf(sesstion.getAttribute("nickName"));
+			System.out.println(nickname+"결과값");
 			
 		}
 		
 		
-		String json = "{\"userInput\":" + userInput + "}";
+		String json = "{\"userInput\":" + userInput + ",\"nickname\": \"" + userName + "\"}";
 		System.out.println("응답: " + json);
 		PrintWriter pw = resp.getWriter();
 		pw.println(json);

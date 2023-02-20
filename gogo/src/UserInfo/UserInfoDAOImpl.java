@@ -107,7 +107,7 @@ public class UserInfoDAOImpl implements UserInfoDAO{
 				ResultSet rs = stmt.executeQuery();
 			if(rs.next()) {
 				
-				 String userNickname = rs.getNString("nickname");				
+				 String userNickname = rs.getString("nickname");				
 
 				return userNickname;
 			}

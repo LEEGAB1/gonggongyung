@@ -31,6 +31,10 @@ public class test {
 //		GasStationServiceImpl gservice = new GasStationServiceImpl(new GasStationDAOImpl());
 //		ParkinglotServiceImpl pservice = new ParkinglotServiceImpl(new ParkingDAOImpl());
 //		reviewServiceImpl rservice = new reviewServiceImpl(new ReviewDAOImpl());
+		
+		ReviewDAOImpl review = new ReviewDAOImpl();
+		
+//		review.reviewInsert(conn, "asfasfsafafaf");
 		GasStationDAOImpl gas = new GasStationDAOImpl();
 		int a = gas.gasHistoryInsert(conn);
 		System.out.println(a);
