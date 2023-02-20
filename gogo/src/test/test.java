@@ -32,23 +32,16 @@ public class test {
 //		GasStationServiceImpl gservice = new GasStationServiceImpl(new GasStationDAOImpl());
 //		ParkinglotServiceImpl pservice = new ParkinglotServiceImpl(new ParkingDAOImpl());
 //		reviewServiceImpl rservice = new reviewServiceImpl(new ReviewDAOImpl());
-<<<<<<< HEAD
 		
 		ReviewDAOImpl review = new ReviewDAOImpl();
 		
-//		review.reviewInsert(conn, "asfasfsafafaf");
 		GasStationDAOImpl gas = new GasStationDAOImpl();
 		int a = gas.gasHistoryInsert(conn);
 		System.out.println(a);
-=======
-//		GasStationDAOImpl gas = new GasStationDAOImpl();
-//		int a = gas.gasHistoryInsert(conn);
-//		System.out.println(a);
 		dao.gasStationXY(conn);
 		
 		
 		
->>>>>>> branch 'master' of https://github.com/LEEGAB1/gonggongyung.git
 		
 //		System.out.println(service.readGas("buk_gu"));
 //		System.out.println(gservice.readGasByStorename("buk_gu","경덕주유소"));
