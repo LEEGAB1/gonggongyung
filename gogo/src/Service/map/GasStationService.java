@@ -7,6 +7,7 @@ public interface GasStationService {
 	//read,update,create(리뷰)
 	//주차장
 	List<GasStation> readGas(String location);
+	List<String> readGasXY();
 	List<GasStation> readGasByStorename(String loacation, String storename);
 	GasStation updateGas(GasStation gasstation, String location);
 	

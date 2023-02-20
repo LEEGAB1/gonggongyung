@@ -84,5 +84,25 @@ public class GasStationServiceImpl implements GasStationService{
 		return null;
 	}
 
+	@Override
+	public List<String> readGasXY() {
+		Connection conn = null;
+		try {
+			conn= ConnectionProvider.getConnection();
+			return dao.gasStationXY(conn);
+		} catch (RuntimeException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return null;
+	}
+
 
 }

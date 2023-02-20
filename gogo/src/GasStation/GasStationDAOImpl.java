@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -136,6 +138,37 @@ public class GasStationDAOImpl    implements GasStationDAO {
 		
 		
 	}
+
+
+	@Override
+	public List<String> gasStationXY(Connection conn) {
+		String sql = "SELECT X,Y FROM gas_station";
+		
+		try(PreparedStatement stmt = conn.prepareStatement(sql)) {
+			
+			
+			try(ResultSet rs = stmt.executeQuery()) {
+				List<String> list = new ArrayList();
+				
+				while(rs.next()) {
+					 String X = rs.getString("X");
+					 String Y = rs.getString("Y");
+					 
+					 list.add(X);
+					 list.add(Y);
+					 
+					
+				}
+				System.out.println(list);
+				return list;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException("주유소 선별조회 작업 중 예외 발생", e);
+		}
+	}
+		
+	
 
 
 
