@@ -111,32 +111,15 @@ public class GasStationDAOImpl implements GasStationDAO{
 
 	@Override
 	public int gasHistoryInsert(Connection conn) {
-		String sql = "INSERT INTO gas_history (storename, p_gasoline, gasoline, diesel ,`date`) SELECT storename, p_gasoline, gasoline ,diesel, ? FROM ?" ;
+		String sql = "INSERT INTO gas_history (storename, region,p_gasoline, gasoline, diesel,`date` ) SELECT storename, region,p_gasoline, gasoline ,diesel, ?  FROM gas_station";
 		LocalDate now = LocalDate.now();
 		String toDay = String.valueOf(now);
-	    List<String>fileName = new ArrayList<>();
-	      fileName.add("gangseo_gu_gas_station");
-	      fileName.add("geumjeong_gu_gas_station");
-	      fileName.add("gijang_gu_gas_station");
-	      fileName.add("nam_gu_gas_station");
-	      fileName.add("dong_gu_gas_station");
-	      fileName.add("dongrae_gu_gas_station");
-	      fileName.add("jin_gu_gas_station");
-	      fileName.add("buk_gu_gas_station");
-	      fileName.add("sasang_gu_gas_station");
-	      fileName.add("saha_gu_gas_station");
-	      fileName.add("seo_gu_gas_station");
-	      fileName.add("suyung_gu_gas_station");
-	      fileName.add("yeonje_gu_gas_station");
-	      fileName.add("yungdo_gu_gas_station");
-	      fileName.add("jung_gu_gas_station");
-	      fileName.add("haeundae_gu_gas_station");
+	   
 	      
-	  for(int i = 0 ;i<fileName.size();i++) {    
+	     
 		try(PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setString(1,toDay );
-			stmt.setString(2,fileName.get(i) );
-		
+			
 			
 			return stmt.executeUpdate();
 			
@@ -145,9 +128,9 @@ public class GasStationDAOImpl implements GasStationDAO{
 			throw new RuntimeException("주유소 넣기 작업 중 예외 발생", e);
 		}
 		
-	  }
+	  
 		
-		return 0;
+		
 	}
 
 
