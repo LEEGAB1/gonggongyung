@@ -6,13 +6,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class GasStationDAOImpl implements GasStationDAO{
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+
+
+public class GasStationDAOImpl    implements GasStationDAO {
 
 	@Override
-	public List<GasStation> gasStationSelect(Connection conn, String location) {
-		String sql = "SELECT * FROM " + location +"_gas_station";
+	public List<GasStation> gasStationSelect(Connection conn) {
+		String sql = "SELECT * FROM gas_station";
 		
 		try(PreparedStatement stmt = conn.prepareStatement(sql);
 				ResultSet rs = stmt.executeQuery()) {
@@ -30,8 +36,8 @@ public class GasStationDAOImpl implements GasStationDAO{
 
 
 	@Override
-	public List<GasStation> gasStationSelectByStoreName(Connection conn, String storeName, String location) {
-		String sql = "SELECT * FROM " + location + "_gas_station WHERE storename LIKE ?";
+	public List<GasStation> gasStationSelectByStoreName(Connection conn, String storeName) {
+		String sql = "SELECT * FROM gas_station WHERE storename LIKE ?";
 		
 		try(PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setString(1, "%" + storeName + "%");
@@ -50,8 +56,8 @@ public class GasStationDAOImpl implements GasStationDAO{
 	}
 
 	@Override
-	public int gasStationUpdate(Connection conn, GasStation gasstation, String location) {
-		String sql = "UPDATE " + location + "_gas_station SET p_gasoline=?, gasoline=?, diesel =? WHERE storename=?";
+	public int gasStationUpdate(Connection conn, GasStation gasstation) {
+		String sql = "UPDATE gas_station SET p_gasoline=?, gasoline=?, diesel =? WHERE storename=?";
 		
 		try(PreparedStatement stmt = conn.prepareStatement(sql)){
 			stmt.setString(1, gasstation.getP_gasoline());
@@ -67,8 +73,8 @@ public class GasStationDAOImpl implements GasStationDAO{
 	}
 	
 	@Override
-	public int gasStationInsert(Connection conn, GasStation gasstation, String location) {
-		String sql = "INSERT INTO " + location + "_gas_station "
+	public int gasStationInsert(Connection conn, GasStation gasstation) {
+		String sql = "INSERT INTO gas_station "
 				+ "(storename, storeaddress, storenumber, storebrand, self, p_gasoline, gasoline, diesel) "
 				+ "values (?,?,?,?,?,?,?,?)";
 		
@@ -110,44 +116,60 @@ public class GasStationDAOImpl implements GasStationDAO{
 
 
 	@Override
-	public int gasHistoryInsert(Connection conn) {
-		String sql = "INSERT INTO gas_history (storename, p_gasoline, gasoline, diesel ,`date`) SELECT storename, p_gasoline, gasoline ,diesel, ? FROM ?" ;
+	public int gasHistoryInsert(Connection conn) { // 복사해서 history에 넣기 
+		String sql = "INSERT INTO gas_history (storename, region,p_gasoline, gasoline, diesel,`date` ) SELECT storename, region,p_gasoline, gasoline ,diesel, ?  FROM gas_station";
 		LocalDate now = LocalDate.now();
 		String toDay = String.valueOf(now);
-	    List<String>fileName = new ArrayList<>();
-	      fileName.add("gangseo_gu_gas_station");
-	      fileName.add("geumjeong_gu_gas_station");
-	      fileName.add("gijang_gu_gas_station");
-	      fileName.add("nam_gu_gas_station");
-	      fileName.add("dong_gu_gas_station");
-	      fileName.add("dongrae_gu_gas_station");
-	      fileName.add("jin_gu_gas_station");
-	      fileName.add("buk_gu_gas_station");
-	      fileName.add("sasang_gu_gas_station");
-	      fileName.add("saha_gu_gas_station");
-	      fileName.add("seo_gu_gas_station");
-	      fileName.add("suyung_gu_gas_station");
-	      fileName.add("yeonje_gu_gas_station");
-	      fileName.add("yungdo_gu_gas_station");
-	      fileName.add("jung_gu_gas_station");
-	      fileName.add("haeundae_gu_gas_station");
+	   
 	      
+	     
 		try(PreparedStatement stmt = conn.prepareStatement(sql)) {
-			for(int i = 0 ; i<fileName.size(); i++) {    
-				stmt.setString(1,toDay);
-				stmt.setString(2,fileName.get(i));
-				
-			}
+			stmt.setString(1,toDay );
+			
+			
 			return stmt.executeUpdate();
-		
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException("주유소 넣기 작업 중 예외 발생", e);
 		}
 		
+	  
+		
 		
 	}
+
+
+	@Override
+	public List<String> gasStationXY(Connection conn) {
+		String sql = "SELECT X,Y FROM gas_station";
+		
+		try(PreparedStatement stmt = conn.prepareStatement(sql)) {
+			
+			
+			try(ResultSet rs = stmt.executeQuery()) {
+				List<String> list = new ArrayList();
+				
+				while(rs.next()) {
+					 String X = rs.getString("X");
+					 String Y = rs.getString("Y");
+					 
+					 list.add(X);
+					 list.add(Y);
+					 
+					
+				}
+				System.out.println(list);
+				return list;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException("주유소 선별조회 작업 중 예외 발생", e);
+		}
+	}
+		
+	
+
 
 
 }

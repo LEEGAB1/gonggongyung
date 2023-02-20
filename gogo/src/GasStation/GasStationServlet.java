@@ -21,11 +21,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import Service.map.GasStationService;
 import Service.map.GasStationServiceImpl;
 
-@WebServlet({"/gogo/gasstation","/gogo/gasstation/*"})
+@WebServlet({ "/gogo/gasstation", "/gogo/gasstation/*" })
 public class GasStationServlet extends HttpServlet {
 	private GasStationService gasService;
 
-	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		gasService = new GasStationServiceImpl(new GasStationDAOImpl());
@@ -34,7 +33,18 @@ public class GasStationServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
+		List<String> list = gasService.readGasXY();
+		// x,y 표값 받아온다
+		// 맵핑해서 보낸다
+
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.writeValueAsString(list);
+
+		PrintWriter pw = resp.getWriter();
+		pw.println(json);
+		pw.flush();
+
 	}
 
 	@Override
@@ -43,35 +53,30 @@ public class GasStationServlet extends HttpServlet {
 		String storename = req.getParameter("storename");
 		System.out.println("location" + location);
 		System.out.println("storename" + storename);
-		
-		
-		if(location != null && storename.isEmpty()) {
+
+		if (location != null && storename.isEmpty()) {
 			List<GasStation> list = gasService.readGas(location);
 			ObjectMapper mapper = new ObjectMapper();
 			String json = mapper.writeValueAsString(list);
-			
+
 			PrintWriter pw = resp.getWriter();
 			pw.println(json);
 			pw.flush();
-			
+
 		} else if (location != null && storename != null) {
 			List<GasStation> list = gasService.readGasByStorename(location, storename);
 			ObjectMapper mapper = new ObjectMapper();
 			String json = mapper.writeValueAsString(list);
-			
+
 			PrintWriter pw = resp.getWriter();
 			pw.println(json);
 			pw.flush();
 		}
 	}
 
-
-	
 	private GasStation jsonToGasStation(String json) throws JsonMappingException, JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
 		return mapper.readValue(json, GasStation.class);// 읽고 book class에 맵핑 후 반환
 	}
-	
-	
 
 }

@@ -3,6 +3,7 @@ package test;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import GasStation.GasStation;
 import GasStation.GasStationDAO;
@@ -31,6 +32,7 @@ public class test {
 //		GasStationServiceImpl gservice = new GasStationServiceImpl(new GasStationDAOImpl());
 //		ParkinglotServiceImpl pservice = new ParkinglotServiceImpl(new ParkingDAOImpl());
 //		reviewServiceImpl rservice = new reviewServiceImpl(new ReviewDAOImpl());
+<<<<<<< HEAD
 		
 		ReviewDAOImpl review = new ReviewDAOImpl();
 		
@@ -38,6 +40,15 @@ public class test {
 		GasStationDAOImpl gas = new GasStationDAOImpl();
 		int a = gas.gasHistoryInsert(conn);
 		System.out.println(a);
+=======
+//		GasStationDAOImpl gas = new GasStationDAOImpl();
+//		int a = gas.gasHistoryInsert(conn);
+//		System.out.println(a);
+		dao.gasStationXY(conn);
+		
+		
+		
+>>>>>>> branch 'master' of https://github.com/LEEGAB1/gonggongyung.git
 		
 //		System.out.println(service.readGas("buk_gu"));
 //		System.out.println(gservice.readGasByStorename("buk_gu","경덕주유소"));
