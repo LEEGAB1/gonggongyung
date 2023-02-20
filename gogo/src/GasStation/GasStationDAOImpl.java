@@ -8,11 +8,15 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GasStationDAOImpl implements GasStationDAO{
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+
+
+public class GasStationDAOImpl    implements GasStationDAO {
 
 	@Override
-	public List<GasStation> gasStationSelect(Connection conn, String location) {
-		String sql = "SELECT * FROM " + location +"_gas_station";
+	public List<GasStation> gasStationSelect(Connection conn) {
+		String sql = "SELECT * FROM gas_station";
 		
 		try(PreparedStatement stmt = conn.prepareStatement(sql);
 				ResultSet rs = stmt.executeQuery()) {
@@ -30,8 +34,8 @@ public class GasStationDAOImpl implements GasStationDAO{
 
 
 	@Override
-	public List<GasStation> gasStationSelectByStoreName(Connection conn, String storeName, String location) {
-		String sql = "SELECT * FROM " + location + "_gas_station WHERE storename LIKE ?";
+	public List<GasStation> gasStationSelectByStoreName(Connection conn, String storeName) {
+		String sql = "SELECT * FROM gas_station WHERE storename LIKE ?";
 		
 		try(PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setString(1, "%" + storeName + "%");
@@ -50,8 +54,8 @@ public class GasStationDAOImpl implements GasStationDAO{
 	}
 
 	@Override
-	public int gasStationUpdate(Connection conn, GasStation gasstation, String location) {
-		String sql = "UPDATE " + location + "_gas_station SET p_gasoline=?, gasoline=?, diesel =? WHERE storename=?";
+	public int gasStationUpdate(Connection conn, GasStation gasstation) {
+		String sql = "UPDATE gas_station SET p_gasoline=?, gasoline=?, diesel =? WHERE storename=?";
 		
 		try(PreparedStatement stmt = conn.prepareStatement(sql)){
 			stmt.setString(1, gasstation.getP_gasoline());
@@ -67,8 +71,8 @@ public class GasStationDAOImpl implements GasStationDAO{
 	}
 	
 	@Override
-	public int gasStationInsert(Connection conn, GasStation gasstation, String location) {
-		String sql = "INSERT INTO " + location + "_gas_station "
+	public int gasStationInsert(Connection conn, GasStation gasstation) {
+		String sql = "INSERT INTO gas_station "
 				+ "(storename, storeaddress, storenumber, storebrand, self, p_gasoline, gasoline, diesel) "
 				+ "values (?,?,?,?,?,?,?,?)";
 		
@@ -110,7 +114,7 @@ public class GasStationDAOImpl implements GasStationDAO{
 
 
 	@Override
-	public int gasHistoryInsert(Connection conn) {
+	public int gasHistoryInsert(Connection conn) { // 복사해서 history에 넣기 
 		String sql = "INSERT INTO gas_history (storename, region,p_gasoline, gasoline, diesel,`date` ) SELECT storename, region,p_gasoline, gasoline ,diesel, ?  FROM gas_station";
 		LocalDate now = LocalDate.now();
 		String toDay = String.valueOf(now);

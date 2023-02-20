@@ -49,7 +49,7 @@ public class CsvToList {
 		GasStationDAO dao = new GasStationDAOImpl();
 		
 		for (int i = 1; i < list.size(); i++) {
-			System.out.print(dao.gasStationInsert(conn, list.get(i), location));			
+			System.out.print(dao.gasStationInsert(conn, list.get(i)));			
 		}
 		
 	}

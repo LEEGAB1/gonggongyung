@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import Service.map.GasStationService;
 import Service.map.GasStationServiceImpl;
 
+
 @WebServlet({"/gogo/gasstation","/gogo/gasstation/*"})
 public class GasStationServlet extends HttpServlet {
 	private GasStationService gasService;
@@ -34,6 +35,18 @@ public class GasStationServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// x,y 표값 받아온다 
+		//맵핑해서 보낸다
+		
+		
+//		List<Book> list = service.read();
+//		ObjectMapper mapper = new ObjectMapper();
+//		String json = mapper.writeValueAsString(list);
+//
+//		PrintWriter pw = resp.getWriter();
+//		pw.println(json);
+//		pw.flush();
+		
 		
 	}
 

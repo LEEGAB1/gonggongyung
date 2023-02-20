@@ -21,7 +21,7 @@ public class GasStationServiceImpl implements GasStationService{
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
-			return dao.gasStationSelect(conn, location);
+			return dao.gasStationSelect(conn);
 		} catch (RuntimeException | SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -41,7 +41,7 @@ public class GasStationServiceImpl implements GasStationService{
 		Connection conn = null;
 		try {
 			conn= ConnectionProvider.getConnection();
-			return dao.gasStationSelectByStoreName(conn, storename, location);
+			return dao.gasStationSelectByStoreName(conn, storename);
 		} catch (RuntimeException | SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -61,7 +61,7 @@ public class GasStationServiceImpl implements GasStationService{
 		try {
 			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
-			dao.gasStationUpdate(conn, gasstation, location);
+			dao.gasStationUpdate(conn, gasstation);
 			conn.commit();
 			return gasstation;
 		} catch (RuntimeException | SQLException e) {
