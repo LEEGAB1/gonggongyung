@@ -18,7 +18,7 @@ import zerozerotwo.dbutil.ConnectionProvider;
 
 public class CsvToList {
 	public static void main(String[] args) throws IOException, SQLException {
-		String location = "yungdo_gu";
+		String location = "영도구";
 		
 		CsvSchema schema = new CsvSchema.Builder()//규칙을 설명하는 타임
 				

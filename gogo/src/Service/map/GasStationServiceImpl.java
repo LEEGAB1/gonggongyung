@@ -17,7 +17,7 @@ public class GasStationServiceImpl implements GasStationService{
 	}
 
 	@Override
-	public List<GasStation> readGas(String location) {
+	public List<GasStation> readGas() {
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
@@ -37,7 +37,27 @@ public class GasStationServiceImpl implements GasStationService{
 	}
 
 	@Override
-	public List<GasStation> readGasByStorename(String location, String storename) {
+	public List<GasStation> readGasByRegion(String region) {
+		Connection conn = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			return dao.gasStationSelectByRegion(conn, region);
+		} catch(RuntimeException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	public List<GasStation> readGasByStorename(String storename) {
 		Connection conn = null;
 		try {
 			conn= ConnectionProvider.getConnection();
@@ -55,13 +75,14 @@ public class GasStationServiceImpl implements GasStationService{
 		}
 		return null;
 	}
+	
 	@Override
-	public GasStation updateGas(GasStation gasstation, String location) {
+	public GasStation updateGas(GasStation gasstation, String region) {
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
-			dao.gasStationUpdate(conn, gasstation);
+			dao.gasStationUpdate(conn, gasstation, region);
 			conn.commit();
 			return gasstation;
 		} catch (RuntimeException | SQLException e) {
@@ -103,6 +124,7 @@ public class GasStationServiceImpl implements GasStationService{
 		}
 		return null;
 	}
+
 
 
 }
