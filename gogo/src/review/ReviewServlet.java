@@ -44,10 +44,10 @@ public class ReviewServlet extends HttpServlet{
 //		String nickname = req.getParameter("nickname");
 		String review = req.getParameter("reviewInput");
 		String name = req.getParameter("username");
-//		String storename = req.getParameter("storename");
+		String storename = req.getParameter("storename");
 		System.out.println(review);
 		System.out.println(name);
-//		System.out.println(storename);
+		System.out.println(storename);
 //		String storename = req.getParameter("storename");
 //		System.out.println("nickname" + nickname);
 //		System.out.println("storename" + storename);
