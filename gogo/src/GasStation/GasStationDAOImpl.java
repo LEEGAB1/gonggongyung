@@ -14,7 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 
 
-public class GasStationDAOImpl    implements GasStationDAO {
+public class GasStationDAOImpl implements GasStationDAO {
 
 	@Override
 	public List<GasStation> gasStationSelect(Connection conn) {
@@ -34,7 +34,26 @@ public class GasStationDAOImpl    implements GasStationDAO {
 		}
 	}
 
-
+	@Override
+	public List<GasStation> gasStationSelectByRegion(Connection conn, String region) {
+		String sql = "SELECT * FROM gas_station WHERE region = ?";
+		
+		try(PreparedStatement stmt = conn.prepareStatement(sql)) {
+			stmt.setString(1, region);
+			
+			try(ResultSet rs = stmt.executeQuery()) {
+				List<GasStation> list = new ArrayList<>();
+				while(rs.next()) {
+					list.add(resultMapping(rs));
+				}
+				return list;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException("주유소 지역별 선별조회 작업 중 예외 발생", e);
+		}
+	}
+	
 	@Override
 	public List<GasStation> gasStationSelectByStoreName(Connection conn, String storeName) {
 		String sql = "SELECT * FROM gas_station WHERE storename LIKE ?";
@@ -56,14 +75,15 @@ public class GasStationDAOImpl    implements GasStationDAO {
 	}
 
 	@Override
-	public int gasStationUpdate(Connection conn, GasStation gasstation) {
-		String sql = "UPDATE gas_station SET p_gasoline=?, gasoline=?, diesel =? WHERE storename=?";
+	public int gasStationUpdate(Connection conn, GasStation gasstation, String region) {
+		String sql = "UPDATE gas_station SET p_gasoline=?, gasoline=?, diesel =? WHERE storename=? and region=?";
 		
 		try(PreparedStatement stmt = conn.prepareStatement(sql)){
 			stmt.setString(1, gasstation.getP_gasoline());
 			stmt.setString(2, gasstation.getGasoline());
 			stmt.setString(3, gasstation.getDiesel());
 			stmt.setString(4, gasstation.getStorename());
+			stmt.setNString(5, region);
 			
 			return stmt.executeUpdate();
 		} catch (SQLException e) {
@@ -167,6 +187,9 @@ public class GasStationDAOImpl    implements GasStationDAO {
 			throw new RuntimeException("주유소 선별조회 작업 중 예외 발생", e);
 		}
 	}
+
+
+
 		
 	
 
