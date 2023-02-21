@@ -627,7 +627,7 @@
             text-align: center;
         }
 
-        .star {
+        .mainstar {
             text-align: center;
             font-size: medium;
         }
@@ -805,7 +805,7 @@
             
         }
 
-        /* 테스트 */
+        /* 모달창 */
         button {
           background-color: #F9B514;
           padding: 5px 10px;
@@ -848,6 +848,37 @@
           display: none;
         }
 
+        /* 별점 */
+        /* component */
+
+        .star-rating {
+        /* border:solid 1px #ccc; */
+        display:flex;
+        flex-direction: row-reverse;
+        font-size:1.5em;
+        justify-content:space-around;
+        padding:0 .2em;
+        text-align:center;
+        width:5em;
+        }
+
+        .star-rating input {
+        display:none;
+        }
+
+        .star-rating label {
+        color:#ccc;
+        cursor:pointer;
+        }
+
+        .star-rating :checked ~ label {
+        color:#f90;
+        }
+
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+        color:#fc0;
+        }
         
     </style>
 
@@ -960,7 +991,7 @@
                         <div class="sidebarHead" style="height: 12%;">
                             <p class="parkingname"> 주차장이름 </p>
                             <p class="parkingaddr" type="text" id="namebtn" name="storename"></p>
-                            <p class="star"> 평점 : ★★★★☆ </p>
+                            <p class="mainstar"> 평점 : ★★★★☆ </p>
 
                         </div>
 
@@ -1009,9 +1040,25 @@
                                 <button class="openBtn">작성하기</button>
                                 <div class="modal hidden">
                                     <div class="bg"></div>
-                                    <div class = "modalBox">
+                                    <div class = "modalBox" style="display: flex;align-items:center;flex-direction: column;justify-content:space-around">
+                                        <p>☺️😊😥</p>
+                                        <div class="star-rating">
+                                            <input type="radio" id="5-stars" name="rating" value="5" />
+                                            <label for="5-stars" class="star">&#9733;</label>
+                                            <input type="radio" id="4-stars" name="rating" value="4" />
+                                            <label for="4-stars" class="star">&#9733;</label>
+                                            <input type="radio" id="3-stars" name="rating" value="3" />
+                                            <label for="3-stars" class="star">&#9733;</label>
+                                            <input type="radio" id="2-stars" name="rating" value="2" />
+                                            <label for="2-stars" class="star">&#9733;</label>
+                                            <input type="radio" id="1-star" name="rating" value="1" />
+                                            <label for="1-star" class="star">&#9733;</label>
+                                          </div>
                                         <textarea class="reviewInput" name="reviewInput" placeholder="방문한 가게는 어땠나요? 리뷰를 남겨주세요." onclick="joinCheck()"></textarea>
-                                        <button class="reviewBtn" id="reviewBtn" type="submit" >등록</button>
+                                        <div style="display: flex;">
+                                            <button class="reviewBtn" id="reviewBtn" type="submit" >등록</button>
+                                            <button class="closeBtn">닫기</button>
+                                        </div>
                                     </div>
                                 </div>
                             </form>
@@ -1046,6 +1093,7 @@
                             }
 
                             document.querySelector(".openBtn").addEventListener("click", open);
+                            document.querySelector(".closeBtn").addEventListener("click", close);
                             document.querySelector(".bg").addEventListener("click", close);
 
                             
@@ -2109,7 +2157,7 @@
 
         }
 
-//  02/21 15:42 최신화
+//  02/21 16:26 최신화
 
 
     </script>
