@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>리뷰 설정 페이지</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .content-title {
+            padding-bottom: 1px;
+            font-family: nanumgothic,sans-serif;
+            font-size: 23px;
+            line-height: 1;
+            font-weight: 700;
+            color: #000;
+        }
+        h1 {
+            display: block;
+            font-size: 2em;
+            margin-block-start: 0.67em;
+            margin-block-end: 0.67em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            font-weight: bold;
+        }
+        body, input, button, textarea, select {
+            font: 12px/1.5em "돋움",Dotum,Helvetica,Sans-serif;
+             color: #424242;
+        }
+        .blind {
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            font-size: 0;
+            line-height: 0;
+            opacity: 0;
+            filter: Alpha(opacity=0);
+        }
+        .top_desc_2 {
+            color: #424242;
+            padding: 30px 0 30px 10px;
+            line-height: 20px;
+        }
+        p {
+            display: block;
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+        }
+        div {
+            display: block;
+        }
+        .action2:after {
+            display : block;
+            content : '';
+            clear : both;
+        }
+        .action2_1 {
+            margin-left : 10px;
+        }
+        img, fieldset {
+            border : none;
+        }
+        fieldset {
+            display: block;
+            margin-inline-start: 2px;
+            margin-inline-end: 2px;
+            padding-block-start: 0.35em;
+            padding-inline-start: 0.75em;
+            padding-inline-end: 0.75em;
+            padding-block-end: 0.625em;
+            min-inline-size: min-content;
+            border-width: 0px;
+            border-style: groove;
+            border-color: rgb(192, 192, 192);
+            border-image: initial;
+        }
+        legend {
+            display: block;
+            padding-inline-start: 2px;
+            padding-inline-end: 2px;
+            border-width: initial;
+            border-style: none;
+            border-color: initial;
+            border-image: initial;
+        }
+        select:not(:-internal-list-box) {
+    overflow: visible !important;
+}
+.action2_l select {
+    height: 21px;
+    border: 1px solid #d5d5d5;
+}
+select {
+    writing-mode: horizontal-tb !important;
+
+    text-rendering: auto;
+    color: fieldtext;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    appearance: auto;
+    box-sizing: border-box;
+    align-items: center;
+    white-space: pre;
+    -webkit-rtl-ordering: logical;
+    background-color: field;
+    cursor: default;
+    margin: 0em;
+    border-width: 1px;
+    border-style: solid;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
+    border-radius: 0px;
+}
+option {
+    font-weight: normal;
+    display: block;
+    white-space: nowrap;
+    min-height: 1.2em;
+    padding: 0px 2px 1px;
+}
+.action2_l, .input_text {
+    border: 1px solid #d5d5d5;
+}
+.action2 .input_text {
+    vertical-align: top;
+}
+.input_text {
+    height: 17px;
+    padding: 2px 0 0 3px;
+    border: 1px solid #c4c4c4;
+}
+input[type="text" i] {
+    padding: 1px 2px;
+}
+input {
+    writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: fieldtext;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    appearance: auto;
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    background-color: field;
+    margin: 0em;
+    padding: 1px 2px;
+    border-width: 2px;
+    border-style: inset;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
+}
+.btn2 {
+    height: 21px;
+    margin: 0;
+    background: #fff;
+}
+.btn {
+    margin-right: 2px;
+}
+.btn, .btn a, .btn button, .btn input {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    overflow: visible;
+    position: relative;
+    border: 0 none;
+    background: url(https://blogimgs.pstatic.net/nblog/admin/buddy/bg_btn.gif) no-repeat;
+    white-space: nowrap;
+    vertical-align: top;
+    text-decoration: none!important;
+    cursor: pointer;
+    color: #666;
+}
+input[type="submit" i] {
+    appearance: auto;
+    user-select: none;
+    white-space: pre;
+    align-items: flex-start;
+    text-align: center;
+    cursor: default;
+    box-sizing: border-box;
+    background-color: buttonface;
+    color: buttontext;
+    padding: 1px 6px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: buttonborder;
+    border-image: initial;
+}
+
+.btn a, .btn button, .btn input {
+    left: 2px;
+    padding: 0 5px 0 4px;
+    *padding: 0 7px 0 6px;
+}
+.btn2 a, .btn2 button, .btn2 input {
+    left: 0;
+    height: 21px;
+    padding: 0 5px;
+    background: #fff;
+    border: 1px solid #d5d5d5;
+    font-size: 12px;
+    line-height: 18px;
+    color: #525252;
+}
+.action2_r {
+    float: right;
+    margin-right: 5px;
+}
+.action2 {
+    position: relative;
+    width: 100%;
+    padding: 8px 0 7px;
+    zoom: 1;
+}
+.table3 {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: 1px solid #d6d6d6;
+    border-bottom: 1px solid #d6d6d6;
+    table-layout: fixed;
+}
+table {
+    display: table;
+    border-collapse: separate;
+    box-sizing: border-box;
+    text-indent: initial;
+    border-spacing: 2px;
+    border-color: grey;
+}
+
+colgroup {
+    display: table-column-group;
+}
+.table3 .col1 {
+    width: 24px;
+}
+.table3 .col2 {
+    width: 134px;
+}
+.table3 .col4 {
+    width: 120px;
+}
+thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+.table3 .check1 {
+    padding-right: 0;
+    padding-left: 0;
+    text-align: right;
+}
+.table3 thead th, .table3 thead td {
+    padding: 9px 6px 7px;
+    background: #f6f6f6;
+    text-align: center;
+    font-weight: 400;
+    color: #767676;
+}
+.table3 th, .table3 td {
+    vertical-align: top;
+}
+th {
+    display: table-cell;
+    vertical-align: inherit;
+    font-weight: bold;
+    text-align: -internal-center;
+}
+.input_check, .input_radio {
+    width: 13px;
+    height: 13px;
+    vertical-align: middle;
+    margin-bottom: 3px;
+}
+.table3 .l {
+    text-align: left;
+}
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+.table3 tbody .none td {
+    padding: 59px 0 56px;
+    text-align: center;
+    color: #8e8e8e;
+}
+.table3 tbody th, .table3 tbody td {
+    padding: 14px 10px 15px;
+    border-top: 1px solid #f1f1f1;
+    line-height: 1.3em;
+    overflow: hidden;
+    word-break: break-all;
+    word-wrap: break-word;
+    color: #767676;
+}
+.table3 th, .table3 td {
+    vertical-align: top;
+}
+/* .paginate strong {
+    color: #ff8600!important;
+} */
+.paginate a, .paginate strong {
+    _position: relative;
+    margin-left: -7px;
+    font-weight: 700;
+    display: inline-block;
+    padding: 3px 8px 1px 7px;
+    color: #313031;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    text-decoration: none;
+    line-height: normal;
+    font: bold 12px 돋움,Dotum,굴림,Gulim,Helvetica,Sans-serif;
+    background: #fff;
+}
+.paginate * {
+    margin: 0;
+    padding: 0;
+}
+strong {
+    font-weight: bold;
+}
+.paginate {
+    padding: 15px 0;
+    text-align: center;
+}
+td {
+    display: table-cell;
+    vertical-align: inherit;
+}
+.action2_l, .input_text {
+    border: 1px solid #d5d5d5;
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+}
+.maindiv{
+    display: flex;
+    flex-wrap: nowrap;
+}
+.asidep{
+    padding : 0 100px;
+}
+</style>
+</head>
+<body class="h-screen br-gray-100 flex felx-col">
+    <form id="searchFrm" name="searchFrm" method="post">
+    <header class="bg-white p-4 shadow-md">
+        <nav class="flex items-center justify-betwwen">
+            <h1 class="content-title">
+                 Review Setting
+            </h1>
+            <div class="content-title flex items-center">
+                <a href="#" class="text-lg mr-4 text-gray-600 hover:text-gray-800">Home</a>
+                <a href="#" class="text-lg mr-4 text-gray-600 hover:text-gray-800">About</a>
+            </div>
+        </nav>
+    </header>
+    <main class="maindiv p-4 flex-auto flex flex-wrap w-full">
+        <aside class="asidep"></aside>
+        <section>
+        <div class="action2">
+            <p class="top_desc_2">공영이 리뷰를 관리할 수 있는 공간입니다:)</p>
+            <fieldset class="action2_1">
+                <legend class="blind">검색</legend>
+                <select name="paging.commentSearchType" class="_nclk(edt_reply.option)">
+                    <option value="1">ID</option>
+                    <option value="2">닉네임</option>
+                </select>
+                <input type="text" class="input_text_nclk(edt_reply.search)" style="width:123px;" name="paging.commentSearchValue" value>
+                <span class="btn btn2 _nclk(edt_reply.all)">
+                    <input type="submit" value="검색">
+                </span>
+                <span class="btn btn2 _nclk(edt_reply.all)">
+                    <button type="button" id="allView">전체보기</button>
+                </span>
+            </fieldset>
+            <div class="action2_r">
+                <span class="btn btn2">
+                    <button type="buton" class="_btnSubmit _moveToTrash _nclk(edt_reply.delup)">수정</button>
+                </span>
+                <span class="btn btn2">
+                    <button type="buton" class="_btnSubmit _registBlackAndDelete _nclk(edt_reply.delblockup)">삭제</button>
+                </span>
+            </div>
+            
+        </div>
+        <table cellspacing="0" class="table3">
+            <colgroup>
+            <col class="col1">
+            <col class="col2">
+            <col>
+            <col class="col4">
+        </colgroup>
+        <thead>
+            <tr>
+                <th scope="col" class="check1">
+                    <input type="checkbox" class="input_check _chSelectAll _nclkcb(edt_reply.checkallup)" title="전체선택">
+                </th>
+                <th scope="col" class="1">작성자</th>
+                <th scope="col">내용</th>
+                <th scope="col">별점</th>
+            </tr>
+        </thead>
+        <tbody id="tableListById">
+            <tr class="none e">
+                <td colspan="4">댓글이 없습니다.</td>
+            </tr>
+        </tbody>
+        </table>
+        <div class="action2">
+            <p class="action2_1">
+                <input type="checkbox" class="input_check _chSelelctAll _nclkcb(edt_reply.checkallup)">
+                <label>전체 선택</label>
+            </p>
+            <div class="action2_r">
+                <span class="btn btn2">
+                    <button type="button" class="_btnSubmit _moveToTrash _nclk(edt_reply.deldo)">수정</button>
+                </span>
+                <span class="btn btn2">
+                    <button type="button" class="_btnSubmit _registBlackAndDelete _nclk(edt_reply.delblockup)">삭제</button>
+                </span>
+            </div>
+    </div>
+    </section>
+    <aside class="asidep"></aside>
+    </main>
+    <footer class="bg-white p-4 w-full">
+        <div class="paginate pp1 _ncl(edt_reply.page)">
+            <div class="paginate_re">
+                <strong>1</strong>
+            </div>
+        </div>       
+    </footer>
+</form>
+</body>
+</html>
