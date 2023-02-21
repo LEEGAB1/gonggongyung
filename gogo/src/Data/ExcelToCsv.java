@@ -41,7 +41,7 @@ public class ExcelToCsv {
 	        sheet.saveToFile("output/" + fileName.get(i) + ".csv", ",", Charset.forName("UTF-8"));
 	        
 	        
-	        System.out.println("csv파일 생성완료");
+	         System.out.println(fileName.get(i) +"csv파일 생성완료");
 		   }
 	    }
 }

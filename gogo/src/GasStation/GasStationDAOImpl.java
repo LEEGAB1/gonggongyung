@@ -188,6 +188,33 @@ public class GasStationDAOImpl implements GasStationDAO {
 		}
 	}
 
+	@Override
+	public List<String> oneWeekGasolinePrice(Connection conn, String storeName ) {
+		String sql = "SELECT gasoline,date FROM gas_history where storename = ? ORDER BY date asc" ;
+		try(PreparedStatement stmt = conn.prepareStatement(sql)) {
+			
+			
+			stmt.setNString(1, storeName);
+			try(ResultSet rs = stmt.executeQuery()) {
+				List<String> list = new ArrayList();
+				while(rs.next()) {
+					 String gasoline = rs.getString("gasoline");
+					 String  date = rs.getString("date");
+					 
+					 list.add(gasoline);
+					 list.add(date);
+				}
+				System.out.println(list);
+				return list;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException("주유소 선별조회 작업 중 예외 발생", e);
+		}
+	}
+		
+	}
+
 
 
 		
@@ -195,4 +222,4 @@ public class GasStationDAOImpl implements GasStationDAO {
 
 
 
-}
+
