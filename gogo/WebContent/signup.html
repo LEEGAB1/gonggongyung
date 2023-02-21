@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+
+</head>
+<style>
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+    nav {
+        display: block;
+        justify-content: center;
+    }
+
+    html {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding-top: 30px;
+        padding-bottom: 20px;
+    }
+
+    body {
+        width: 50%;
+        border: 2px solid #160d69;
+        
+    }
+
+    header {
+        display: flex;
+    }
+
+    .logoImage {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-left: 45px;
+        border: 0;
+        width: 150px;
+        height: 150px;
+        background: url(https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FZsIjJ%2FbtrZAhhWFv1%2FvvTo9ns0BKB0r5h8z0ZShK%2Fimg.png);
+    }
+
+    h1 {
+        margin-top: 70px;
+        margin-bottom: 10px;
+        font-size: 30px;
+        color: #160d69;
+        font-weight: bolder;
+
+    }
+
+    input {
+        border: 1px solid black;
+        border-radius: 5px;
+        line-height: 35px;
+        font-size: 15px;
+        padding-left: 20px;
+        padding-right: 10px;
+        justify-content: center;
+        cursor: pointer; 
+        border: none; background-color: #ededed;
+    }
+
+    .auth {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .auth div {
+        width: 30%;
+        text-align: center;
+        font-weight: 700;
+        font-size: 15px;
+    }
+
+    .main nav {
+        justify-content: center;
+        padding: 10px;
+
+    }
+
+    span {
+        margin-right: 15px;
+        font-style: 15px; color: #160d69;
+
+    }
+
+    .signUp button {
+        width: 35%;
+        height: 40px;
+        margin-bottom: 30px;
+        margin-top: 15px;
+        cursor: pointer;
+        background-color: #160d69;
+        color: #fff; 
+        font-weight: bold;
+        border: 0px;
+
+    }
+
+    .error {
+        font-size: 12px;
+        height: 20px;
+        color: red;
+        font-weight: 700;
+        margin-left: 70px;
+        margin-top: 5px;
+    }
+
+    .error2 {
+        font-size: 12px;
+        height: 20px;
+        color: red;
+        font-weight: 700;
+        margin-left: 45px;
+        margin-top: 5px;
+
+    }
+
+    .input1 {
+        font-size: 15px;
+        margin-left: 10px;
+    }
+
+    .input2 {
+        font-size: 15px;
+        margin-left: -8px;
+    }
+
+    button:disabled {
+        background: #bebebe;
+        cursor: default;
+    }
+</style>
+
+<body style="width:500px;" align="center">
+    </bodystyle>
+    <header class="title">
+        <button class="logoImage"></button>
+        <h1> 공영이 회원가입 </h1>
+    </header>
+    <form id="form">
+        <section class="main">
+            <nav class="id">
+                <span class="input1">아이디 : </span>
+                <input name="inputId" id="inputId" type="text" placeholder="아이디를 입력하세요." oninput="idCheck()" required>
+                <div id="idError" class="error"></div>
+            </nav>
+            <nav class="password">
+                <span class="input2">비밀번호 : </span>
+                <input name="inputPw" id="inputPw" type="password" placeholder="비밀번호를 입력하세요." oninput="pwCheck()" required>
+                <div id="pwError" class="error"></div>
+            </nav>
+            <nav class="nickName">
+                <span class="input1">닉네임 : </span>
+                <input name="inputName" id="inputName" type="text" placeholder="닉네임을 입력하세요." oninput="nickCheck()" required>
+                <div id="nameError" class="error2"></div>
+            </nav>
+            <footer class="signUp">
+                <button id="joinbtn" type="submit" disabled="disabled">가입하기</button>
+            </footer>
+        </section>
+    </form>
+
+
+</body>
+<script>
+    let inputId = document.getElementById("inputId");
+    let inputPw = document.getElementById("inputPw");
+    let inputName = document.getElementById("inputName");
+    let idError = document.getElementById("idError");
+    let pwError = document.getElementById("pwError");
+    let nameError = document.getElementById("nameError");
+    let joinbtn = document.getElementById("joinbtn");
+    let id = false;
+    let pw = false;
+    let name = false;
+    
+    function idCheck() {
+        let pattern = /^[a-z0-9]{6,}$/;
+
+        if (!pattern.test(inputId.value)) {
+            idError.innerHTML = "영소문자,숫자를 사용해 6자이상 입력해주세요."
+            id = false;
+        } else {
+            idError.innerHTML = "";
+            id = true;
+        }
+        if (id && pw && name) {
+            joinbtn.disabled = false;
+        } else {
+            joinbtn.disabled = true;
+        }
+    }
+    
+    function pwCheck() {
+        let pattern = /^[a-z0-9]{8,}$/;
+        
+        if (!pattern.test(inputPw.value)) {
+            pwError.innerHTML = "영소문자,숫자를 사용해 8자이상 입력해주세요."
+            pw = false;
+        } else {
+            pwError.innerHTML = "";
+            pw = true;
+        }
+        if (id && pw && name) {
+            joinbtn.disabled = false;
+        } else {
+            joinbtn.disabled = true;
+        }
+        
+    }
+    
+    function nickCheck() {
+        let pattern = /^[ㄱ-ㅎ|가-힣]{2,}$/;
+        
+        if (!pattern.test(inputName.value)) {
+            nameError.innerHTML = "한글만 사용해 2자이상 입력해주세요."
+            // joinbtn.disabled = true;
+            name = false;
+        } else {
+            nameError.innerHTML = "";
+            name = true;
+        }
+        if (id && pw && name) {
+            joinbtn.disabled = false;
+        } else {
+            joinbtn.disabled = true;
+        }
+    }
+    
+    
+    let form = document.getElementById("form");
+
+
+    form.addEventListener("submit", function (e) {
+            e.preventDefault();
+        })
+        
+
+
+        joinbtn.addEventListener("click", (e) => {
+            // let inputId = document.getElementById("inputId").value;
+            // let inputPw = document.getElementById("inputPw").value;
+            // let inputName = document.getElementById("inputName").value;
+            // let idError = document.getElementById("idError");
+            // let nameError = document.getElementById("nameError");
+            
+            
+            const payload = new FormData(form);
+            
+            fetch("http://localhost:8080/gonggongyung/gogo/userinfo/joinbtn", {
+                method: "POST",
+                body : new URLSearchParams([...payload.entries()]), // post body형식
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    //    "Content-Type": "application/json",
+                }
+            })
+            .then((resp) => {
+                console.log(resp.status);
+                    return resp.json();
+                })
+                .then((obj) => {
+                    if (obj.inputId === 1 || obj.inputName === 1) {
+                        if (obj.inputId === 1) {
+                            idError.innerHTML = "중복 된 아이디 입니다."
+                        }
+                        if (obj.inputName === 1) {
+                        nameError.innerHTML = "중복 된 닉네임 입니다."
+                    }
+                    
+                } else {
+                    alert(inputName.value + "님 회원가입 되었습니다. 환영합니다.");
+                    
+                }
+            }).catch((e) => { console.log(e) })
+            
+        });
+    </script>
+
+</html>
