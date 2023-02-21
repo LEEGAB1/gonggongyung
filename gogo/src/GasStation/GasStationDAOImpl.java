@@ -120,6 +120,7 @@ public class GasStationDAOImpl implements GasStationDAO {
 	private GasStation resultMapping(ResultSet rs) throws SQLException{
 		GasStation gasstation = new GasStation();
 		gasstation.setStorename(rs.getString("storename"));
+		gasstation.setRegion(rs.getString("region"));
 		gasstation.setStoreaddress(rs.getString("storeaddress"));
 		gasstation.setStorebrand(rs.getString("storebrand"));
 		gasstation.setStorenumber(rs.getString("storenumber"));

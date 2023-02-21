@@ -10,7 +10,6 @@ public class GasStation {
 	private String p_gasoline;
 	private String gasoline;
 	private String diesel;
-	private String kerosene;
 	private String X;
 	private String Y;
 	
@@ -19,7 +18,7 @@ public class GasStation {
 	}
 
 	public GasStation(String region, String storename, String storeaddress, String storebrand, String storenumber,
-			String self, String p_gasoline, String gasoline, String diesel, String kerosene, String x, String y) {
+			String self, String p_gasoline, String gasoline, String diesel,  String x, String y) {
 		super();
 		this.region = region;
 		this.storename = storename;
@@ -30,7 +29,7 @@ public class GasStation {
 		this.p_gasoline = p_gasoline;
 		this.gasoline = gasoline;
 		this.diesel = diesel;
-		this.kerosene = kerosene;
+		
 		X = x;
 		Y = y;
 	}
@@ -107,13 +106,7 @@ public class GasStation {
 		this.diesel = diesel;
 	}
 
-	public String getKerosene() {
-		return kerosene;
-	}
-
-	public void setKerosene(String kerosene) {
-		this.kerosene = kerosene;
-	}
+	
 
 	public String getX() {
 		return X;
@@ -135,7 +128,7 @@ public class GasStation {
 	public String toString() {
 		return "GasStation [region=" + region + ", storename=" + storename + ", storeaddress=" + storeaddress
 				+ ", storebrand=" + storebrand + ", storenumber=" + storenumber + ", self=" + self + ", p_gasoline="
-				+ p_gasoline + ", gasoline=" + gasoline + ", diesel=" + diesel + ", kerosene=" + kerosene + ", X=" + X
+				+ p_gasoline + ", gasoline=" + gasoline + ", diesel=" + diesel + ", X=" + X
 				+ ", Y=" + Y + "]\n";
 	}
 
@@ -143,7 +136,8 @@ public class GasStation {
 
 	
 	
-	
+
+
 	
 
 }
