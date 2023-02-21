@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import Service.review.reviewService;
 import Service.review.reviewServiceImpl;
 
-@WebServlet("/gogo/review")
+@WebServlet({"/gogo/review","/gogo/review/*"})
 public class ReviewServlet extends HttpServlet{
 	private reviewService reviewservice;
 	
@@ -30,46 +30,42 @@ public class ReviewServlet extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		List<Review> list = reviewservice.readReview();
-//		ObjectMapper mapper = new ObjectMapper();
-//		String json = mapper.writeValueAsString(list);
-//		
-//		PrintWriter pw = resp.getWriter();
-//		pw.print(json);
-//		pw.flush();
+		List<Review> list = reviewservice.readReview();
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.writeValueAsString(list);
+		
+		PrintWriter pw = resp.getWriter();
+		pw.print(json);
+		pw.flush();
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		String nickname = req.getParameter("nickname");
 		String review = req.getParameter("reviewInput");
 		String name = req.getParameter("username");
 		String storename = req.getParameter("storename");
 		System.out.println(review);
 		System.out.println(name);
 		System.out.println(storename);
-//		String storename = req.getParameter("storename");
-//		System.out.println("nickname" + nickname);
-//		System.out.println("storename" + storename);
 		
-//		if(nickname != null) {
-//			List<Review> list = reviewservice.readReviewBynickname(nickname);
-//			ObjectMapper mapper = new ObjectMapper();
-//			String json = mapper.writeValueAsString(list);
-//			
-//			PrintWriter pw = resp.getWriter();
-//			pw.println();
-//			pw.flush();
-//			
-//		} else if (storename != null) {
-//			List<Review> list = reviewservice.readReviewByStorename(storename);
-//			ObjectMapper mapper = new ObjectMapper();
-//			String json = mapper.writeValueAsString(list);
-//			
-//			PrintWriter pw = resp.getWriter();
-//			pw.println();
-//			pw.flush();
-//		}
+		if(name != null) {
+			List<Review> list = reviewservice.readReviewBynickname(name);
+			ObjectMapper mapper = new ObjectMapper();
+			String json = mapper.writeValueAsString(list);
+			
+			PrintWriter pw = resp.getWriter();
+			pw.println();
+			pw.flush();
+			
+		} else if (storename != null) {
+			List<Review> list = reviewservice.readReviewByStorename(storename);
+			ObjectMapper mapper = new ObjectMapper();
+			String json = mapper.writeValueAsString(list);
+			
+			PrintWriter pw = resp.getWriter();
+			pw.println();
+			pw.flush();
+		}
 	}
 	
 	@Override

@@ -36,9 +36,11 @@ public class test {
 		ReviewDAOImpl review = new ReviewDAOImpl();
 		
 		GasStationDAOImpl gas = new GasStationDAOImpl();
-		int a = gas.gasHistoryInsert(conn);
-		System.out.println(a);
-		dao.gasStationXY(conn);
+//		int a = gas.gasHistoryInsert(conn);
+//		System.out.println(a);
+//		dao.gasStationXY(conn);
+		
+		gas.oneWeekGasolinePrice(conn, "SK에너지(주)두꺼비");
 		
 		
 		

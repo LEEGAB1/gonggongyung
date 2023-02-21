@@ -44,13 +44,13 @@ public class CsvToList {
 		List<GasStation> list = iter.readAll();
 		System.out.println(list);
 		
-		//---------------------------------------------------------------------------------------
+//		//---------------------------------------------------------------------------------------
 //		Connection conn = ConnectionProvider.getConnection();
 //		GasStationDAO dao = new GasStationDAOImpl();
 //		
-//		for (int i = 1; i < list.size(); i++) {
+//		for (int i = 0; i < list.size(); i++) {
 //			System.out.print(dao.gasStationInsert(conn, list.get(i)));			
 //		}
-		
-	}
+//		
+}
 }
