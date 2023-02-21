@@ -41,10 +41,17 @@ public class ReviewServlet extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String nickname = req.getParameter("nickname");
+
+//		String nickname = req.getParameter("nickname");
+		String review = req.getParameter("reviewInput");
+		String name = req.getParameter("username");
 		String storename = req.getParameter("storename");
-		System.out.println("nickname" + nickname);
-		System.out.println("storename" + storename);
+		System.out.println(review);
+		System.out.println(name);
+		System.out.println(storename);
+//		String storename = req.getParameter("storename");
+//		System.out.println("nickname" + nickname);
+//		System.out.println("storename" + storename);
 		
 		if(nickname != null) {
 			List<Review> list = reviewservice.readReviewBynickname(nickname);
