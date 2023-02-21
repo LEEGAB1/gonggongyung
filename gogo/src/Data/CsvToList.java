@@ -18,7 +18,7 @@ import zerozerotwo.dbutil.ConnectionProvider;
 
 public class CsvToList {
 	public static void main(String[] args) throws IOException, SQLException {
-		String location = "영도구";
+		String location = "gangseo_gu_gas_station";
 		
 		CsvSchema schema = new CsvSchema.Builder()//규칙을 설명하는 타임
 				
@@ -39,18 +39,18 @@ public class CsvToList {
 		MappingIterator<GasStation> iter = new CsvMapper()
 				.readerFor(GasStation.class)
 				.with(schema)
-				.readValues(new File("C:\\Users\\GGG\\git\\zerozerotwo\\output\\" + location + ".csv"));
+				.readValues(new File("C:\\Users\\GGG\\git\\gonggongyung\\gogo\\output\\" + location + ".csv"));
 		
 		List<GasStation> list = iter.readAll();
 		System.out.println(list);
 		
 		//---------------------------------------------------------------------------------------
-		Connection conn = ConnectionProvider.getConnection();
-		GasStationDAO dao = new GasStationDAOImpl();
-		
-		for (int i = 1; i < list.size(); i++) {
-			System.out.print(dao.gasStationInsert(conn, list.get(i)));			
-		}
+//		Connection conn = ConnectionProvider.getConnection();
+//		GasStationDAO dao = new GasStationDAOImpl();
+//		
+//		for (int i = 1; i < list.size(); i++) {
+//			System.out.print(dao.gasStationInsert(conn, list.get(i)));			
+//		}
 		
 	}
 }
