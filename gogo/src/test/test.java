@@ -2,6 +2,7 @@ package test;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -40,8 +41,10 @@ public class test {
 //		System.out.println(a);
 //		dao.gasStationXY(conn);
 		
-		gas.oneWeekGasolinePrice(conn, "SK에너지(주)두꺼비");
-		
+//		gas.oneWeekGasolinePrice(conn, "SK에너지(주)두꺼비");
+		List<GasStation> list = new ArrayList<>(); 
+				list = gas.gasStationSelect(conn);
+				System.out.println(list);
 		
 		
 		

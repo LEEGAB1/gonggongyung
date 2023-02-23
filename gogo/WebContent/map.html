@@ -1100,7 +1100,11 @@
                             window.addEventListener("load", function (e) {
                                 console.log(nickname);
                                 nick.innerHTML = nickname + "님^^";
+
                             })
+
+                            
+
 
                             function win_open(page, name) {
                                  // window.open("팝업될 문서 경로","팝업될 문서 이름","옵션(위치, bar표시, 크기 등)");
@@ -1190,7 +1194,42 @@
 
 
     <script>
-        //스크립트---------------------
+  let gasstation = [];
+    let parkinglot = [];
+    window.addEventListener("load", function (e) {
+   
+
+    fetch("http://localhost:8080/gonggongyung/gogo/gasstation/", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            for( let i = 0; i < data.length ;i++ ){
+                gasstation.push(data[i]);
+            }
+            
+            console.log(data); // 데이터 출력
+        });
+
+    fetch("http://localhost:8080/gonggongyung/gogo/parkinglot/", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+
+            for(let i =0; i<data.length ; i++){
+                parkinglot.push(data[i]);
+            }
+            
+            console.log(data); // 데이터 출력
+        });
+}); //스크립트---------------------
 
 
 
@@ -1929,8 +1968,8 @@
             var el = document.createElement('li');
             itemStr = '<span class="markerbg marker_' + (index + 1) + '"></span>' +
                 '<div class="info", onclick="showchart(toggleSidebar(' + index + '))">' +
-                '   <h5><p id="name' + index + '" class="innerbutton">' + places.place_name + '</p></h5>';
-
+                '   <h5><p id="name' + index + '" class="innerbutton">' + gasstation[index +1] + '</p></h5>';
+                    
             if (places.road_address_name) {
                 itemStr += '    <span>' + places.road_address_name + '</span>' +
                     '   <span class="jibun gray">' + places.address_name + '</span>';
@@ -2160,6 +2199,45 @@
 //  02/21 16:26 최신화
 
 
+ //========================================================================로딩하면 주유소,주차장값 가지고 있는 변수 만들기
+            // let = gasstation;
+            // let = parkinglot;
+            // window.addEventListener("load",function(e){
+
+            //     fetch("http://localhost:8080/gonggongyung/gogo/gasstation/",  { 
+            //         method: "POST",
+            // body : new URLSearchParams([...payload.entries()]),
+            // headers: {
+            //     "Content-Type": "application/x-www-form-urlencoded",
+            //     //    "Content-Type": "application/json",
+            // }
+            // }).then((response) => response.json())
+            //   .then((data) => {
+            //    gasstation.push(data); 
+                
+            // })
+
+            // fetch("http://localhost:8080/gonggongyung/gogo/parkinglot",  { 
+            //     method: "POST",
+            // body : new URLSearchParams([...payload.entries()]),
+            // headers: {
+            //     "Content-Type": "application/x-www-form-urlencoded",
+            //     //    "Content-Type": "application/json",
+            // }
+            // }).then((response) => response.json())
+            //   .then((data) => {
+            //     parkinglot.push(data); 
+            //     //parkinglot = data.innerHTML;
+            //     console.log("안녕");
+            // })
+
+
+
+            
+
+            // })
+   
+          
     </script>
 </body>
 
