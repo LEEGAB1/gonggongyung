@@ -806,7 +806,7 @@
         }
 
         /* 모달창 */
-        button {
+        .reviewBtn, .closeBtn, .openBtn {
           background-color: #F9B514;
           padding: 5px 10px;
           border-radius: 4px;
@@ -834,8 +834,9 @@
           position: absolute;
           background-color: #fff;
           width: 400px;
-          height: 200px;
+          height: 300px;
           padding: 15px;
+          border-radius: 10px;
         }
 
         .modalBox button {
@@ -872,12 +873,23 @@
         }
 
         .star-rating :checked ~ label {
-        color:#f90;
+        color:#fc0;
         }
 
         .star-rating label:hover,
         .star-rating label:hover ~ label {
         color:#fc0;
+        }
+
+        .openBtn{
+            position: absolute;
+            right: 20px;
+            top: 760px;
+        }
+
+        #reviewfont{
+            font-weight: bold;
+            color : #160d69;
         }
         
     </style>
@@ -1037,10 +1049,11 @@
                         <form id="reviewform">
                             <div class="review1">
                                 <span style="margin-left: 20px; color: #160d69;">방문자 리뷰</span>
-                                <button class="openBtn">작성하기</button>
+                                <button class="openBtn">✍🏻</button>
                                 <div class="modal hidden">
                                     <div class="bg"></div>
                                     <div class = "modalBox" style="display: flex;align-items:center;flex-direction: column;justify-content:space-around">
+                                        <p id="reviewfont">리뷰 작성하기</p>
                                         <p>☺️😊😥</p>
                                         <div class="star-rating">
                                             <input type="radio" id="5-stars" name="rating" value="5" />
