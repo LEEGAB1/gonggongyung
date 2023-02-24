@@ -590,7 +590,7 @@
             left: 150px;
             color: #160d69;
             font-size: 30px;
-
+            
         }
 
         .logoText2 {
@@ -634,16 +634,17 @@
 
         .ulstyle {
             margin-top: 10px;
-            display: inline-block;
+            display: flex;
             list-style: none;
+            justify-content: space-around;
         }
 
         .gyeong {
-            margin-left: 30px;
             display: inline-block;
-            border-right: 2px solid hotpink;
+            border-right: 2px solid #160d69;
+            text-align: center;
             padding: center;
-            padding-right: 110px;
+            padding-right: 77px;
             padding-bottom: 140px;
             font-size: 18px;
             font-weight: 800;
@@ -654,7 +655,6 @@
             margin-left: 60px;
             display: inline-block;
             font-size: 18px;
-            padding-left: 20px;
             text-align: center;
             font-weight: 800;
         }
@@ -664,64 +664,64 @@
             border-width: 0px;
         }
 
-        .up {
+        /* .up {
             background: url(https://blog.kakaocdn.net/dn/oleHY/btrZrTWwNLE/xFHG1FPVraApQFIRMPMf61/img.gif);
             width: 80px;
             height: 80px;
             margin-left: 120px;
             margin-top: -80px;
 
-        }
+        } */
 
         .lefttext {
-            display: inline-block;
+            /* display: inline-block; */
             position: absolute;
-            left: 70px;
-            top: 340px;
+            left: 69px;
+            /*top: 340px;
             font-size: 30px;
-            bottom: 50px;
+            bottom: 50px; */
         }
 
-        .down {
+        /* .down {
             display: inline-block;
             background: url(https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FwPuS8%2FbtrZre6WjYG%2F2VkU75eFvYDwf2uEwBlG20%2Fimg.png);
             width: 30px;
             height: 30px;
             margin-left: 300px;
             margin-top: -200px;
-        }
+        } */
 
         .righttext {
-            display: inline-block;
+            /* display: inline-block; */
             position: absolute;
-            font-size: 30px;
-            top: 380px;
-            left: 270px;
+            /* font-size: 30px;
+            top: 380px; */
+            left: 257px;
         }
 
-        .upup {
+        /* .upup {
             display: inline-block;
             background: url(https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FPj8Z0%2FbtrZqVT5X7K%2F69YwkRnHHEDJ3briW96MhK%2Fimg.png);
             width: 60px;
             height: 60px;
-        }
+        } */
 
-        .downdown {
+        /* .downdown {
             display: inline-block;
             background: url(https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FeDufnR%2FbtrZuGui9Ax%2Ft6S0Y5m8YqXNTdBjsrjLN0%2Fimg.png);
             width: 70px;
             height: 60px;
-        }
+        } */
 
         .smalltext {
             position: absolute;
-            left: 70px;
+            /* left: 70px; */
         }
 
-        .smalltext2 {
+        /* .smalltext2 {
             position: absolute;
             left: 280px;
-        }
+        } */
 
         .chartshow {
             display: block;
@@ -891,6 +891,10 @@
             font-weight: bold;
             color : #160d69;
         }
+
+        #myChart{
+            margin : 40px 0px;
+        }
         
     </style>
 
@@ -1008,41 +1012,40 @@
                         </div>
 
                         <hr>
-                        <div style="height: 60%;">
+                        <div style="height: 30%;">
 
-                            <p style="font-size: large;text-align : center; "> 동구에서: <span>3번째로 싼집!</span></p>
+                            <p style="font-size: large;text-align : center; "> 동구에서 <span>3번째로 싼집!</span></p>
 
-                            <p style="color: red; text-align: center; font-size: 20px;"> 오늘의 유가 정보 </p>
+                            <p style="color: #160d69; font-weight: bold; text-align: center; font-size: 20px;"> 오늘의 유가 정보 </p>
 
                             <p>
-                            <ul class="ulstyle">
-                                <li>
-                                    <div class="gyeong"> 경유 </div>
-                                    <div class="hwi"> 휘발유 </div>
-                                    <div class="up">
-                                        <p class="lefttext">2000</p>
+                            <div class="ulstyle">
+                                <div>
+                                    <div class="gyeong"> 
+                                        <p>경유</p> 
+                                        <p class="lefttext" id="diesel">2000</p>
                                     </div>
-                                    <div class="down">
-                                        <p class="righttext">3500</p>
+                                    <div class="hwi">
+                                        <p>휘발유</p>
+                                        <p class="righttext" id="gasoline">3500</p>
                                     </div>
                                     <div class="smalltext" style="color: #ff7200;text-align: left;">+102원</div>
                                     <div class="smalltext2" style="color: #ff7200; text-align: right; ">+12원</div>
-                                </li>
+                                </div>
 
-                            </ul>
-
-
-                            <hr>
-                            <p class="upup">구에서 몇번째로 싼지 비교</p>
-
-                            <p class="downdown"> 7일치 평균가격과 오늘의 가격 비교</p>
+                            </div>
+                        </dib>
+                        <hr>
+                        <div>
+                            <!-- <p class="upup">구에서 몇번째로 싼지 비교</p>
+                            <p class="downdown"> 7일치 평균가격과 오늘의 가격 비교</p> -->
                             <canvas id="myChart" style="width: 200px;"></canvas>
 
 
 
                         </div>
                     </form>
-                        <!-- ---------------------review--------------------------------------------- -->.
+                        <!-- ---------------------review--------------------------------------------- -->
 
                     
                         <hr style="margin-top: 20px;">
@@ -1981,7 +1984,7 @@
             var el = document.createElement('li');
             itemStr = '<span class="markerbg marker_' + (index + 1) + '"></span>' +
                 '<div class="info", onclick="showchart(toggleSidebar(' + index + '))">' +
-                '   <h5><p id="name' + index + '" class="innerbutton">' + gasstation[index +1] + '</p></h5>';
+                '   <h5><p id="name' + index + '" class="innerbutton">' + places.place_name + '</p></h5>';
                     
             if (places.road_address_name) {
                 itemStr += '    <span>' + places.road_address_name + '</span>' +
@@ -2123,6 +2126,23 @@
             let name = document.getElementById("name" + index);
             namebtn.innerHTML = name.innerHTML;
 
+            let todayDiesel = document.getElementById("diesel");
+            let todayGasoline = document.getElementById("gasoline");
+            let storename = "대운";
+
+            if(name){
+                fetch("http://localhost:8080/gonggongyung/gogo/gasstation?name=" + storename)
+                    .then((resp) => resp.json())
+                    .then((obj) => {
+                        todayDiesel.innerText = obj.dieselprice + "원";
+                        todayGasoline.innerText = obj.gasolineprice + "원";
+                    })
+                    .catch((e) => console.log(e))
+
+                todayDiesel.innerText = "~";
+                todayGasoline.innerText = "~";
+            }
+
             var before = document.getElementsByClassName("active")[0] // 창 실시간 변동현황
             if (before && document.getElementsByClassName("active")[0] != index) {
                 before.nextElementSibling.style.maxHeight = null;
@@ -2194,7 +2214,9 @@
                     datasets: [{
                         label: 'chart',
                         data: [2, 19, 3, 5, 2, 3],
-                        borderWidth: 2, borderColor: '#160d69',
+                        borderWidth: 2, 
+                        borderColor: '#160d69',
+                        backgroundColor : '#9BBBDF',
                     }]
                 },
                 options: {

@@ -33,17 +33,41 @@ public class GasStationServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		List<String> list = gasService.readGasXY();
-		// x,y 표값 받아온다
-		// 맵핑해서 보낸다
-
-		ObjectMapper mapper = new ObjectMapper();
-		String json = mapper.writeValueAsString(list);
-
-		PrintWriter pw = resp.getWriter();
-		pw.println(json);
-		pw.flush();
+		String storename = req.getParameter("name");
+		System.out.println("name" + storename);
+		
+		if(storename == null) {
+			List<String> list = gasService.readGasXY();
+			// x,y 표값 받아온다
+			// 맵핑해서 보낸다
+			
+			ObjectMapper mapper = new ObjectMapper();
+			String json = mapper.writeValueAsString(list);
+			
+			PrintWriter pw = resp.getWriter();
+			pw.println(json);
+			pw.flush();		
+			
+		} else if (storename != null) {
+//			String type = req.getParameter("type");
+			String type = "diesel";
+			List<GasStation> gaslist = gasService.readGasByStorename(storename);
+			List<GasStation> priceGaslist = gasService.readGasPrice(gaslist.get(0).getRegion(), type);
+			String dieselprice = gaslist.get(0).getDiesel();
+			String gasolineprice = gaslist.get(0).getGasoline();
+			
+			for (int i = 0; i < priceGaslist.size(); i++) {
+				priceGaslist.get(index)
+				gaslist.get(0).getStorename()
+			}
+			
+			String pricejson = "{\"dieselprice\": " + dieselprice + 
+								", \"gasolineprice\": " + gasolineprice + 
+								", \"pricenum\": " + pricenum + "}";
+			PrintWriter pw = resp.getWriter();
+			pw.println(pricejson);
+			pw.flush();	
+		}	
 
 	}
 

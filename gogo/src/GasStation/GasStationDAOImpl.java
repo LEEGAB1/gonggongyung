@@ -73,6 +73,27 @@ public class GasStationDAOImpl implements GasStationDAO {
 			throw new RuntimeException("주유소 선별조회 작업 중 예외 발생", e);
 		}
 	}
+	
+	@Override
+	public List<GasStation> gasStationPrice(Connection conn, String region, String type) {
+		String sql = "SELECT * FROM gas_station WHERE region = ? group by "+ type + " order by " + type + " asc";
+		
+		try(PreparedStatement stmt = conn.prepareStatement(sql)) {
+			stmt.setString(1, region);
+			
+			try(ResultSet rs = stmt.executeQuery()) {
+				List<GasStation> list = new ArrayList<>();
+				while(rs.next()) {
+					list.add(resultMapping(rs));
+				}
+				return list;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException("주유소 가격조회 작업 중 예외 발생", e);
+		}
+		
+	}
 
 	@Override
 	public int gasStationUpdate(Connection conn, GasStation gasstation, String region) {
@@ -213,6 +234,8 @@ public class GasStationDAOImpl implements GasStationDAO {
 			throw new RuntimeException("주유소 선별조회 작업 중 예외 발생", e);
 		}
 	}
+
+
 		
 	}
 

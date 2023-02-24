@@ -9,6 +9,7 @@ public interface GasStationService {
 	List<GasStation> readGas();
 	List<GasStation> readGasByRegion(String region);
 	List<GasStation> readGasByStorename(String storename);
+	List<GasStation> readGasPrice(String region, String type);
 	GasStation updateGas(GasStation gasstation, String region);
 	List<String> readGasXY();
 	
