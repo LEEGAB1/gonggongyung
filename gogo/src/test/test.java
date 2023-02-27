@@ -45,6 +45,8 @@ public class test {
 		List<GasStation> list = new ArrayList<>(); 
 				list = gas.gasStationSelect(conn);
 				System.out.println(list);
+				
+		System.out.println(dao.gasHistoryInsert(conn));
 		
 		
 		

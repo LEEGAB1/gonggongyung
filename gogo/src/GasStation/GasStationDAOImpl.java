@@ -159,7 +159,7 @@ public class GasStationDAOImpl implements GasStationDAO {
 
 	@Override
 	public int gasHistoryInsert(Connection conn) { // 복사해서 history에 넣기 
-		String sql = "INSERT INTO gas_history (storename, region,p_gasoline, gasoline, diesel,`date` ) SELECT storename, region,p_gasoline, gasoline ,diesel, ?  FROM gas_station";
+		String sql = "INSERT INTO gas_history (storename, storeaddress,p_gasoline, gasoline, diesel,`date` ) SELECT storename, storeaddress,p_gasoline, gasoline ,diesel, ?  FROM gas_station";
 		LocalDate now = LocalDate.now();
 		String toDay = String.valueOf(now);
 	   
