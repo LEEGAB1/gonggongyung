@@ -2210,13 +2210,18 @@
         };
         //================================chart========================================
         function showchart() {
+            let today = new Date();
+            // let month = today.getMonth() + 1;
+            // let date = today.getDate();
+            // let newToday = dateCalculator(today, -10);
+
 
             const ctx = document.getElementById('myChart');
 
             new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', today.toLocaleDateString()],
                     datasets: [{
                         label: 'chart',
                         data: [2, 19, 3, 5, 2, 3],
@@ -2235,6 +2240,10 @@
             });
 
 
+        }
+
+        function dateCalculator(date, n) {
+            return new Date(date.setDate(date.getDate() + n));
         }
 
 //  02/21 16:26 최신화
