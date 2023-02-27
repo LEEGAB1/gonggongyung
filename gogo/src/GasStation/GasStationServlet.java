@@ -56,6 +56,7 @@ public class GasStationServlet extends HttpServlet {
          List<GasStation> priceGaslist = gasService.readGasPrice(gaslist.get(0).getRegion(), type);
          String dieselprice = gaslist.get(0).getDiesel();
          String gasolineprice = gaslist.get(0).getGasoline();
+         String region = gaslist.get(0).getRegion();
          
          for (int i = 0; i < priceGaslist.size(); i++) {
             if(priceGaslist.get(i).getStorename().equals(gaslist.get(0).getStorename())) {
@@ -64,8 +65,10 @@ public class GasStationServlet extends HttpServlet {
          }
          
          String pricejson = "{\"dieselprice\": " + dieselprice + 
-                        ", \"gasolineprice\": " + gasolineprice + 
-                        ", \"pricenum\": " + pricenum + "}";
+                        ", \"gasolineprice\": " + gasolineprice +
+                        ", \"region\": \"" +  region +
+                        "\" , \"pricenum\": " + pricenum + "}";
+         System.out.println(pricejson);
          PrintWriter pw = resp.getWriter();
          pw.println(pricejson);
          pw.flush();   

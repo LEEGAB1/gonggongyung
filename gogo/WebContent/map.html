@@ -1014,7 +1014,7 @@
                         <hr>
                         <div style="height: 30%;">
 
-                            <p style="font-size: large;text-align : center; "> 동구에서 <span>3번째로 싼집!</span></p>
+                            <p style="font-size: large;text-align : center; "> <span id="gasRegion">동구</span>에서 <span id="priceNum">3</span>번째로 싼집!</p>
 
                             <p style="color: #160d69; font-weight: bold; text-align: center; font-size: 20px;"> 오늘의 유가 정보 </p>
 
@@ -2128,17 +2128,23 @@
 
             let todayDiesel = document.getElementById("diesel");
             let todayGasoline = document.getElementById("gasoline");
-            let storename = "대운";
+            let gasRegion = document.getElementById("gasRegion");
+            let priceNum = document.getElementById("priceNum");
+            let storename = "(주)DJS신항만물류단지주유소";
 
             if(name){
                 fetch("http://localhost:8080/gonggongyung/gogo/gasstation?name=" + storename)
                     .then((resp) => resp.json())
                     .then((obj) => {
+                        gasRegion.innerText = obj.region;
+                        priceNum.innerText = obj.pricenum;
                         todayDiesel.innerText = obj.dieselprice + "원";
                         todayGasoline.innerText = obj.gasolineprice + "원";
                     })
                     .catch((e) => console.log(e))
-
+                
+                gasRegion.innerText = "~";
+                priceNum.innerText = "~";
                 todayDiesel.innerText = "~";
                 todayGasoline.innerText = "~";
             }
