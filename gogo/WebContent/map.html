@@ -2324,7 +2324,7 @@
             let todayGasoline = document.getElementById("gasoline");
             let gasRegion = document.getElementById("gasRegion");
             let priceNum = document.getElementById("priceNum");
-            let storename = "(주)DJS신항만물류단지주유소";
+            let storename = namebtn.innerText;
 
             if(name){
                 fetch("http://localhost:8080/gonggongyung/gogo/gasstation?name=" + storename)
