@@ -78,7 +78,7 @@ public class GasStationServlet extends HttpServlet {
 
    @Override
    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-      String region = req.getParameter("region");
+      String region = req.getParameter("guSelect");
       String storename = req.getParameter("storename");
       System.out.println("region" + region);
       System.out.println("storename" + storename);
