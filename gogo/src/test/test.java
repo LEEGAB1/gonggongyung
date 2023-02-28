@@ -42,11 +42,11 @@ public class test {
 //		dao.gasStationXY(conn);
 		
 //		gas.oneWeekGasolinePrice(conn, "SK에너지(주)두꺼비");
-		List<GasStation> list = new ArrayList<>(); 
-				list = gas.gasStationSelect(conn);
-				System.out.println(list);
+//		List<GasStation> list = new ArrayList<>(); 
+//				list = gas.gasStationSelect(conn);
+//				System.out.println(list);
 				
-		System.out.println(dao.gasHistoryInsert(conn));
+		System.out.println(dao.gasStationPrice(conn, "강서구", "diesel", "평강주유소"));
 		
 		
 		

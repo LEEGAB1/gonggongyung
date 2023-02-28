@@ -51,18 +51,19 @@ public class GasStationServlet extends HttpServlet {
       } else if (storename != null) {
 //         String type = req.getParameter("type");
          String type = "diesel";
-         int pricenum = 0;
          List<GasStation> gaslist = gasService.readGasByStorename(storename);
-         List<GasStation> priceGaslist = gasService.readGasPrice(gaslist.get(0).getRegion(), type);
+//         List<GasStation> priceGaslist = gasService.readGasPrice(gaslist.get(0).getRegion(), type);
          String dieselprice = gaslist.get(0).getDiesel();
          String gasolineprice = gaslist.get(0).getGasoline();
          String region = gaslist.get(0).getRegion();
+         int pricenum = gasService.readGasPrice(region, type, storename);
+         System.out.println(pricenum);
          
-         for (int i = 0; i < priceGaslist.size(); i++) {
-            if(priceGaslist.get(i).getStorename().equals(gaslist.get(0).getStorename())) {
-               pricenum = (i + 1);
-            }
-         }
+//         for (int i = 0; i < priceGaslist.size(); i++) {
+//            if(priceGaslist.get(i).getStorename().equals(gaslist.get(0).getStorename())) {
+//               pricenum = (i + 1);
+//            }
+//         }
          
          String pricejson = "{\"dieselprice\": " + dieselprice + 
                         ", \"gasolineprice\": " + gasolineprice +

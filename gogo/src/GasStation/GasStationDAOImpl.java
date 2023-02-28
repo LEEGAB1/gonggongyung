@@ -75,24 +75,24 @@ public class GasStationDAOImpl implements GasStationDAO {
 	}
 	
 	@Override
-	public List<GasStation> gasStationPrice(Connection conn, String region, String type) {
-		String sql = "SELECT * FROM gas_station WHERE region = ? group by "+ type + " order by " + type + " asc";
+	public int gasStationPrice(Connection conn, String region, String type, String storename) {
+		String sql = "SELECT storename, diesel, gasoline, dense_rank() over (order by " + type + " asc) "
+				+ "as ranking FROM gas_station WHERE region = ? and storename = ?";
 		
 		try(PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setString(1, region);
+			stmt.setString(2, storename);
 			
 			try(ResultSet rs = stmt.executeQuery()) {
-				List<GasStation> list = new ArrayList<>();
-				while(rs.next()) {
-					list.add(resultMapping(rs));
+				if(rs.next()) {
+					return rs.getInt("ranking");
 				}
-				return list;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException("주유소 가격조회 작업 중 예외 발생", e);
 		}
-		
+		return 0;
 	}
 
 	@Override

@@ -77,11 +77,11 @@ public class GasStationServiceImpl implements GasStationService{
 	}
 	
 	@Override
-	public List<GasStation> readGasPrice(String region, String type) {
+	public int readGasPrice(String region, String type, String storename) {
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
-			return dao.gasStationPrice(conn, region, type);
+			return dao.gasStationPrice(conn, region, type, storename);
 		} catch (RuntimeException | SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -93,7 +93,7 @@ public class GasStationServiceImpl implements GasStationService{
 				}
 			}
 		}
-		return null;
+		return -1;
 	}
 	
 	
