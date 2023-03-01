@@ -9,6 +9,7 @@ public interface GasStationDAO {
 	
 	List<GasStation> gasStationSelect(Connection conn);
 	List<GasStation> gasStationSelectByRegion(Connection conn, String region);
+	List<GasStation> gasStationSelectByRegionAndZone(Connection conn, String region, String zone );
 	List<GasStation> gasStationSelectByStoreName(Connection conn, String storeName);
 	int gasStationPrice(Connection conn, String region, String type, String storename);
 	List<String> gasStationXY(Connection conn);
