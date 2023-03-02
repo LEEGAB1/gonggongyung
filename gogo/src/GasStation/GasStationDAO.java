@@ -17,6 +17,6 @@ public interface GasStationDAO {
 	int gasStationInsert(Connection conn, GasStation gasstation);
 	int gasHistoryInsert(Connection conn);
 
-	List<String> oneWeekGasolinePrice(Connection conn, String storeName);
+	List<String> oneWeekPrice(Connection conn, String storeName, String type);
 
 }

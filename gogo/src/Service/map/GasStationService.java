@@ -13,6 +13,7 @@ public interface GasStationService {
 	List<GasStation> readGasByRegionAndZone(String region, String zone);
 	List<GasStation> readGasByStorename(String storename);
 	Map<String, Integer> readGasPrice(String region, String type);
+	List<String> readOneWeekPrice(String storename, String type);
 	GasStation updateGas(GasStation gasstation, String region);
 	List<String> readGasXY();
 	

@@ -97,6 +97,25 @@ public class GasStationServiceImpl implements GasStationService{
 		return null;
 	}
 	
+	@Override
+	public List<String> readOneWeekPrice(String storename, String type) {
+		Connection conn = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			return dao.oneWeekPrice(conn, storename, type);
+		} catch (RuntimeException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return null;
+	}
 	
 	@Override
 	public GasStation updateGas(GasStation gasstation, String region) {
@@ -166,6 +185,8 @@ public class GasStationServiceImpl implements GasStationService{
 		}
 		return null;
 	}
+
+
 
 
 

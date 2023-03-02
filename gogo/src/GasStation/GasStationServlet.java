@@ -59,10 +59,15 @@ public class GasStationServlet extends HttpServlet {
          Map<String, Integer> pricemap = gasService.readGasPrice(region, type);
          int pricenum = pricemap.get(storename);
          
+         List<String> oneweekprice = gasService.readOneWeekPrice(storename, type);
+         ObjectMapper mapper = new ObjectMapper();
+         String pricemapjson = mapper.writeValueAsString(oneweekprice);
+         
          String pricejson = "{\"dieselprice\": " + dieselprice + 
                         ", \"gasolineprice\": " + gasolineprice +
                         ", \"region\": \"" +  region +
-                        "\" , \"pricenum\": " + pricenum + "}";
+                        "\" , \"pricenum\": " + pricenum + 
+                        ", \"oneweek\": " + pricemapjson + "}";
          System.out.println(pricejson);
          PrintWriter pw = resp.getWriter();
          pw.println(pricejson);

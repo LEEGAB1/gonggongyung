@@ -2318,6 +2318,7 @@
             let gasRegion = document.getElementById("gasRegion");
             let priceNum = document.getElementById("priceNum");
             let storename = namebtn.innerText;
+            var oneweek = {};
 
             if(name){
                 fetch("http://localhost:8080/gonggongyung/gogo/gasstation?type=diesel&name=" + storename)
@@ -2327,6 +2328,10 @@
                         priceNum.innerText = obj.pricenum;
                         todayDiesel.innerText = obj.dieselprice + "원";
                         todayGasoline.innerText = obj.gasolineprice + "원";
+                        // for(let i = 0; i < obj.oneweek.length; i++) {
+                            // oneweek.push(obj.oneweek[i]);
+                        // }
+                        console.log(obj.oneweek.length);
                     })
                     .catch((e) => console.log(e))
                 
@@ -2403,11 +2408,11 @@
             new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: [dateCalculator(-6), dateCalculator(-5), dateCalculator(-4), dateCalculator(-3), dateCalculator(-2), dateCalculator(-1), dateCalculator(0)],
+                    labels: [dateCalculator(-7), dateCalculator(-6), dateCalculator(-5), dateCalculator(-4), dateCalculator(-3), dateCalculator(-2), dateCalculator(-1), dateCalculator(0)],
 
                     datasets: [{
                         label: 'chart',
-                        data: [1, 2, 19, 3, 5, 2, 3],
+                        data: [2, 1, 2, 19, 3, 5, 2, 3],
                         borderWidth: 2, 
                         borderColor: '#160d69',
                         backgroundColor : '#9BBBDF',
@@ -2432,6 +2437,7 @@
             let newdate = newday.getDate();
             return newmonth + "/" + newdate;
         }
+
 
         function setOilType(oiltype) {
             let todayDiesel = document.getElementById("diesel");

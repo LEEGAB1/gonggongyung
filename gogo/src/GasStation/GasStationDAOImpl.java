@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -211,22 +212,19 @@ public class GasStationDAOImpl implements GasStationDAO {
 	}
 
 	@Override
-	public List<String> oneWeekGasolinePrice(Connection conn, String storeName ) {
-		String sql = "SELECT gasoline,date FROM gas_history where storename = ? ORDER BY date asc" ;
+	public List<String> oneWeekPrice(Connection conn, String storeName, String type) {
+		String sql = "SELECT date, " + type +" FROM gas_history where storename = ? ORDER BY date asc" ;
 		try(PreparedStatement stmt = conn.prepareStatement(sql)) {
-			
-			
 			stmt.setNString(1, storeName);
+			
 			try(ResultSet rs = stmt.executeQuery()) {
-				List<String> list = new ArrayList();
+				List<String> list = new ArrayList<>();
 				while(rs.next()) {
-					 String gasoline = rs.getString("gasoline");
-					 String  date = rs.getString("date");
-					 
-					 list.add(gasoline);
-					 list.add(date);
+//					 String date = rs.getString("date");
+					 String typeprice = rs.getString(type);
+
+					 list.add(typeprice);
 				}
-				System.out.println(list);
 				return list;
 			}
 		} catch (SQLException e) {
