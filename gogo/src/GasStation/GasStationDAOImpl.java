@@ -235,6 +235,27 @@ public class GasStationDAOImpl implements GasStationDAO {
 		}
 	}
 
+	@Override
+	public List<GasStation> gasStationSelectByRegionAndZone(Connection conn, String region, String zone) {
+	String sql = "SELECT * FROM gas_station WHERE region = ? AND zone = ?";
+		
+		try(PreparedStatement stmt = conn.prepareStatement(sql)) {
+			stmt.setString(1, region);
+			stmt.setString(2, zone);
+			
+			try(ResultSet rs = stmt.executeQuery()) {
+				List<GasStation> list = new ArrayList<>();
+				while(rs.next()) {
+					list.add(resultMapping(rs));
+				}
+				return list;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException("주유소 지역별 선별조회 작업 중 예외 발생", e);
+		}
+	}
+
 
 		
 	}

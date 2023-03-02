@@ -81,11 +81,13 @@ public class GasStationServlet extends HttpServlet {
    @Override
    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
       String region = req.getParameter("guSelect");
+      String zone = req.getParameter("dongSelect");
       String storename = req.getParameter("storename");
       System.out.println("region" + region);
+      System.out.println("zone" + zone);
       System.out.println("storename" + storename);
 
-      if (region != null) {
+      if (region != null && zone == null) {
          List<GasStation> list = gasService.readGasByRegion(region);
          ObjectMapper mapper = new ObjectMapper();
          String json = mapper.writeValueAsString(list);
@@ -102,6 +104,15 @@ public class GasStationServlet extends HttpServlet {
          PrintWriter pw = resp.getWriter();
          pw.println(json);
          pw.flush();
+      } else if (region != null && zone != null ) {
+    	  List<GasStation> list = gasService.readGasByRegionAndZone(region, zone);
+          ObjectMapper mapper = new ObjectMapper();
+          String json = mapper.writeValueAsString(list);
+
+          PrintWriter pw = resp.getWriter();
+          pw.println(json);
+          pw.flush();
+    	  
       }
    }
 

@@ -10,6 +10,7 @@ public interface GasStationService {
 	//주차장
 	List<GasStation> readGas();
 	List<GasStation> readGasByRegion(String region);
+	List<GasStation> readGasByRegionAndZone(String region, String zone);
 	List<GasStation> readGasByStorename(String storename);
 	Map<String, Integer> readGasPrice(String region, String type);
 	GasStation updateGas(GasStation gasstation, String region);
