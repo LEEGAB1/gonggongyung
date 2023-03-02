@@ -1042,10 +1042,11 @@
 
                     <button type="button" id="selectlocation">조회</button>
                 </form>
-
+            <fom id = "zone">
                 <select id="dongSelect" style="width:120px;">
                     <option value="">읍/면/동</option>
                 </select>
+            </fom>
 
 
                 <div>
@@ -1422,20 +1423,19 @@
         let selectlocation = document.getElementById("selectlocation");
         let region = document.getElementById("region");
         let placesList = document.getElementById("placesList");
+        let zone = document.getElementById("zone");
+
 
         let menuEl = document.getElementById('menu_wrap'),
             fragment = document.createDocumentFragment(),
             bounds = new kakao.maps.LatLngBounds(),
             listStr = '';
-
-        //let selectgasstation = [];  
         selectlocation.addEventListener("click", function (e) {
 
+           
             const regionform = new FormData(region);
             regionform.append("guSelect", guSelect.value);
             regionform.append("dongSelect", dongSelect.value);
-
-
             fetch("http://localhost:8080/gonggongyung/gogo/gasstation", {
                 method: "POST",
                 body: new URLSearchParams([...regionform.entries()]), // post body형식
@@ -1446,13 +1446,9 @@
 
                 return resp.json();
             }).then((obj) => {
-
-
-
-
+                if(obj != ""){
                 for (let i = 0; i < obj.length; i++) {
                     let myobj = {};
-
                     myobj.diesel = obj[i].diesel
                     myobj.gasoline = obj[i].gasoline
                     myobj.p_gasoline = obj[i].p_gasoline
@@ -1464,52 +1460,49 @@
                     myobj.storenumber = obj[i].storenumber
                     myobj.x = obj[i].x
                     myobj.y = obj[i].y
-
-
+                    
                     function getListItem(index, myobj) {
                         var el = document.createElement('li');
                         itemStr = '<span class="markerbg marker_' + (index + 1) + '"></span>' +
                             '<div class="info", onclick="showchart(toggleSidebar(' + index + '))">' +
                             '   <h5><p id="name' + index + '" class="innerbutton">' + myobj.storename + '</p></h5>';
-
                         if (myobj) {
                             itemStr += '    <span>' + myobj.storebrand + '</span>' +
                                 '   <span class="jibun gray">' + myobj.storeaddress + '</span>';
                         } else {
                             itemStr += '    <span>' + myobj.storenumber + '</span>';
                         }
-
                         itemStr += '  <span class="tel">' + myobj.region + '</span>' +
                             '</div>';
-
                         el.innerHTML = itemStr;
                         el.className = 'item';
-
                         return el;
                     }
                     removeAllChildNods(placesList);
-
-                    //selectgasstation.push(myobj);
-                    console.log(myobj);
-                    // placesList.innerText = myobj.storename
-
-                    //console.log(sigunguselect.value);
                     itemEl = getListItem(i, obj[i]);
                     fragment.appendChild(itemEl);
-
-
-                    // getListItem(i, myobj);
                 }
-                placesList.appendChild(fragment);
+                placesList.appendChild(fragment); //??
                 menuEl.scrollTop = 0;
-
+                console.log(obj);
+             } 
+            else  {
+                console.log("실행");
+                removeAllChildNods(placesList);
+                placesList.innerText = "검색 내용이 없습니다";
+            }
             })
-            //console.log(sigunguselect.value);
+            
+        
+            
+        
+
+
         });
+    
 
 
-
-
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         let gasstation = [];
         let parkinglot = [];
         window.addEventListener("load", function (e) {
