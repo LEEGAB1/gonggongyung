@@ -2398,18 +2398,13 @@
         //================================chart========================================
         function showchart() {
             
-            // let month = today.getMonth() + 1;
-            // let date = today.getDate();
-            // let newToday = dateCalculator(today, -10);
-            // console.log(newToday);
-
-
             const ctx = document.getElementById('myChart');
-
+            
             new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: [dateCalculator(-6), dateCalculator(-5), dateCalculator(-4), dateCalculator(-3), dateCalculator(-2), dateCalculator(-1), dateCalculator(0)],
+
                     datasets: [{
                         label: 'chart',
                         data: [1, 2, 19, 3, 5, 2, 3],
@@ -2427,7 +2422,7 @@
                 }
             });
 
-
+            
         }
 
         function dateCalculator(n) {
