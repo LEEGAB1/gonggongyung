@@ -1154,8 +1154,8 @@
 
                     let nick = document.getElementById("nick");
                     let reviewBtn = document.getElementById("reviewBtn");
-                    let grade = document.getElementById("grade");
-                    let userReview = document.getElementsByName("userReview");
+                    let grade = document.getElementsByName("rating");
+                    let reviewInput = document.getElementsByName("reviewInput");
                     let storename = document.getElementById("namebtn");
                     let reviewusername = document.getElementById("reviewusername");
 
@@ -1220,16 +1220,17 @@
                             }
                         })
 
-                        // .then((resp) => {
-                        //         console.log(resp.status);
-                        //         return resp.json();
-                        //     })
-                        //     .then((obj) => {
-                        //         console.log(nickName)
-                        //         console.log(reviewInput.values)
-                        //     }).catch((e) => { console.log(e) })
+                        .then((resp) => {
+                            console.log(resp.status);
+                            return resp.json();
+                            })
+                            .then((obj) => {
 
-                    });
+                                
+                                
+                            }).catch((e) => { console.log(e) })
+                        });
+        
 
 
                 </script>

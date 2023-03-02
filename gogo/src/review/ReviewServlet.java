@@ -41,12 +41,14 @@ public class ReviewServlet extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String review = req.getParameter("reviewInput");
+		String userReview = req.getParameter("reviewInput");
 		String name = req.getParameter("username");
 		String storename = req.getParameter("storename");
-		System.out.println(review);
+		String grade = req.getParameter("grade");
+		System.out.println(userReview);
 		System.out.println(name);
 		System.out.println(storename);
+		System.out.println(grade);
 		
 		if(name != null) {
 			List<Review> list = reviewservice.readReviewBynickname(name);
@@ -65,7 +67,19 @@ public class ReviewServlet extends HttpServlet{
 			PrintWriter pw = resp.getWriter();
 			pw.println();
 			pw.flush();
+		
 		}
+		
+		if (name != null && storename != null && grade != null && userReview != null) {
+			Review review = new Review();
+			review.setGrade(grade);
+			review.setNickname(name);
+			review.setStorename(storename);
+			review.setUserreview(userReview);
+			reviewservice.createReview(review);
+			
+		}
+			
 	}
 	
 	@Override
