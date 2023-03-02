@@ -2397,10 +2397,11 @@
         };
         //================================chart========================================
         function showchart() {
-            let today = new Date();
+            
             // let month = today.getMonth() + 1;
             // let date = today.getDate();
             // let newToday = dateCalculator(today, -10);
+            // console.log(newToday);
 
 
             const ctx = document.getElementById('myChart');
@@ -2408,10 +2409,10 @@
             new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', today.toLocaleDateString()],
+                    labels: [dateCalculator(-6), dateCalculator(-5), dateCalculator(-4), dateCalculator(-3), dateCalculator(-2), dateCalculator(-1), dateCalculator(0)],
                     datasets: [{
                         label: 'chart',
-                        data: [2, 19, 3, 5, 2, 3],
+                        data: [1, 2, 19, 3, 5, 2, 3],
                         borderWidth: 2, 
                         borderColor: '#160d69',
                         backgroundColor : '#9BBBDF',
@@ -2429,13 +2430,13 @@
 
         }
 
-        function dateCalculator(date, n) {
-            return new Date(date.setDate(date.getDate() + n));
+        function dateCalculator(n) {
+            let today = new Date();
+            let newday = new Date(today.setDate(today.getDate() + n));
+            let newmonth = newday.getMonth() + 1
+            let newdate = newday.getDate();
+            return newmonth + "/" + newdate;
         }
-
-
-
-
 
         function setOilType(oiltype) {
             let todayDiesel = document.getElementById("diesel");
