@@ -4,14 +4,14 @@ public class Review {
 	private int pk;
 	private String storename;
 	private String nickname;
-	private int grade;
+	private String grade;
 	private String userreview;
 
 	public Review() {
 		super();
 	}
 
-	public Review(int pk, String storename, String nickname, int grade, String userreview) {
+	public Review(int pk, String storename, String nickname, String grade, String userreview) {
 		super();
 		this.pk = pk;
 		this.storename = storename;
@@ -44,11 +44,11 @@ public class Review {
 		this.nickname = nickname;
 	}
 
-	public int getGrade() {
+	public String getGrade() {
 		return grade;
 	}
 
-	public void setGrade(int grade) {
+	public void setGrade(String grade) {
 		this.grade = grade;
 	}
 

@@ -88,7 +88,7 @@ public class ReviewDAOImpl implements ReviewDAO{
 		try(PreparedStatement stmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS)){
 			stmt.setString(1, review.getStorename());
 			stmt.setString(2, review.getNickname());
-			stmt.setInt(3, review.getGrade());
+			stmt.setString(3, review.getGrade());
 			stmt.setString(4, review.getUserreview());
 			
 			int result = stmt.executeUpdate();
@@ -111,7 +111,7 @@ public class ReviewDAOImpl implements ReviewDAO{
 		review.setPk(rs.getInt("pk"));
 		review.setStorename(rs.getString("storename"));
 		review.setNickname(rs.getString("nickname"));
-		review.setGrade(rs.getInt("grade"));
+		review.setGrade(rs.getString("grade"));
 		review.setUserreview(rs.getString("userreview"));
 		
 		return review;
