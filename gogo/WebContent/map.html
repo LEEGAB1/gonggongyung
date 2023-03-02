@@ -2398,17 +2398,19 @@
         //================================chart========================================
         function showchart() {
             let today = new Date();
-            // let month = today.getMonth() + 1;
-            // let date = today.getDate();
-            // let newToday = dateCalculator(today, -10);
-
-
+            let month = today.getMonth() + 1;
+            let date = today.getDate();
+            let newMonth = newToday.getMonth() + 1;
+            let newDate = newToday.getDate();
+            
+            console.log(newToday)
+            
             const ctx = document.getElementById('myChart');
-
+            
             new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', today.toLocaleDateString()],
+                    labels: [newMonth+"/"+newDate, 'Blue', 'Yellow', 'Green', 'Purple', month+"/"+date],
                     datasets: [{
                         label: 'chart',
                         data: [2, 19, 3, 5, 2, 3],
@@ -2425,15 +2427,21 @@
                     }
                 }
             });
+            
 
-
+            
+            // function dateCalculator(date, i) {
+            //     for (i = -6; i < 0; i++) {
+            //         return new Date(date.setDate(date.getDate() + i));
+            //     }
+                
+            //     return newToday = dateCalculator(today, i);
+                
+            // }
+            
         }
-
-        function dateCalculator(date, n) {
-            return new Date(date.setDate(date.getDate() + n));
-        }
-
-
+        
+        
 
 
 
