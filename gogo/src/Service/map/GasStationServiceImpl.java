@@ -3,6 +3,7 @@ package Service.map;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import GasStation.GasStation;
 import GasStation.GasStationDAO;
@@ -77,11 +78,11 @@ public class GasStationServiceImpl implements GasStationService{
 	}
 	
 	@Override
-	public int readGasPrice(String region, String type, String storename) {
+	public Map<String, Integer> readGasPrice(String region, String type) {
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
-			return dao.gasStationPrice(conn, region, type, storename);
+			return dao.gasStationPrice(conn, region, type);
 		} catch (RuntimeException | SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -93,7 +94,7 @@ public class GasStationServiceImpl implements GasStationService{
 				}
 			}
 		}
-		return -1;
+		return null;
 	}
 	
 	

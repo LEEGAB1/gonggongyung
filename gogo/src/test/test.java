@@ -46,7 +46,7 @@ public class test {
 //				list = gas.gasStationSelect(conn);
 //				System.out.println(list);
 				
-		System.out.println(dao.gasStationPrice(conn, "강서구", "diesel", "평강주유소"));
+		System.out.println(dao.gasStationPrice(conn, "강서구", "diesel"));
 		
 		
 		

@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -56,8 +57,8 @@ public class GasStationServlet extends HttpServlet {
          String dieselprice = gaslist.get(0).getDiesel();
          String gasolineprice = gaslist.get(0).getGasoline();
          String region = gaslist.get(0).getRegion();
-         int pricenum = gasService.readGasPrice(region, type, storename);
-         System.out.println(pricenum);
+         Map<String, Integer> pricemap = gasService.readGasPrice(region, type);
+         int pricenum = pricemap.get(storename);
          
 //         for (int i = 0; i < priceGaslist.size(); i++) {
 //            if(priceGaslist.get(i).getStorename().equals(gaslist.get(0).getStorename())) {

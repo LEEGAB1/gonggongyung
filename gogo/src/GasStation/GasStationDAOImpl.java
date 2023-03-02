@@ -75,24 +75,24 @@ public class GasStationDAOImpl implements GasStationDAO {
 	}
 	
 	@Override
-	public int gasStationPrice(Connection conn, String region, String type, String storename) {
-		String sql = "SELECT storename, diesel, gasoline, dense_rank() over (order by " + type + " asc) "
-				+ "as ranking FROM gas_station WHERE region = ? and storename = ?";
+	public Map<String, Integer> gasStationPrice(Connection conn, String region, String type) {
+		String sql = "SELECT storename, dense_rank() over (order by " + type + " asc) "
+				+ "as ranking FROM gas_station WHERE region = ?";
 		
 		try(PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setString(1, region);
-			stmt.setString(2, storename);
 			
 			try(ResultSet rs = stmt.executeQuery()) {
-				if(rs.next()) {
-					return rs.getInt("ranking");
+				Map<String, Integer> map = new HashMap<>();
+				while(rs.next()) {
+					map.put(rs.getString(1), rs.getInt(2));
 				}
+				return map;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException("주유소 가격조회 작업 중 예외 발생", e);
 		}
-		return 0;
 	}
 
 	@Override
