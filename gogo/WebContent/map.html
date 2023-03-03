@@ -1465,7 +1465,7 @@
                     function getListItem(index, myobj) {
                         var el = document.createElement('li');
                         itemStr = '<span class="markerbg marker_' + (index + 1) + '"></span>' +
-                            '<div class="info", onclick="showchart(toggleSidebar(' + index + '))">' +
+                            '<div class="info", onclick="toggleSidebar(' + index + '), showchart()">' +
                             '   <h5><p id="name' + index + '" class="innerbutton">' + myobj.storename + '</p></h5>';
                         if (myobj) {
                             itemStr += '    <span>' + myobj.storebrand + '</span>' +
@@ -2308,40 +2308,41 @@
 
 
         // ------------사이드바함수------------
-
+        var oneweekprice = [];
+        
         function toggleSidebar(index) {
             let namebtn = document.getElementById("namebtn");
             let name = document.getElementById("name" + index);
             namebtn.innerHTML = name.innerHTML;
-
+            
             let todayDiesel = document.getElementById("diesel");
             let todayGasoline = document.getElementById("gasoline");
             let gasRegion = document.getElementById("gasRegion");
             let priceNum = document.getElementById("priceNum");
             let storename = namebtn.innerText;
-            var oneweek = {};
-
+            
             if(name){
+                oneweekprice = [];
                 fetch("http://localhost:8080/gonggongyung/gogo/gasstation?type=diesel&name=" + storename)
-                    .then((resp) => resp.json())
-                    .then((obj) => {
-                        gasRegion.innerText = obj.region;
-                        priceNum.innerText = obj.pricenum;
-                        todayDiesel.innerText = obj.dieselprice + "원";
-                        todayGasoline.innerText = obj.gasolineprice + "원";
-                        // for(let i = 0; i < obj.oneweek.length; i++) {
-                            // oneweek.push(obj.oneweek[i]);
-                        // }
-                        console.log(obj.oneweek.length);
+                .then((resp) => resp.json())
+                .then((obj) => {
+                    gasRegion.innerText = obj.region;
+                    priceNum.innerText = obj.pricenum;
+                    todayDiesel.innerText = obj.dieselprice + "원";
+                    todayGasoline.innerText = obj.gasolineprice + "원";
+                    for(let i = 0; i < obj.oneweek.length; i++) {
+                            oneweekprice.push(obj.oneweek[i]);
+                        }
+                        console.log(oneweekprice.length);
                     })
                     .catch((e) => console.log(e))
+                    
+                    gasRegion.innerText = "~";
+                    priceNum.innerText = "~";
+                    todayDiesel.innerText = "~";
+                    todayGasoline.innerText = "~";
+                }
                 
-                gasRegion.innerText = "~";
-                priceNum.innerText = "~";
-                todayDiesel.innerText = "~";
-                todayGasoline.innerText = "~";
-            }
-
             var before = document.getElementsByClassName("active")[0] // 창 실시간 변동현황
             if (before && document.getElementsByClassName("active")[0] != index) {
                 before.nextElementSibling.style.maxHeight = null;
@@ -2409,11 +2410,17 @@
             new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: [dateCalculator(-7), dateCalculator(-6), dateCalculator(-5), dateCalculator(-4), dateCalculator(-3), dateCalculator(-2), dateCalculator(-1), dateCalculator(0)],
+                    labels: [dateCalculator(-6), dateCalculator(-5), dateCalculator(-4), dateCalculator(-3), dateCalculator(-2), dateCalculator(-1), dateCalculator(0)],
 
                     datasets: [{
                         label: 'chart',
-                        data: [2, 1, 2, 19, 3, 5, 2, 3],
+                        data: [parseInt(oneweekprice[6], 10)
+                                , parseInt(oneweekprice[5], 10)
+                                , parseInt(oneweekprice[4], 10)
+                                , parseInt(oneweekprice[3], 10)
+                                , parseInt(oneweekprice[2], 10)
+                                , parseInt(oneweekprice[1], 10)
+                                , parseInt(oneweekprice[0], 10)],
                         borderWidth: 2, 
                         borderColor: '#160d69',
                         backgroundColor : '#9BBBDF',
