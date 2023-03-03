@@ -213,7 +213,7 @@ public class GasStationDAOImpl implements GasStationDAO {
 
 	@Override
 	public List<String> oneWeekPrice(Connection conn, String storeName, String type) {
-		String sql = "SELECT date, " + type +" FROM gas_history where storename = ? ORDER BY date asc" ;
+		String sql = "SELECT date, " + type +" FROM gas_history where storename = ? ORDER BY date desc limit 7" ;
 		try(PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setNString(1, storeName);
 			
