@@ -2308,7 +2308,6 @@
 
 
         // ------------사이드바함수------------
-        var oneweekprice = [];
         
         function toggleSidebar(index) {
             let namebtn = document.getElementById("namebtn");
@@ -2322,7 +2321,6 @@
             let storename = namebtn.innerText;
             
             if(name){
-                oneweekprice = [];
                 fetch("http://localhost:8080/gonggongyung/gogo/gasstation?type=diesel&name=" + storename)
                 .then((resp) => resp.json())
                 .then((obj) => {
@@ -2330,10 +2328,6 @@
                     priceNum.innerText = obj.pricenum;
                     todayDiesel.innerText = obj.dieselprice + "원";
                     todayGasoline.innerText = obj.gasolineprice + "원";
-                    for(let i = 0; i < obj.oneweek.length; i++) {
-                            oneweekprice.push(obj.oneweek[i]);
-                        }
-                        console.log(oneweekprice.length);
                     })
                     .catch((e) => console.log(e))
                     
@@ -2342,15 +2336,15 @@
                     todayDiesel.innerText = "~";
                     todayGasoline.innerText = "~";
                 }
-                
+
             var before = document.getElementsByClassName("active")[0] // 창 실시간 변동현황
             if (before && document.getElementsByClassName("active")[0] != index) {
-                before.nextElementSibling.style.maxHeight = null;
+                // before.nextElementSibling.style.maxHeight = null;
                 before.classList.remove("active");
             }
             document.querySelector('.sidebar').classList.toggle('active');
 
-
+            
 
         }
 
@@ -2404,37 +2398,48 @@
         };
         //================================chart========================================
         function showchart() {
-            
+            var pricechart;
             const ctx = document.getElementById('myChart');
+            let storename = namebtn.innerText;
             
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: [dateCalculator(-6), dateCalculator(-5), dateCalculator(-4), dateCalculator(-3), dateCalculator(-2), dateCalculator(-1), dateCalculator(0)],
-
-                    datasets: [{
-                        label: 'chart',
-                        data: [parseInt(oneweekprice[6], 10)
-                                , parseInt(oneweekprice[5], 10)
-                                , parseInt(oneweekprice[4], 10)
-                                , parseInt(oneweekprice[3], 10)
-                                , parseInt(oneweekprice[2], 10)
-                                , parseInt(oneweekprice[1], 10)
-                                , parseInt(oneweekprice[0], 10)],
-                        borderWidth: 2, 
-                        borderColor: '#160d69',
-                        backgroundColor : '#9BBBDF',
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
+            fetch("http://localhost:8080/gonggongyung/gogo/gasstation?type=diesel&name=" + storename)
+            .then((resp) => resp.json())
+            .then((obj) => {
+                let oneweekprice = [];
+                for(let i = 0; i < obj.oneweek.length; i++) {
+                        oneweekprice.push(obj.oneweek[i]);
                     }
-                }
-            });
-
+                    console.log(oneweekprice)
+                    
+                    pricechart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: [dateCalculator(-6), dateCalculator(-5), dateCalculator(-4), dateCalculator(-3), dateCalculator(-2), dateCalculator(-1), dateCalculator(0)],
+        
+                            datasets: [{
+                                label: 'diesel',
+                                data: [oneweekprice[6]
+                                        , oneweekprice[5]
+                                        , oneweekprice[4]
+                                        , oneweekprice[3]
+                                        , oneweekprice[2]
+                                        , oneweekprice[1]
+                                        , oneweekprice[0]],
+                                borderWidth: 2, 
+                                borderColor: '#160d69',
+                                backgroundColor : '#9BBBDF',
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+            })
+            .catch((e) => console.log(e))
             
         }
 
