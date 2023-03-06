@@ -893,7 +893,7 @@
         #myChart {
             margin: 40px 0px;
         }
-        
+
         .oil {
             flex-direction: column;
             height: 30%;
@@ -908,32 +908,32 @@
             line-height: 30px;
             cursor: pointer;
         }
-        
+
         .oilType .btn {
             background: #fff;
             background: linear-gradient(#fff, #e6e6e6);
         }
-        
+
         .oilType .btn:hover {
             background: #f5f5f5;
             background: linear-gradient(#f5f5f5, #e3e3e3);
         }
-        
+
         .oilType .btn:active {
             background: #e6e6e6;
             background: linear-gradient(#e6e6e6, #fff);
         }
-        
+
         .oilType .selected_btn {
             color: #fff;
             background: #425470;
             background: linear-gradient(#425470, #5b6d8a);
         }
-        
+
         .oilType .selected_btn:hover {
             color: #fff;
         }
-        
+
         .oilType {
             margin-left: 300px;
             right: 10px;
@@ -943,10 +943,6 @@
             z-index: 1;
             background-color: #f5f5f5;
         }
-
-
-
-
     </style>
 
 
@@ -1042,11 +1038,11 @@
 
                     <button type="button" id="selectlocation">조회</button>
                 </form>
-            <fom id = "zone">
-                <select id="dongSelect" style="width:120px;">
-                    <option value="">읍/면/동</option>
-                </select>
-            </fom>
+                <fom id="zone">
+                    <select id="dongSelect" style="width:120px;">
+                        <option value="">읍/면/동</option>
+                    </select>
+                </fom>
 
 
                 <div>
@@ -1071,18 +1067,20 @@
                             </div>
 
                             <hr>
-                            <div class="oil" >
+                            <div class="oil">
                                 <div class="oilType radius_border">
                                     <span id="btnDiesel" class="selected_btn" onclick="setOilType('diesel')">경유</span>
                                     <span id="btnGasoline" class="btn" onclick="setOilType('gasoline')">휘발유</span>
                                 </div>
-                                    <p style="font-size: large;text-align : center; "> <span id="gasRegion">동구</span>에서 <span id="priceNum">3</span>번째로 싼집!</p>
-                                    <p style="color: #160d69; font-weight: bold; text-align: center; font-size: 20px;"> 오늘의 유가 정보 </p>
+                                <p style="font-size: large;text-align : center; "> <span id="gasRegion">동구</span>에서
+                                    <span id="priceNum">3</span>번째로 싼집!</p>
+                                <p style="color: #160d69; font-weight: bold; text-align: center; font-size: 20px;"> 오늘의
+                                    유가 정보 </p>
                                 <p>
                                 <div class="ulstyle">
                                     <div>
-                                        <div class="gyeong"> 
-                                            <p>경유</p> 
+                                        <div class="gyeong">
+                                            <p>경유</p>
                                             <p class="lefttext" id="diesel">2000</p>
                                         </div>
                                         <div class="hwi">
@@ -1092,7 +1090,7 @@
                                         <div class="smalltext" style="color: #ff7200;text-align: left;">+102원</div>
                                         <div class="smalltext2" style="color: #ff7200; text-align: right; ">+12원</div>
                                     </div>
-    
+
 
                                 </div>
                                 </dib>
@@ -1220,17 +1218,17 @@
                             }
                         })
 
-                        .then((resp) => {
-                            console.log(resp.status);
-                            return resp.json();
+                            .then((resp) => {
+                                console.log(resp.status);
+                                return resp.json();
                             })
                             .then((obj) => {
 
-                                
-                                
+
+
                             }).catch((e) => { console.log(e) })
-                        });
-        
+                    });
+
 
 
                 </script>
@@ -1416,7 +1414,6 @@
 
 
 
-     
         //----------------------------------------------------------------------------------------------------------------------검색할때 post로 담기
 
 
@@ -1517,7 +1514,9 @@
 
         });
 
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         let gasstation = [];
         let parkinglot = [];
         window.addEventListener("load", function (e) {
@@ -2163,7 +2162,10 @@
 
 
 
+
             // 검색 결과 - =======================
+
+            
             var listEl = document.getElementById('placesList'),
                 menuEl = document.getElementById('menu_wrap'),
                 fragment = document.createDocumentFragment(),
@@ -2197,6 +2199,7 @@
 
             // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
             map.setBounds(bounds);
+            
 
         }
 
@@ -2322,43 +2325,48 @@
 
 
         // ------------사이드바함수------------
-        
+
         function toggleSidebar(index) {
             let namebtn = document.getElementById("namebtn");
             let name = document.getElementById("name" + index);
             namebtn.innerHTML = name.innerHTML;
-            
+
             let todayDiesel = document.getElementById("diesel");
             let todayGasoline = document.getElementById("gasoline");
             let gasRegion = document.getElementById("gasRegion");
             let priceNum = document.getElementById("priceNum");
             let storename = namebtn.innerText;
-            
-            if(name){
+            var oneweek = {};
+
+            if (name) {
                 fetch("http://localhost:8080/gonggongyung/gogo/gasstation?type=diesel&name=" + storename)
-                .then((resp) => resp.json())
-                .then((obj) => {
-                    gasRegion.innerText = obj.region;
-                    priceNum.innerText = obj.pricenum;
-                    todayDiesel.innerText = obj.dieselprice + "원";
-                    todayGasoline.innerText = obj.gasolineprice + "원";
+                    .then((resp) => resp.json())
+                    .then((obj) => {
+                        gasRegion.innerText = obj.region;
+                        priceNum.innerText = obj.pricenum;
+                        todayDiesel.innerText = obj.dieselprice + "원";
+                        todayGasoline.innerText = obj.gasolineprice + "원";
+                        // for(let i = 0; i < obj.oneweek.length; i++) {
+                        // oneweek.push(obj.oneweek[i]);
+                        // }
+                        console.log(obj.oneweek.length);
                     })
                     .catch((e) => console.log(e))
-                    
-                    gasRegion.innerText = "~";
-                    priceNum.innerText = "~";
-                    todayDiesel.innerText = "~";
-                    todayGasoline.innerText = "~";
-                }
+
+                gasRegion.innerText = "~";
+                priceNum.innerText = "~";
+                todayDiesel.innerText = "~";
+                todayGasoline.innerText = "~";
+            }
 
             var before = document.getElementsByClassName("active")[0] // 창 실시간 변동현황
             if (before && document.getElementsByClassName("active")[0] != index) {
-                // before.nextElementSibling.style.maxHeight = null;
+                before.nextElementSibling.style.maxHeight = null;
                 before.classList.remove("active");
             }
             document.querySelector('.sidebar').classList.toggle('active');
 
-            
+
 
         }
 
@@ -2375,7 +2383,7 @@
 
 
         // gps로 위치불러오기
-        function getCurrentPos() {
+        function getCurrentPos2() {
             navigator.geolocation.getCurrentPosition(function (position) {
                 var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
                 let lat = 35.15959895331954;
@@ -2389,6 +2397,9 @@
 
                 map.setLevel(2);
             });
+//------------------------------------------------------------------------------------------
+
+
             // 지도에 마커와 인포윈도우를 표시하는 함수입니다
             function displayMarker(locPosition, message) { // 마커를 생성합니다
                 var imageSrc_loc = "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkKkSb%2FbtrZBswymE9%2FNeYXXnsq79d4Mk6vEl3gKk%2Fimg.png";
@@ -2410,51 +2421,54 @@
                 map.setCenter(locPosition);
             }
         };
+
+//-------------------------------------------------------------------------------------------------
+
+function getCurrentPos2(obj) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
+                let lat = obj.y;
+                let lon = obj.x;
+                // var lat = position.coords.latitude, // 위도
+                //     lon = position.coords.longitude; // 경도
+                var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+                    message = '<div style="height: 25px; padding:2px 8px; m argin: 3px;">메롱~~~~~~~~~</div>'    // 인포윈도우에 표시될 내용입니다
+
+                displayMarker(locPosition, message, mapOption);
+
+                map.setLevel(2);
+            });
+        }
+
+
         //================================chart========================================
         function showchart() {
-            var pricechart;
+
             const ctx = document.getElementById('myChart');
-            let storename = namebtn.innerText;
-            
-            fetch("http://localhost:8080/gonggongyung/gogo/gasstation?type=diesel&name=" + storename)
-            .then((resp) => resp.json())
-            .then((obj) => {
-                let oneweekprice = [];
-                for(let i = 0; i < obj.oneweek.length; i++) {
-                        oneweekprice.push(obj.oneweek[i]);
-                    }
-                    console.log(oneweekprice)
-                    
-                    pricechart = new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: [dateCalculator(-6), dateCalculator(-5), dateCalculator(-4), dateCalculator(-3), dateCalculator(-2), dateCalculator(-1), dateCalculator(0)],
-        
-                            datasets: [{
-                                label: 'diesel',
-                                data: [oneweekprice[6]
-                                        , oneweekprice[5]
-                                        , oneweekprice[4]
-                                        , oneweekprice[3]
-                                        , oneweekprice[2]
-                                        , oneweekprice[1]
-                                        , oneweekprice[0]],
-                                borderWidth: 2, 
-                                borderColor: '#160d69',
-                                backgroundColor : '#9BBBDF',
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                y: {
-                                    beginAtZero: true
-                                }
-                            }
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [dateCalculator(-7), dateCalculator(-6), dateCalculator(-5), dateCalculator(-4), dateCalculator(-3), dateCalculator(-2), dateCalculator(-1), dateCalculator(0)],
+
+                    datasets: [{
+                        label: 'chart',
+                        data: [2, 1, 2, 19, 3, 5, 2, 3],
+                        borderWidth: 2,
+                        borderColor: '#160d69',
+                        backgroundColor: '#9BBBDF',
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
                         }
-                    });
-            })
-            .catch((e) => console.log(e))
-            
+                    }
+                }
+            });
+
+
         }
 
         function dateCalculator(n) {
@@ -2475,7 +2489,7 @@
 
             var dieselControl = document.getElementById('btnDiesel');
             var gasolineControl = document.getElementById('btnGasoline');
-            
+
             if (oiltype === 'diesel') {
                 // map.setMapTypeId(kakao.maps.MapTypeId.ROADMAP);
                 dieselControl.className = 'selected_btn';
@@ -2490,7 +2504,7 @@
                         todayGasoline.innerText = obj.gasolineprice + "원";
                     })
                     .catch((e) => console.log(e))
-                
+
                 gasRegion.innerText = "~";
                 priceNum.innerText = "~";
                 todayDiesel.innerText = "~";
@@ -2510,13 +2524,13 @@
                         todayGasoline.innerText = obj.gasolineprice + "원";
                     })
                     .catch((e) => console.log(e))
-                
+
                 gasRegion.innerText = "~";
                 priceNum.innerText = "~";
                 todayDiesel.innerText = "~";
                 todayGasoline.innerText = "~";
-                }
             }
+        }
 
 
     </script>
