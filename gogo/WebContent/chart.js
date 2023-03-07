@@ -1,6 +1,7 @@
 //================================chart========================================
+var chart;
+
 function showchart() {
-    var pricechart;
     const ctx = document.getElementById('myChart');
     let storename = namebtn.innerText;
     
@@ -13,7 +14,7 @@ function showchart() {
             }
             console.log(oneweekprice)
             
-            pricechart = new Chart(ctx, {
+            chart = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: [dateCalculator(-6), dateCalculator(-5), dateCalculator(-4), dateCalculator(-3), dateCalculator(-2), dateCalculator(-1), dateCalculator(0)],
@@ -51,4 +52,10 @@ function dateCalculator(n) {
     let newmonth = newday.getMonth() + 1
     let newdate = newday.getDate();
     return newmonth + "/" + newdate;
+}
+
+function chartclear() {
+    if(chart){
+        chart.destroy();
+    }
 }
