@@ -45,10 +45,10 @@ public class ReviewServlet extends HttpServlet{
 		String name = req.getParameter("username");
 		String storename = req.getParameter("storename");
 		String grade = req.getParameter("grade");
-		System.out.println(userReview);
-		System.out.println(name);
-		System.out.println(storename);
-		System.out.println(grade);
+//		System.out.println(userReview);
+//		System.out.println(name);
+//		System.out.println(storename);
+//		System.out.println(grade);
 		
 		if(name != null) {
 			List<Review> list = reviewservice.readReviewBynickname(name);
@@ -56,16 +56,17 @@ public class ReviewServlet extends HttpServlet{
 			String json = mapper.writeValueAsString(list);
 			
 			PrintWriter pw = resp.getWriter();
-			pw.println();
+			pw.println(json);
 			pw.flush();
 			
 		} else if (storename != null) {
 			List<Review> list = reviewservice.readReviewByStorename(storename);
 			ObjectMapper mapper = new ObjectMapper();
 			String json = mapper.writeValueAsString(list);
-			
+			System.out.println("성공");
+			System.out.println(json);
 			PrintWriter pw = resp.getWriter();
-			pw.println();
+			pw.println(json);
 			pw.flush();
 		
 		}
@@ -80,6 +81,8 @@ public class ReviewServlet extends HttpServlet{
 //			
 //		}
 			
+		
+		
 	}
 	
 	@Override

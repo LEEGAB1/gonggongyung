@@ -14,7 +14,8 @@
     <script src="./oiltypebutton.js"></script>
     <script src="./zoomcontrol.js"></script>
     <script src="./selectgudong.js"></script>
-    
+    <script src="./marker.js"></script>
+    <script src="./sidebarmarker.js"></script>
 </head>
 
 <body>
@@ -208,7 +209,7 @@
                 <div class="review2">
                     <form id="reviewList">
                         <div>
-                            <span class="userReview" name="userReview">""</span>
+                            <span class="userReview" id="userReview">작성 된 리뷰가 없습니다.</span>
                         </div>
                     </form>
                 </div>
@@ -223,7 +224,8 @@
                     let storename = document.getElementById("namebtn");
                     let reviewusername = document.getElementById("reviewusername");
                     let openBtn = document.getElementsByClassName("openBtn");
-                    
+                    // let userReview = document.getElementsByName("userReview");
+                    let userReview = document.getElementById("userReview");
 
                     var nickname = sessionStorage.getItem("userName")
 
@@ -258,16 +260,16 @@
                     function joinCheck() {
                         const nickname = localStorage.getItem('nickname'); // 로컬 스토리지에서 nickname 값을 가져옴
                         
-                        if (!nickname == "null") { // nickname이 undefined, null, 빈 문자열("")인 경우 모두 처리
+                        if (nickname == "null") { // nickname이 undefined, null, 빈 문자열("")인 경우 모두 처리
                             console.log('nickname 값이 없습니다.');
                             window.location.href = 'http://127.0.0.1:5500/gonggongyung/gogo/WebContent/join.html'; // 로그인 페이지로 이동
                         }
                     }
                       
                     
-                    reviewList.addEventListener("load", function (e) {
-                        e.preventDefault();
-
+                    function reviewlist() {
+                        const reviewList = document.getElementById('reviewList');
+                        
                         const listform = new FormData(reviewList);
                         listform.append("storename", storename.innerText);
 
@@ -281,14 +283,22 @@
 
                         .then((resp) => {
                             console.log(resp.status);
+
                             return resp.json();
                             })
                             .then((obj) => {
                                 console.log(obj);
-                                
-                                
+                                for (let i = 0; i < obj.length; i++) {
+                                    console.log(obj[i].nickname);
+                                    console.log(obj[i].userreview);
+                                    userReview.innerHTML = obj[i].nickname + ":" + obj[i].userreview + "\n";
+                                    // userReview.innerText = "dksksisik";
+                                }
+                            
+   
+   
                             }).catch((e) => { console.log(e) })
-                        });
+                        };
         
 
 
@@ -397,9 +407,6 @@
             image: markerImage // 마커이미지 설정 setOilType
         });
 
-        // 마커가 지도 위에 표시되도록 설정합니다
-
-        // 마커가 표시될 위치입니다 
 
         // 마커를 생성합니다
         var marker = new kakao.maps.Marker({
@@ -422,7 +429,7 @@
         };
 
         // 위에 작성한 옵션으로 Drawing Manager를 생성합니다
-        var manager = new kakao.maps.drawing.DrawingManager(options);
+       // var manager = new kakao.maps.drawing.DrawingManager(options);
 
 
 
@@ -447,66 +454,67 @@
 
        
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        let gasstation = [];
-        let parkinglot = [];
-        window.addEventListener("load", function (e) {
+        // let gasstation = [];
+        // let parkinglot = [];
+        // window.addEventListener("load", function (e) {
 
 
-            fetch("http://localhost:8080/gonggongyung/gogo/gasstation/", {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    for (let i = 0; i < data.length; i++) {
-                        gasstation.push(data[i]);
-                    }
+        //     fetch("http://localhost:8080/gonggongyung/gogo/gasstation/", {
+        //         method: "GET",
+        //         headers: {
+        //             "Content-Type": "application/json"
+        //         }
+        //     })
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             for (let i = 0; i < data.length; i++) {
+        //                 gasstation.push(data[i]);
+        //             }
 
-                    console.log(data); // 데이터 출력
-                });
+        //             console.log(data); // 데이터 출력
+        //         });
 
-            fetch("http://localhost:8080/gonggongyung/gogo/parkinglot/", {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
-                .then(response => response.json())
-                .then(data => {
+        //     fetch("http://localhost:8080/gonggongyung/gogo/parkinglot/", {
+        //         method: "GET",
+        //         headers: {
+        //             "Content-Type": "application/json"
+        //         }
+        //     })
+        //         .then(response => response.json())
+        //         .then(data => {
 
-                    for (let i = 0; i < data.length; i++) {
-                        parkinglot.push(data[i]);
-                    }
+        //             for (let i = 0; i < data.length; i++) {
+        //                 parkinglot.push(data[i]);
+        //             }
 
-                    console.log(data); // 데이터 출력
-                });
-        }); //스크립트---------------------
-
-        // 커피숍 마커가 표시될 좌표 배열입니다
-        var coffeePositions = [
-           
-        ];
+        //             console.log(data); // 데이터 출력
+        //         });
+        // }); //스크립트---------------------
 
         // 편의점 마커가 표시될 좌표 배열입니다
 
-        function asd() {
-            let storeMenu = document.getElementsByClassName("storeMenus");
 
-            fetch("http://localhost:8080/gonggongyung/gogo/gasstation/", { // 누르면 가라
-            }).then((response) => response.json())
-                .then((data) => {
-                    for (let i = 0; i < data.length; i += 2) {
-                        storePositions.push(new kakao.maps.LatLng(data[i], data[i + 1]));
-                        console.log(storePositions);
-                    }
-                })
-            createStoreMarkers();
-        }
 
-        var storePositions = [
-        ];
+        
+
+        // function asd() {
+        //     let storeMenu = document.getElementsByClassName("storeMenus");
+
+        //     fetch("http://localhost:8080/gonggongyung/gogo/gasstation/", { // 누르면 가라
+        //     }).then((response) => response.json())
+        //         .then((data) => {
+        //             for (let i = 0; i < data.length; i += 2) {
+        //                 storePositions.push(new kakao.maps.LatLng(data[i], data[i + 1]));
+        //                 console.log(storePositions);
+        //             }
+        //         })
+        //     createStoreMarkers();
+        // }
+
+        // 커피숍 마커가 표시될 좌표 배열입니다
+        var coffeePositions = [];
+
+        var storePositions = [];
 
 
         // 주차장 마커가 표시될 좌표 배열입니다
@@ -557,147 +565,7 @@
 
 
         // 마커이미지의 주소와, 크기, 옵션으로 마커 이미지를 생성하여 리턴하는 함수입니다
-        function createMarkerImage(src, size, options) {
-            var markerImage = new kakao.maps.MarkerImage(src, size, options);
-            return markerImage;
-        }
-
-        // 좌표와 마커이미지를 받아 마커를 생성하여 리턴하는 함수입니다
-        function createMarker(position, image) {
-            var marker = new kakao.maps.Marker({
-                position: position,
-                image: image
-            });
-
-            return marker;
-        }
-
-        // 커피숍 마커를 생성하고 커피숍 마커 배열에 추가하는 함수입니다
-        function createCoffeeMarkers() {
-
-            for (var i = 0; i < coffeePositions.length; i++) {
-
-                var imageSize = new kakao.maps.Size(22, 26),
-                    imageOptions = {
-                        spriteOrigin: new kakao.maps.Point(10, 0),
-                        spriteSize: new kakao.maps.Size(36, 98)
-                    };
-
-                // 마커이미지와 마커를 생성합니다
-                var markerImage = createMarkerImage(markerImageSrc, imageSize, imageOptions),
-                    marker = createMarker(coffeePositions[i], markerImage);
-
-                // 생성된 마커를 커피숍 마커 배열에 추가합니다
-                coffeeMarkers.push(marker);
-            }
-        }
-
-        // 커피숍 마커들의 지도 표시 여부를 설정하는 함수입니다
-        function setCoffeeMarkers(map) {
-            for (var i = 0; i < coffeeMarkers.length; i++) {
-                coffeeMarkers[i].setMap(map);
-            }
-        }
-
-        // 편의점 마커를 생성하고 편의점 마커 배열에 추가하는 함수입니다
-        function createStoreMarkers() {
-            for (var i = 0; i < storePositions.length; i++) {
-
-                var imageSize = new kakao.maps.Size(22, 26),
-                    imageOptions = {
-                        spriteOrigin: new kakao.maps.Point(10, 0),
-                        spriteSize: new kakao.maps.Size(36, 98)
-                    };
-
-                // 마커이미지와 마커를 생성합니다
-                var markerImage = createMarkerImage(markerImageSrc, imageSize, imageOptions),
-                    marker = createMarker(storePositions[i], markerImage);
-
-                // 생성된 마커를 편의점 마커 배열에 추가합니다
-                storeMarkers.push(marker);
-            }
-        }
-
-        // 편의점 마커들의 지도 표시 여부를 설정하는 함수입니다
-        function setStoreMarkers(map) {
-            for (var i = 0; i < storeMarkers.length; i++) {
-                storeMarkers[i].setMap(map);
-            }
-        }
-
-        // 주차장 마커를 생성하고 주차장 마커 배열에 추가하는 함수입니다
-        function createCarparkMarkers() {
-            for (var i = 0; i < carparkPositions.length; i++) {
-
-                var imageSize = new kakao.maps.Size(22, 26),
-                    imageOptions = {
-                        spriteOrigin: new kakao.maps.Point(10, 72),
-                        spriteSize: new kakao.maps.Size(36, 98)
-                    };
-
-                // 마커이미지와 마커를 생성합니다
-                var markerImage = createMarkerImage(markerImageSrc, imageSize, imageOptions),
-                    marker = createMarker(carparkPositions[i], markerImage);
-
-                // 생성된 마커를 주차장 마커 배열에 추가합니다
-                carparkMarkers.push(marker);
-            }
-        }
-
-        // 주차장 마커들의 지도 표시 여부를 설정하는 함수입니다
-        function setCarparkMarkers(map) {
-            for (var i = 0; i < carparkMarkers.length; i++) {
-                carparkMarkers[i].setMap(map);
-            }
-        }
-
-        // 카테고리를 클릭했을 때 type에 따라 카테고리의 스타일과 지도에 표시되는 마커를 변경합니다
-        function changeMarker(type) {
-
-            var coffeeMenu = document.getElementById('coffeeMenu');
-            var storeMenu = document.getElementById('storeMenu');
-            var carparkMenu = document.getElementById('carparkMenu');
-
-            // 커피숍 카테고리가 클릭됐을 때
-            if (type === 'coffee') {
-
-                // 커피숍 카테고리를 선택된 스타일로 변경하고
-                coffeeMenu.className = 'menu_selected';
-
-                // 편의점과 주차장 카테고리는 선택되지 않은 스타일로 바꿉니다
-                storeMenu.className = '';
-                carparkMenu.className = '';
-
-                // 커피숍 마커들만 지도에 표시하도록 설정합니다
-                setCoffeeMarkers(map);
-                setStoreMarkers(null);
-                setCarparkMarkers(null);
-
-            } else if (type === 'store') { // 편의점 카테고리가 클릭됐을 때
-
-                // 편의점 카테고리를 선택된 스타일로 변경하고
-                coffeeMenu.className = '';
-                storeMenu.className = 'menu_selected';
-                carparkMenu.className = '';
-
-                // 편의점 마커들만 지도에 표시하도록 설정합니다
-                setCoffeeMarkers(null);
-                setStoreMarkers(map);
-                setCarparkMarkers(null);
-
-            } else if (type === 'carpark') { // 주차장 카테고리가 클릭됐을 때
-
-                // 주차장 카테고리를 선택된 스타일로 변경하고
-                coffeeMenu.className = '';
-                storeMenu.className = '';
-                carparkMenu.className = 'menu_selected';
-
-                // 주차장 마커들만 지도에 표시하도록 설정합니다
-                setCoffeeMarkers(null);
-                setStoreMarkers(null);
-                setCarparkMarkers(map);
-            }
-        }
+     
 
 
 
@@ -717,13 +585,13 @@
 
 
 
-        function relayout() {
+        // function relayout() {
 
-            // 지도를 표시하는 div 크기를 변경한 이후 지도가 정상적으로 표출되지 않을 수도 있습니다
-            // 크기를 변경한 이후에는 반드시  map.relayout 함수를 호출해야 합니다 
-            // window의 resize 이벤트에 의한 크기변경은 map.relayout 함수가 자동으로 호출됩니다
-            map.relayout();
-        }
+        //     // 지도를 표시하는 div 크기를 변경한 이후 지도가 정상적으로 표출되지 않을 수도 있습니다
+        //     // 크기를 변경한 이후에는 반드시  map.relayout 함수를 호출해야 합니다 
+        //     // window의 resize 이벤트에 의한 크기변경은 map.relayout 함수가 자동으로 호출됩니다
+        //     map.relayout();
+        // }
 
 
 
@@ -763,19 +631,19 @@
         }
 
         // 카테고리 검색을 요청하는 함수입니다
-        function searchPlaces() {
-            if (!currCategory) {
-                return;
-            }
+        // function searchPlaces() {
+        //     if (!currCategory) {
+        //         return;
+        //     }
 
-            // 커스텀 오버레이를 숨깁니다 
-            placeOverlay.setMap(null);
+        //     // 커스텀 오버레이를 숨깁니다 
+        //     placeOverlay.setMap(null);
 
-            // 지도에 표시되고 있는 마커를 제거합니다
-            removeMarker();
+        //     // 지도에 표시되고 있는 마커를 제거합니다
+        //     removeMarker();
 
-            ps.categorySearch(currCategory, placesSearchCB, { useMapBounds: true });
-        }
+        //     ps.categorySearch(currCategory, placesSearchCB, { useMapBounds: true });
+        // }
 
         // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
         // function placesSearchCB(data, status, pagination) {
@@ -838,12 +706,7 @@
         // }
 
         // 지도 위에 표시되고 있는 마커를 모두 제거합니다
-        function removeMarker() {
-            for (var i = 0; i < markers.length; i++) {
-                markers[i].setMap(null);
-            }
-            markers = [];
-        }
+
 
 
 
@@ -1040,33 +903,33 @@
 
             //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
-        function addMarker(position, idx, title) {
-            var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
-                imageSize = new kakao.maps.Size(36, 37),  // 마커 이미지의 크기
-                imgOptions = {
-                    spriteSize: new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
-                    spriteOrigin: new kakao.maps.Point(0, (idx * 46) + 10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
-                    offset: new kakao.maps.Point(13, 37) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
-                },
-                markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
-                marker = new kakao.maps.Marker({
-                    position: position, // 마커의 위치
-                    image: markerImage
-                });
+        // function addMarker(position, idx, title) {
+        //     var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+        //         imageSize = new kakao.maps.Size(36, 37),  // 마커 이미지의 크기
+        //         imgOptions = {
+        //             spriteSize: new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
+        //             spriteOrigin: new kakao.maps.Point(0, (idx * 46) + 10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
+        //             offset: new kakao.maps.Point(13, 37) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
+        //         },
+        //         markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
+        //         marker = new kakao.maps.Marker({
+        //             position: position, // 마커의 위치
+        //             image: markerImage
+        //         });
 
-            marker.setMap(map); // 지도 위에 마커를 표출합니다
-            markers.push(marker);  // 배열에 생성된 마커를 추가합니다
+        //     marker.setMap(map); // 지도 위에 마커를 표출합니다
+        //     markers.push(marker);  // 배열에 생성된 마커를 추가합니다
 
-            return marker;
-        }
+        //     return marker;
+        // }
 
         // 지도 위에 표시되고 있는 마커를 모두 제거합니다
-        function removeMarker() {
-            for (var i = 0; i < markers.length; i++) {
-                markers[i].setMap(null);
-            }
-            markers = [];
-        }
+        // function removeMarker() {
+        //     for (var i = 0; i < markers.length; i++) {
+        //         markers[i].setMap(null);
+        //     }
+        //     markers = [];
+        // }
 
         // // 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
         // function displayPagination(pagination) {
