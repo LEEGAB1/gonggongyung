@@ -22,7 +22,7 @@
         <div id="mapwrap">
             <!-- 지도가 표시될 div -->
 
-            <div id="map" style="width:100%;height: 950px;"></div>
+            <div id="map" style="width:100%;height: 969px;"></div>
 
             <!-- 지도 위에 표시될 마커 카테고리 -->
             <div class="category">
@@ -175,7 +175,7 @@
                     <form id="reviewform">
                         <div class="review1">
                             <span style="margin-left: 20px; color: #160d69;">방문자 리뷰</span>
-                            <button class="openBtn">✍🏻</button>
+                            <button class="openBtn" onclick="joinCheck()" >✍🏻</button>
                             <div class="modal hidden">
                                 <div class="bg"></div>
                                 <div class="modalBox"
@@ -195,7 +195,7 @@
                                         <label for="1-star" class="star">&#9733;</label>
                                     </div>
                                     <textarea class="reviewInput" name="reviewInput"
-                                        placeholder="방문한 가게는 어땠나요? 리뷰를 남겨주세요." onclick="joinCheck()"></textarea>
+                                        placeholder="방문한 가게는 어땠나요? 리뷰를 남겨주세요."></textarea>
                                     <div style="display: flex;">
                                         <button class="reviewBtn" id="reviewBtn" type="submit">등록</button>
                                         <button class="closeBtn">닫기</button>
@@ -206,9 +206,11 @@
                     <hr style="border-top: 1px dotted #8c8b8b;">
                 </div>
                 <div class="review2">
-                    <div>
-                        <span class="userReview" name="userReview">등록 된 리뷰가 없습니다.</span>
-                    </div>
+                    <form id="reviewList">
+                        <div>
+                            <span class="userReview" name="userReview">""</span>
+                        </div>
+                    </form>
                 </div>
 
 
@@ -220,9 +222,12 @@
                     let reviewInput = document.getElementsByName("reviewInput");
                     let storename = document.getElementById("namebtn");
                     let reviewusername = document.getElementById("reviewusername");
+                    let openBtn = document.getElementsByClassName("openBtn");
+                    
 
                     var nickname = sessionStorage.getItem("userName")
 
+                    let reviewList = document.getElementById("reviewList");
                     let reviewform = document.getElementById("reviewform");
                     let mainform = document.getElementById("mainform");
 
@@ -245,22 +250,52 @@
 
                     })
 
-
-
-
                     function win_open(page, name) {
                         // window.open("팝업될 문서 경로","팝업될 문서 이름","옵션(위치, bar표시, 크기 등)");
                         window.open(page, name, "width=300, height=400, left=0, top=0");
                     };
 
-
                     function joinCheck() {
-                        if (nickname == "null") {
-                            console.log(nickname);
-                            window.location = "http://127.0.0.1:5500/002/join.html"
+                        const nickname = localStorage.getItem('nickname'); // 로컬 스토리지에서 nickname 값을 가져옴
+                        
+                        if (!nickname == "null") { // nickname이 undefined, null, 빈 문자열("")인 경우 모두 처리
+                            console.log('nickname 값이 없습니다.');
+                            window.location.href = 'http://127.0.0.1:5500/gonggongyung/gogo/WebContent/join.html'; // 로그인 페이지로 이동
                         }
                     }
+                      
+                    
+                    reviewList.addEventListener("load", function (e) {
+                        e.preventDefault();
 
+                        const listform = new FormData(reviewList);
+                        listform.append("storename", storename.innerText);
+
+                        fetch("http://localhost:8080/gonggongyung/gogo/review", {
+                            method: "POST",
+                            body: new URLSearchParams([...listform.entries()]), // post body형식
+                            headers: {
+                                "Content-Type": "application/x-www-form-urlencoded",
+                            }
+                        })
+
+                        .then((resp) => {
+                            console.log(resp.status);
+                            return resp.json();
+                            })
+                            .then((obj) => {
+                                console.log(obj);
+                                
+                                
+                            }).catch((e) => { console.log(e) })
+                        });
+        
+
+
+
+
+
+                    
 
                     reviewform.addEventListener("submit", function (e) {
                         e.preventDefault();
@@ -314,7 +349,7 @@
 
 
     <!-- 지도를 표시할 div 입니다 -->
-    <div id="map" style="width:100%; height:0;"></div>
+    <!-- <div id="map" style="width:100%; height:0;"></div> -->
 
 
 

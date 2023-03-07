@@ -154,14 +154,15 @@
     top: 0;
     left: 0;
     bottom: 0;
-    width: 300px;
-    margin: 10px 0 30px 10px;
-    padding: 5px;
+    width: 320px;
+    /* margin: 10px 0 30px 10px; */
+    padding: 10px;
     overflow-y: auto;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255);
     z-index: 1;
     font-size: 12px;
     border-radius: 10px;
+    border : 1px solid #c9c9c9;
 }
 
 .bg_white {
@@ -504,26 +505,38 @@ body {
 .sidebar {
     display: inline-block;
     position: fixed;
-    margin: 10px 0 30px 10px;
-    padding: 5px;
+    /* margin: 10px 0 30px 10px; */
+    padding: 10px;
     overflow: scroll;
     overflow-y: auto;
     overflow-x: hidden;
     z-index: 1;
     font-size: 12px;
     border-radius: 10px;
-    top: 10px;
+    top: 0px;
     bottom: 0;
     left: -2800px;
     width: 400px;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255);
     height: 950px;
     transition: left 0.5s;
-
+    border : 1px solid #c9c9c9;
 }
 
+.sidebar::-webkit-scrollbar {
+    width: 5px;
+  }
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: #a09f9f;
+    border-radius: 10px;
+  }
+.sidebar::-webkit-scrollbar-track {
+    background-color: #c9c9c9;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+  }
 .sidebar.active {
-    left: 310px;
+    left: 342px;
 }
 
 .locatedStyle {
