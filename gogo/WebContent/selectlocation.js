@@ -1,20 +1,17 @@
 
-window.onload = function(){
+window.onload = function () {
     let guSelect = document.getElementById("guSelect");
     let dongSelect = document.getElementById("dongSelect");
     let selectlocation = document.getElementById("selectlocation");
     let region = document.getElementById("region");
     let placesList = document.getElementById("placesList");
     let zone = document.getElementById("zone");
-    
-    
+
     let menuEl = document.getElementById('menu_wrap'),
         fragment = document.createDocumentFragment(),
-        
+
         listStr = '';
     selectlocation.addEventListener("click", function (e) {
-    
-    
         const regionform = new FormData(region);
         regionform.append("guSelect", guSelect.value);
         regionform.append("dongSelect", dongSelect.value);
@@ -25,7 +22,7 @@ window.onload = function(){
                 "Content-Type": "application/x-www-form-urlencoded",
             }
         }).then((resp) => {
-    
+
             return resp.json();
         }).then((obj) => {
             if (obj != "") {
@@ -45,20 +42,20 @@ window.onload = function(){
                     myobj.storenumber = obj[i].storenumber
                     myobj.x = obj[i].x
                     myobj.y = obj[i].y
-                    
+
                     function getListItem(index, myobj) {
                         var el = document.createElement('li');
                         itemStr = '<span class="markerbg marker_' + (index + 1) + '"></span>' +
-                        '<div class="info", onclick="toggleSidebar(' + index + '),chartclear(),showchart(),reviewlist()">' +
-                            '   <h5><p id="name' + index + '" class="innerbutton">' + myobj.storename + '</p></h5>';
+                        '<div class="info", onclick="toggleSidebar(' + index + '),chartclear(),showchart(),setOilType(diesel),reviewlist()">' +
+                            '   <h4><p id="name' + index + '" class="innerbutton">' + myobj.storename + '</p></h4>';
                         if (myobj) {
                             itemStr += '    <span>' + myobj.storebrand + '</span>' +
-                            '   <span class="jibun gray">' + myobj.storeaddress + '</span>';
+                                '   <span class="jibun gray">' + myobj.storeaddress + '</span>';
                         } else {
                             itemStr += '    <span>' + myobj.storenumber + '</span>';
                         }
                         itemStr += '  <span class="tel">' + myobj.region + '</span>' +
-                        '</div>';
+                            '</div>';
                         el.innerHTML = itemStr;
                         el.className = 'item';
                         return el;
@@ -70,30 +67,17 @@ window.onload = function(){
                     // LatLngBounds 객체에 좌표를 추가합니다
                     bounds.extend(placePosition);
                     fragment.appendChild(itemEl);
-                    
+
                 }
                 placesList.appendChild(fragment); //??
                 menuEl.scrollTop = 0;
                 map.setBounds(bounds);
-    
-                
-                
-                
             }
             else {
                 console.log("실행");
                 removeAllChildNods(placesList);
                 placesList.innerText = "검색 내용이 없습니다";
             }
-            
-            //
-            
         })
-        
-      
-    
-    
-    
-    
     });
-    }
+}

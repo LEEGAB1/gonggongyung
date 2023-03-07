@@ -154,11 +154,11 @@
     top: 0;
     left: 0;
     bottom: 0;
-    width: 320px;
+    width: 327px;
     /* margin: 10px 0 30px 10px; */
     padding: 10px;
     overflow-y: auto;
-    background: rgba(255, 255, 255);
+    background: rgb(255, 253, 250);
     z-index: 1;
     font-size: 12px;
     border-radius: 10px;
@@ -168,6 +168,20 @@
 .bg_white {
     background: #fff;
 }
+
+.bg_white::-webkit-scrollbar {
+    width: 6px;
+  }
+.bg_white::-webkit-scrollbar-thumb {
+    background-color: #c4c4c4;
+    border-radius: 10px;
+  }
+.bg_white::-webkit-scrollbar-track {
+    background-color: #c9c9c9;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+  }
+  
 
 #menu_wrap hr {
     display: block;
@@ -517,17 +531,17 @@ body {
     bottom: 0;
     left: -2800px;
     width: 400px;
-    background-color: rgba(255, 255, 255);
+    background: rgb(255, 253, 250);
     height: 950px;
     transition: left 0.5s;
     border : 1px solid #c9c9c9;
 }
 
 .sidebar::-webkit-scrollbar {
-    width: 5px;
+    width: 6px;
   }
 .sidebar::-webkit-scrollbar-thumb {
-    background-color: #a09f9f;
+    background-color: #c4c4c4;
     border-radius: 10px;
   }
 .sidebar::-webkit-scrollbar-track {
@@ -535,8 +549,9 @@ body {
     border-radius: 10px;
     box-shadow: inset 0px 0px 5px white;
   }
+
 .sidebar.active {
-    left: 342px;
+    left: 347px;
 }
 
 .locatedStyle {
@@ -554,7 +569,7 @@ body {
 .searchIcon {
     border-width: 3px;
     font-size: 20px;
-    /* display: none; */
+    display: none; 
     width: 190px;
     height: 35px;
     margin-left: 90px;
@@ -949,4 +964,29 @@ body {
     z-index: 1;
     background-color: #f5f5f5;
 }
+.sigungu{
+    width:102px;
+}   
 
+.dongs{
+    display: block;
+    position: absolute;
+    width:102px;
+    margin-left: 110px;
+    top: 157px;
+}
+
+.checkbtn{
+    display: block;
+    position: absolute;
+    right: 30px;
+    top: 157px;
+}
+
+
+.loginbtn{
+    display: block;
+    position: absolute;
+    margin-top: -40px;
+    right: 25px;
+}
