@@ -697,7 +697,7 @@ body {
 .lefttext {
     /* display: inline-block; */
     position: absolute;
-    left: 69px;
+    left: 77px;
     /*top: 340px;
     font-size: 30px;
     bottom: 50px; */
@@ -717,7 +717,7 @@ body {
     position: absolute;
     /* font-size: 30px;
     top: 380px; */
-    left: 257px;
+    left: 267px;
 }
 
 /* .upup {
@@ -903,7 +903,6 @@ body {
 .openBtn {
     position: absolute;
     right: 20px;
-    top: 760px;
 }
 
 #reviewfont {
@@ -1004,5 +1003,5 @@ body {
 
 #region {
     margin-top: 3px;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
 }
