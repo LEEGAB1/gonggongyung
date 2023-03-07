@@ -200,9 +200,11 @@
                     <hr style="border-top: 1px dotted #8c8b8b;">
                 </div>
                 <div class="review2">
-                    <div>
-                        <span class="userReview" name="userReview">등록 된 리뷰가 없습니다.</span>
-                    </div>
+                    <form id="reviewList">
+                        <div>
+                            <span class="userReview" name="userReview">""</span>
+                        </div>
+                    </form>
                 </div>
 
 
@@ -215,9 +217,11 @@
                     let storename = document.getElementById("namebtn");
                     let reviewusername = document.getElementById("reviewusername");
                     let openBtn = document.getElementsByClassName("openBtn");
+                    
 
                     var nickname = sessionStorage.getItem("userName")
 
+                    let reviewList = document.getElementById("reviewList");
                     let reviewform = document.getElementById("reviewform");
                     let mainform = document.getElementById("mainform");
 
@@ -240,9 +244,6 @@
 
                     })
 
-
-
-
                     function win_open(page, name) {
                         // window.open("팝업될 문서 경로","팝업될 문서 이름","옵션(위치, bar표시, 크기 등)");
                         window.open(page, name, "width=300, height=400, left=0, top=0");
@@ -251,14 +252,44 @@
                     function joinCheck() {
                         const nickname = localStorage.getItem('nickname'); // 로컬 스토리지에서 nickname 값을 가져옴
                         
-                        if (!nickname) { // nickname이 undefined, null, 빈 문자열("")인 경우 모두 처리
+                        if (!nickname == "null") { // nickname이 undefined, null, 빈 문자열("")인 경우 모두 처리
                             console.log('nickname 값이 없습니다.');
                             window.location.href = 'http://127.0.0.1:5500/gonggongyung/gogo/WebContent/join.html'; // 로그인 페이지로 이동
                         }
                     }
                       
+                    
+                    reviewList.addEventListener("load", function (e) {
+                        e.preventDefault();
+
+                        const listform = new FormData(reviewList);
+                        listform.append("storename", storename.innerText);
+
+                        fetch("http://localhost:8080/gonggongyung/gogo/review", {
+                            method: "POST",
+                            body: new URLSearchParams([...listform.entries()]), // post body형식
+                            headers: {
+                                "Content-Type": "application/x-www-form-urlencoded",
+                            }
+                        })
+
+                        .then((resp) => {
+                            console.log(resp.status);
+                            return resp.json();
+                            })
+                            .then((obj) => {
+                                console.log(obj);
+                                
+                                
+                            }).catch((e) => { console.log(e) })
+                        });
+        
 
 
+
+
+
+                    
 
                     reviewform.addEventListener("submit", function (e) {
                         e.preventDefault();
