@@ -210,7 +210,7 @@
                 <div class="review2">
                     <form id="reviewList">
                         <div>
-                            <span class="userReview" id="userReview">작성 된 리뷰가 없습니다.</span>
+                           <span class="userReview" id="userReview"></span>
                         </div>
                     </form>
                 </div>
@@ -289,11 +289,15 @@
                             })
                             .then((obj) => {
                                 console.log(obj);
+                                userReview.innerText ="";
+                                if (obj.length > 1) {
                                 for (let i = 0; i < obj.length; i++) {
-                                    console.log(obj[i].nickname);
-                                    console.log(obj[i].userreview);
-                                    userReview.innerHTML = obj[i].nickname + ":" + obj[i].userreview + "\n";
-                                    // userReview.innerText = "dksksisik";
+                                        // console.log(obj[i].nickname);
+                                        // console.log(obj[i].userreview);
+                                        userReview.innerHTML += obj[i].nickname + ":" + obj[i].userreview + "\n";
+                                    }
+                                } else {
+                                    userReview.innerText ="작성 된 리뷰가 없습니다.";
                                 }
                             
    
