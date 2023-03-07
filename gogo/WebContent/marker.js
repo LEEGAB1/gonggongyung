@@ -1,13 +1,5 @@
 
 
-
-
-
-
-
-
-
-
     let gasstation = [];
     let parkinglot = [];
     window.addEventListener("load", function (e) {
@@ -47,13 +39,6 @@
 
 
 
-
-
-
-
-
-
-
     // 커피숍 마커가 표시될 좌표 배열입니다
     var coffeePositions = [
        
@@ -63,12 +48,6 @@
 
     function asd() {
         let storeMenu = document.getElementsByClassName("storeMenus");
-
-        
-
-
-
-            
         
         fetch("http://localhost:8080/gonggongyung/gogo/gasstation/", { // 누르면 가라
         }).then((response) => response.json())
@@ -274,6 +253,3 @@
             setCarparkMarkers(map);
         }
     }
-
-    window.onload = function () {
-}
