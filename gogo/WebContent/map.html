@@ -74,7 +74,7 @@
                 <form onsubmit="clearSearchBox(searchPlaces()); return false;">
                     <button class="logoImage"></button>
                     <!-- <h1 class="logoText">공영이</h1> -->
-                    <div><button type="button" id="" class="loginbtn">로그인</button></div>
+                    <button type="button" id="loginbtn" class="loginbtn">로그인</button>
                     <!-- <h2 class="logoText2" id="nick">(002)</h2> -->
                     <button onclick="" id="parkingbtn" class="parkingIcon"></button>
                     <button class="gasIcon"></button>
@@ -217,7 +217,7 @@
 
 
                 <script>
-
+                    let loginbtn= document.getElementById("loginbtn");
                     let nick = document.getElementById("nick");
                     let reviewBtn = document.getElementById("reviewBtn");
                     let grade = document.getElementsByName("rating");
@@ -339,6 +339,9 @@
                             }).catch((e) => { console.log(e) })
                         });
         
+                        loginbtn.addEventListener("click", (e)=> {
+                            window.location.href = "./join.html";
+                        })
 
 
                 </script>
