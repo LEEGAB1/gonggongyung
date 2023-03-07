@@ -757,7 +757,7 @@ body {
 .busan {
     position: absolute;
     top: 110px;
-    left: 60px;
+    /* left: 60px; */
     font-size: 20px;
 }
 
