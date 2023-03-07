@@ -202,7 +202,7 @@
                 <div class="review2">
                     <form id="reviewList">
                         <div>
-                            <span class="userReview" name="userReview">""</span>
+                            <span class="userReview" id="userReview">작성 된 리뷰가 없습니다.</span>
                         </div>
                     </form>
                 </div>
@@ -217,7 +217,8 @@
                     let storename = document.getElementById("namebtn");
                     let reviewusername = document.getElementById("reviewusername");
                     let openBtn = document.getElementsByClassName("openBtn");
-                    
+                    // let userReview = document.getElementsByName("userReview");
+                    let userReview = document.getElementById("userReview");
 
                     var nickname = sessionStorage.getItem("userName")
 
@@ -252,16 +253,16 @@
                     function joinCheck() {
                         const nickname = localStorage.getItem('nickname'); // 로컬 스토리지에서 nickname 값을 가져옴
                         
-                        if (!nickname == "null") { // nickname이 undefined, null, 빈 문자열("")인 경우 모두 처리
+                        if (nickname == "null") { // nickname이 undefined, null, 빈 문자열("")인 경우 모두 처리
                             console.log('nickname 값이 없습니다.');
                             window.location.href = 'http://127.0.0.1:5500/gonggongyung/gogo/WebContent/join.html'; // 로그인 페이지로 이동
                         }
                     }
                       
                     
-                    reviewList.addEventListener("load", function (e) {
-                        e.preventDefault();
-
+                    function reviewlist() {
+                        const reviewList = document.getElementById('reviewList');
+                        
                         const listform = new FormData(reviewList);
                         listform.append("storename", storename.innerText);
 
@@ -275,14 +276,22 @@
 
                         .then((resp) => {
                             console.log(resp.status);
+
                             return resp.json();
                             })
                             .then((obj) => {
                                 console.log(obj);
-                                
-                                
+                                for (let i = 0; i < obj.length; i++) {
+                                    console.log(obj[i].nickname);
+                                    console.log(obj[i].userreview);
+                                    userReview.innerHTML = obj[i].nickname + ":" + obj[i].userreview + "\n";
+                                    // userReview.innerText = "dksksisik";
+                                }
+                            
+   
+   
                             }).catch((e) => { console.log(e) })
-                        });
+                        };
         
 
 

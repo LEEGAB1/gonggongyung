@@ -49,7 +49,7 @@ window.onload = function(){
                     function getListItem(index, myobj) {
                         var el = document.createElement('li');
                         itemStr = '<span class="markerbg marker_' + (index + 1) + '"></span>' +
-                        '<div class="info", onclick="toggleSidebar(' + index + '),chartclear(),showchart()">' +
+                        '<div class="info", onclick="toggleSidebar(' + index + '),chartclear(),showchart(),reviewlist()">' +
                             '   <h5><p id="name' + index + '" class="innerbutton">' + myobj.storename + '</p></h5>';
                         if (myobj) {
                             itemStr += '    <span>' + myobj.storebrand + '</span>' +
