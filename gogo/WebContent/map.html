@@ -169,7 +169,7 @@
                     <form id="reviewform">
                         <div class="review1">
                             <span style="margin-left: 20px; color: #160d69;">방문자 리뷰</span>
-                            <button class="openBtn">✍🏻</button>
+                            <button class="openBtn" onclick="joinCheck()" >✍🏻</button>
                             <div class="modal hidden">
                                 <div class="bg"></div>
                                 <div class="modalBox"
@@ -189,7 +189,7 @@
                                         <label for="1-star" class="star">&#9733;</label>
                                     </div>
                                     <textarea class="reviewInput" name="reviewInput"
-                                        placeholder="방문한 가게는 어땠나요? 리뷰를 남겨주세요." onclick="joinCheck()"></textarea>
+                                        placeholder="방문한 가게는 어땠나요? 리뷰를 남겨주세요."></textarea>
                                     <div style="display: flex;">
                                         <button class="reviewBtn" id="reviewBtn" type="submit">등록</button>
                                         <button class="closeBtn">닫기</button>
@@ -214,6 +214,7 @@
                     let reviewInput = document.getElementsByName("reviewInput");
                     let storename = document.getElementById("namebtn");
                     let reviewusername = document.getElementById("reviewusername");
+                    let openBtn = document.getElementsByClassName("openBtn");
 
                     var nickname = sessionStorage.getItem("userName")
 
@@ -247,13 +248,16 @@
                         window.open(page, name, "width=300, height=400, left=0, top=0");
                     };
 
-
                     function joinCheck() {
-                        if (nickname == "null") {
-                            console.log(nickname);
-                            window.location = "http://127.0.0.1:5500/002/join.html"
+                        const nickname = localStorage.getItem('nickname'); // 로컬 스토리지에서 nickname 값을 가져옴
+                        
+                        if (!nickname) { // nickname이 undefined, null, 빈 문자열("")인 경우 모두 처리
+                            console.log('nickname 값이 없습니다.');
+                            window.location.href = 'http://127.0.0.1:5500/gonggongyung/gogo/WebContent/join.html'; // 로그인 페이지로 이동
                         }
                     }
+                      
+
 
 
                     reviewform.addEventListener("submit", function (e) {
