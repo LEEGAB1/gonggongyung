@@ -70,15 +70,15 @@ public class ReviewServlet extends HttpServlet{
 		
 		}
 		
-		if (name != null && storename != null && grade != null && userReview != null) {
-			Review review = new Review();
-			review.setGrade(grade);
-			review.setNickname(name);
-			review.setStorename(storename);
-			review.setUserreview(userReview);
-			reviewservice.createReview(review);
-			
-		}
+//		if (name != null && storename != null && grade != null && userReview != null) {
+//			Review review = new Review();
+//			review.setGrade(grade);
+//			review.setNickname(name);
+//			review.setStorename(storename);
+//			review.setUserreview(userReview);
+//			reviewservice.createReview(review);
+//			
+//		}
 			
 	}
 	
