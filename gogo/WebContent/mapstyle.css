@@ -635,6 +635,13 @@ body {
 
 }
 
+.logo {
+    width: 150px;
+    height: 150px;
+    /* margin-right: 12px; */
+    /* margin-bottom: 10px; */
+}
+
 .parkingname {
     top: 10px;
     text-align: center;
@@ -983,7 +990,7 @@ body {
     width: 60px;
     height: 30px;
     border-radius: 5px;
-    background-color: #160d69;
+    background-color: #325573;
     color: rgb(255, 255, 255);
 }
 
@@ -997,7 +1004,7 @@ body {
     /* margin-top: -100px; */
     top: 45px;
     left: 160px;
-    background-color: #160d69;
+    background-color: #325573;
     color: rgb(255, 255, 255);
 }
 
