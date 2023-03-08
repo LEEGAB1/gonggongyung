@@ -191,7 +191,7 @@ time, mark, audio, video {
         
         const payload = new FormData(form);
         
-        fetch("http://localhost:8080/gonggongyung/gogo/login/loginbtn", {
+        fetch("http://192.168.0.103:8080/gonggongyung/gogo/login/loginbtn", {
             method: "POST",
             body : new URLSearchParams([...payload.entries()]),
             headers: {
