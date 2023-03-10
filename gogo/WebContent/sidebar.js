@@ -35,10 +35,8 @@ function toggleSidebar(index) {
     }
     document.querySelector('.sidebar').classList.toggle('active');
 
-    
-
 }
 
 function closeSidebar() {
-    document.querySelector('.sidebar').classList.toggle('active2');
+    document.querySelector('.sidebar').classList.toggle('active');
 }
